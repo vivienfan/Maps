@@ -4,18 +4,23 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (dataHelper) => {
+  router.get('/', (req, res) => {
+    res.render('../views/index');
+  });
 
   router.post('/login', (req, res) => {
-    let username = req.body.username;
-    let email = req.body.email;
-    let input_password = req.body.password;
-    dataHelper.logIn(username, email, password, (err, uid, msg) => {
+    let obj = {
+      email: req.body.email,
+      password: req.body.password
+    }
+    dataHelper.logIn(obj, (err, uid, msg) => {
       if (err) {
         res.status(500).json({error: err.message});
         return;
       }
       if (uid) {
         req.session.user_id = uid;
+        console.log(req.session.user_id);
         res.status(200).send();
       } else {
         res.status(403).send(msg);
@@ -30,7 +35,7 @@ module.exports = (dataHelper) => {
 
   router.post('/register', (req, res) => {
     let obj = {
-      name: req.body.name,
+      // name: req.body.name,
       username: req.body.username,
       email: req.body.email,
       password: req.body.password
