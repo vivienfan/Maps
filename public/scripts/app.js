@@ -1,21 +1,32 @@
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done((users) => {
-//     for(user of users) {
-//       $("<div>").text(user.name).appendTo($("body"));
-//     }
-//   });;
-// });
+$(() => {
+  $.ajax({
+    method: "GET",
+    url: "/api/users"
+  }).done((users) => {
+    for(user of users) {
+      $("<div>").text(user.name).appendTo($("body"));
+    }
+  });;
+});
 
 $(document).ready(function() {
-  // $( ".login_show" ).click(function() {
-  //     show_login();
-  // });
-  // $( ".register_show" ).click(function() {
-  //     show_register();
-  // });
+  function show_login() {
+	   el = document.getElementById("overlaylogin");
+	    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+    }
+
+  function show_register() {
+    el = document.getElementById("overlayregister");
+  	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+  }
+
+
+  $( ".login_show" ).click(function() {
+      show_login();
+  });
+  $( ".register_show" ).click(function() {
+      show_register();
+  });
   $("#register").on('click', 'button', function (e) {
     var email = $(this).siblings(".email").val();
     var password = $(this).siblings(".password").val();
@@ -60,13 +71,12 @@ $(document).ready(function() {
      },
     error: function(err) {
       console.log('err');
-    }
+      }
+    });
   });
+})
 
-
-
-
-  }
+});
 
 
 //   $(function(){
@@ -78,18 +88,9 @@ $(document).ready(function() {
 // });
 // $("#demo01").animatedModal();
 
-  function show_login() {
-	   el = document.getElementById("overlaylogin");
-	    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-    }
-
-  function show_register() {
-    el = document.getElementById("overlayregister");
-  	el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-  }
 
 
-});
+
 // Get the modal
 // var modal = document.getElementById('myModal');
 //
