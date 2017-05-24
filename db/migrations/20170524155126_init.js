@@ -8,13 +8,20 @@ exports.up = function(knex, Promise) {
       table.string('username');
       table.unique('username');
     }),
+    knex.schema.createTable('lists', function(table) {
+      table.increments('l_id');
+      table.string('title');
+      table.string('description');
+      table.boolean('public');
+      // h_id references
+    }),
     knex.schema.createTable('maps', function(table) {
       table.increments('m_id');
-      table.integer('l_id').references('lists.l_id');
+      table.integer('l_id').references('lists.l_id').onDelete('cascade');;
     }),
     knex.schema.createTable('map_points', function(table) {
       table.increments('p_id');
-      table.integer('m_id').references('maps.m_id');
+      table.integer('m_id').references('maps.m_id').onDelete('cascade');;
       table.string('title');
       table.string('description');
       table.string('image');
@@ -23,20 +30,13 @@ exports.up = function(knex, Promise) {
       // TODO:
       // table.string('embed_links');
     }),
-    knex.schema.createTable('lists', function(table) {
-      table.increments('l_id');
-      table.string('title');
-      table.string('description');
-      table.boolean('public');
-      // h_id references
-    }),
     knex.schema.createTable('contributions', function (table) {
-      table.integer('u_id').references('users.id');
-      table.integer('l_id').references('lists.l_id');
+      table.integer('u_id').references('users.id').onDelete('cascade');;
+      table.integer('l_id').references('lists.l_id').onDelete('cascade');;
     }),
     knex.schema.createTable('favourites', function (table) {
-      table.integer('u_id').references('users.id');
-      table.integer('l_id').references('lists.l_id');
+      table.integer('u_id').references('users.id').onDelete('cascade');;
+      table.integer('l_id').references('lists.l_id').onDelete('cascade');;
     })
     // TODO:
     // knex.schema.createTable('histories', function(table) {
