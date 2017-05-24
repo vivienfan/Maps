@@ -13,13 +13,15 @@ module.exports = (dataHelper) => {
       email: req.body.email,
       password: req.body.password
     }
-    dataHelper.logIn(obj, (err, uid, msg) => {
+    dataHelper.logIn(obj, (err, dbObj, msg) => {
       if (err) {
         res.status(500).json({error: err.message});
         return;
       }
-      if (uid) {
-        req.session.user_id = uid;
+      if (dbObj) {
+        req.session.user_id = dbObj.uid;
+        req.session.username = dbObj.username;
+        req.session.email = dbObj.email;
         console.log(req.session.user_id);
         res.status(200).send();
       } else {
@@ -40,13 +42,15 @@ module.exports = (dataHelper) => {
       email: req.body.email,
       password: req.body.password
     };
-    dataHelper.createNewUser(obj, (err, uid, msg) => {
+    dataHelper.createNewUser(obj, (err, dbObj, msg) => {
       if (err) {
         res.status(500).json({error: err.message});
         return;
       }
-      if (uid) {
-        req.session.user_id = uid;
+      if (dbObj) {
+        req.session.user_id = dbObj.uid;
+        req.session.username = dbObj.username;
+        req.session.email = dbObj.email;
         res.status(200).send();
       } else {
         res.status(403).send(msg);
