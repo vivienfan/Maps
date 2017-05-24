@@ -5,6 +5,7 @@ const router  = express.Router();
 
 module.exports = (dataHelper) => {
   router.get('/', (req, res) => {
+<<<<<<< HEAD
     let uid = req.session.user_id;
     dataHelper.getAllContributionForUser(uid, (err, contributions) => {
       if (err) {
@@ -36,6 +37,15 @@ module.exports = (dataHelper) => {
         res.status(500).send(err);
       } else {
         dataHelper.getContributionByListId(uid)
+=======
+    let username = req.body.username;
+
+    dataHelper.getAllLists(username, (err, obj) => {
+      if (err) {
+        res.status(500).send();
+      } else {
+        res.status(200).json(obj);
+>>>>>>> 2e8f7b49836173513db04f26ef14a91fbb69e34c
       }
     });
   });
