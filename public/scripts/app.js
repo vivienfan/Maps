@@ -10,14 +10,63 @@ $(() => {
 });
 
 $(document).ready(function() {
+  // $( ".login_show" ).click(function() {
+  //     show_login();
+  // });
+  // $( ".register_show" ).click(function() {
+  //     show_register();
+  // });
+  $("#register").on('click', 'button', function (e) {
+    var email = $(this).siblings(".email").val();
+    var password = $(this).siblings(".password").val();
+    var username = $(this).siblings(".username").val();
 
-  $( ".login_show" ).click(function() {
-      show_login();
+    console.log(email, password, username);
+
+
+    $.ajax({
+    url: '/register/',
+    method: 'POST',
+    data: {email: email,
+      password: password,
+       username: username},
+    dataType: 'json',
+    success: function(suc) {
+
+      //Hide register and login buttons
+     },
+    error: function(err) {
+      console.log('err');
+    }
   });
 
-  $( ".register_show" ).click(function() {
-      show_register();
+  $("#login").on('click', 'button', function (e) {
+    var email = $(this).siblings(".email").val();
+    var password = $(this).siblings(".password").val();
+
+    console.log(email, password, username);
+
+
+    $.ajax({
+    url: '/login/',
+    method: 'POST',
+    data: {email: email,
+      password: password,
+    },
+    dataType: 'json',
+    success: function(suc) {
+      //Hide register and login buttons
+
+     },
+    error: function(err) {
+      console.log('err');
+    }
   });
+
+
+
+
+  }
 
 
 //   $(function(){
@@ -40,7 +89,7 @@ $(document).ready(function() {
   }
 
 
-  });
+});
 // Get the modal
 // var modal = document.getElementById('myModal');
 //

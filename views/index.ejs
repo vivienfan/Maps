@@ -21,7 +21,6 @@
 
   <body>
     <nav id="nav-bar">
-      <img class="logo" src="/images/bird.png">
       <span class="header">Mapssss</span>
 
 
@@ -29,12 +28,11 @@
 
 
   <div id="overlaylogin">
-    <section class="loginInfo">
-      <form action="/login" method="POST" style="">
-        <label for="email"> </label>
-        <input id="email" type="email" name="email">
-        <input id="email" type="password" name="password">
-        <input type="submit" value="Login">
+    <section id="login">
+      <form action="/login" method="POST">
+        <input class="login_email" type="email" name="email">
+        <input class="login_password" type="password" name="password">
+        <button> Login </button>
       </form>
     </section>'
   </div>
@@ -43,13 +41,12 @@
     <button class="login_show"> login </button>
 
     <div id="overlayregister">
-      <section class="registerInfo">
-        <form action="/register" method="POST" style="">
-          <label for="email"> </label>
-          <input id="email" type="email" name="email">
-          <input id="password" type="password" name="password">
-          <input id="username" type="text" name="username">
-          <input type="submit" value="Register">
+      <section id="register">
+        <form action="/register" method="POST">
+          <input class="email" type="email" name="email">
+          <input class="password" type="password" name="password">
+          <input class="username" type="text" name="username">
+          <button> Register </button>
         </form>
       </section>
     </div>
