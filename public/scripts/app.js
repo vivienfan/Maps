@@ -9,7 +9,56 @@ $(() => {
   });;
 });
 
+
+function createFavourite(list) {
+  console.log("I am in createFavourite");
+  var $listItem = $('<article>')
+  $listItem.append($('<h4>').text(list.title));
+  $listItem.append($('<p>').text(list.description));
+  return $listItem;
+}
+
+
+function renderFavourites(lists){
+  console.log("i am in renderFavourites")
+  lists.forEach( function (list) {
+    console.log("For each is working!!")
+    // debugger;
+    $('#listfav').prepend(createFavourite(list))});
+  }
+
+
+
 $(document).ready(function() {
+  //Rendering Favourited Lists
+  $.ajax({
+  url: '/lists',
+  method: 'GET',
+  dataType: 'json',
+  success: function(data) {
+
+    if (data.length > 0) {
+      renderFavourites(data)
+    }
+    //add class
+    //Hide register and login buttons
+   },
+  error: function(err) {
+    console.log('err');
+  }
+});
+
+// renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
+
+
+
+
+
+
+
+
+
+  // LOGIN
   function show_login() {
 	   el = document.getElementById("overlaylogin");
 	    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
@@ -43,7 +92,7 @@ $(document).ready(function() {
        username: username},
     dataType: 'json',
     success: function(suc) {
-
+      //add class
       //Hide register and login buttons
      },
     error: function(err) {
@@ -55,7 +104,7 @@ $(document).ready(function() {
     var email = $(this).siblings(".email").val();
     var password = $(this).siblings(".password").val();
 
-    console.log(email, password, username);
+    console.log(email, password);
 
 
     $.ajax({
