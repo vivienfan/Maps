@@ -43,9 +43,16 @@ $(document).ready(function() {
       success: function(suc) {
         //add class
         //Hide register and login buttons
+        global_username = suc.username;
+        global_email = suc.email;
+        console.log("I am here: ", suc);
+        $('#display_username').text(`Hello ${global_username}!`);
+        $('#login_nav').addClass('hide');
+        $('#reg_nav').addClass('hide');
+        $('#regmodal').modal('hide');
        },
       error: function(err) {
-        console.log('register error');
+        console.log(err);
       }
     });
   });
@@ -70,6 +77,11 @@ $(document).ready(function() {
         global_username = suc.username;
         global_email = suc.email;
         $('#display_username').text(`Hello ${global_username}!`);
+        $('#login_nav').addClass('hide');
+        $('#reg_nav').addClass('hide');
+        $('#loginmodal').modal('hide');
+
+
       },
       error: function(err) {
         console.log('login error');

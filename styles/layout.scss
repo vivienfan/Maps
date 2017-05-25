@@ -6,7 +6,7 @@ body {
   }
 }
 .modal_hide {
-  display: none; }
+  display: none;}
 
 #nav-bar {
   position: fixed;
@@ -121,4 +121,8 @@ main #userCont {
 
 .labelLogEmail{
   margin-right: 14px;
+}
+
+.hide {
+  display: none
 }
