@@ -29,7 +29,7 @@ module.exports = (dataHelper) => {
     }
     dataHelper.logIn(obj, (err, dbObj, msg) => {
       if (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
         return;
       }
       if (dbObj) {

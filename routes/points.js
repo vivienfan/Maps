@@ -24,7 +24,7 @@ module.exports = (dataHelper) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
-        res.status(200).json(mapInfo, pointsInfo);
+        res.status(200).json(pointsInfo);
       }
     });
   });
@@ -75,7 +75,7 @@ module.exports = (dataHelper) => {
   // update points info in map_points table
   router.put('/:pid', (req, res) => {
     let obj = {
-       mid: req.params.pid,
+       pid: req.params.pid,
        title: req.body.title,
        description: req.body.description,
        image: req.body.image,
@@ -92,7 +92,7 @@ module.exports = (dataHelper) => {
   });
 
   // method: delete
-  // URL: /points/:mid
+  // URL: /points/:pid
   // client input: req.params
   // server output: err /  none
   //
