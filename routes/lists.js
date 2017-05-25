@@ -21,42 +21,40 @@ module.exports = (dataHelper) => {
     });
   })
 
-
-
-/*  router.get('/', (req, res) => {
-    let uid = req.session.user_id;
-    dataHelper.getAllContributionForUser(uid, (err, contributions) => {
+  // method: get
+  // URL: /lists/fav/:uid
+  // client input: res.params
+  // server output: err / [{ l_id: int, title: str, description: str }]
+  //
+  // profile page, get all favourited lists belong to user
+  router.get('/fav/:uid', (req, res) => {
+    let uid = req.params.uid;
+    dataHelper.getAllFavouritesForUser(uid, (err, favs) => {
       if (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
         return;
       }
-      console.log("contributions: ", contributions);
-      let contris = [];
-      if (contributions && contributions.length !== 0) {
-        contributions.forEach((element) => {
-          contris.push({title: element.title, descritpion:element.description});
-        });
-      }
-      dataHelper.getAllPublicListsExcept(uid, (err, publics) => {
-        if (err) {
-          res.status(500).send(err.message);
-          return;
-        }
-        console.log("public lists:", publics);
-        res.status(200).json({contribution: contris, public: publics});
-      });
+      res.status(200).json(favs);
     });
-  });*/
+  });
 
+  // progile page contribution_list (list object)
   // method: get
-  // URL: /lists/favourites/:uid
-  // client input: req.params
-  // server output: err / [ { lid: int, title: str, description: str } ]
+  // URL: /lists/contributions/:uid
+  // client input: res.params
+  // server output: err / [{l_id: int, title: str, description: str }]
   //
-  // retrieve the favourite lists for user
-  // router.get('/favourites/:uid'){
-
-  // }
+  // profile page, get all contribution lists belong to user
+  router.get('/contributions/:uid', (req, res) => {
+    let uid = req.params.uid;
+    dataHelper.getContributionsByUserId(uid, (err, contrs) => {
+      if (err) {
+        res.status(400).send(err.message);
+        return;
+      }
+      res.status(200).json(contrs);
+    });
+  })
 
 
   // method: get
@@ -77,21 +75,21 @@ module.exports = (dataHelper) => {
     dataHelper.getListInfo(lid, (err, listInfo) => {
       if (err) {
         res.status(400).send(err.message);
-      } else {
-        dataHelper.getContributorName(lid, (err, contributors) => {
+        return;
+      }
+      dataHelper.getContributorName(lid, (err, contributors) => {
+        if (err) {
+          res.status(400).send(err.message);
+          return;
+        }
+        dataHelper.getMapsByListId(lid, (err, maps) => {
           if (err) {
             res.status(400).send(err.message);
-          } else {
-            dataHelper.getMapsByListId(lid, (err, maps) => {
-              if (err) {
-                res.status(400).send(err.message);
-              } else {
-                res.status(200).json({ listInfo: listInfo, contributors: contributors, maps: maps });
-              }
-            });
+            return;
           }
+          res.status(200).json({ listInfo: listInfo, contributors: contributors, maps: maps });
         });
-      }
+      });
     });
   });
 
@@ -106,9 +104,9 @@ module.exports = (dataHelper) => {
     dataHelper.dropList(lid, (err) => {
       if(err) {
         res.status(500).send(err.message);
-      } else {
-        res.status(200).send();
+        return;
       }
+      res.status(200).send();
     })
   });
 
@@ -126,9 +124,9 @@ module.exports = (dataHelper) => {
     dataHelper.addContributor(obj, (err) => {
       if(err) {
         res.status(500).send(err.message);
-      } else {
-        res.status(200).send();
+        return;
       }
+      res.status(200).send();
     });
   });
 
@@ -147,16 +145,12 @@ module.exports = (dataHelper) => {
     dataHelper.addList(obj, (err, lid) => {
       if (err) {
         res.status(500).send(err.message);
-      } else {
-        res.status(200).json(lid);
+        return;
       }
+      res.status(200).json(lid);
     });
   })
 
   return router;
 }
 
-
-// profile page favourate_list (list object)
-
-// progile page contribution_list (list object)
