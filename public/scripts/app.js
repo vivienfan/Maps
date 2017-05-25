@@ -263,7 +263,7 @@ $(document).ready(function() {
         }
       })
     });
-});
+
 
 
 // var a = $('<section>').attr('data-map_id', m_id);
