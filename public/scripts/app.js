@@ -1,20 +1,3 @@
-function createFavourite(list) {
-  console.log("I am in createFavourite");
-  var $listItem = $('<article>')
-  $listItem.append($('<h4>').text(list.title));
-  $listItem.append($('<p>').text(list.description));
-  return $listItem;
-}
-
-function renderFavourites(lists){
-  console.log("i am in renderFavourites")
-  lists.forEach( function (list) {
-    console.log("For each is working!!")
-    // debugger;
-    $('#listfav').prepend(createFavourite(list))});
-  }
-
-
 $(document).ready(function() {
   //Rendering Favourited Lists
 
@@ -110,6 +93,24 @@ $(document).ready(function() {
   //   }
   // });
 
+
+
+  function createFavourite(list) {
+    console.log("I am in createFavourite");
+    var $listItem = $('<article>')
+    $listItem.append($('<h4>').text(list.title));
+    $listItem.append($('<p>').text(list.description));
+    return $listItem;
+  }
+
+  function renderFavourites(lists){
+    console.log("i am in renderFavourites")
+    lists.forEach( function (list) {
+      console.log("For each is working!!")
+      // debugger;
+      $('#listfav').prepend(createFavourite(list))
+    });
+  }
 
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   function createSingleContributor(cont) {
