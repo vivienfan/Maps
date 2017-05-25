@@ -15,6 +15,23 @@ module.exports = (dataHelper) => {
     res.render('../views/index');
   });
 
+  // method: get
+  // URL: /me
+  // client input: none
+  // server output: { username: str, email: str }
+  //
+  // send back client with their username and email saved in cookie
+  router.get('/me', (req, res) => {
+    let obj = null;
+    if (req.session.username && req.session.email) {
+      obj = {
+        username: req.session.username,
+        email: req.session.email
+      }
+    }
+    res.status(200).json(obj);
+  })
+
   // method: post
   // URL: /login
   // client input: req.body = { email: str, password: str }
@@ -38,9 +55,9 @@ module.exports = (dataHelper) => {
         req.session.email = dbObj.email;
         console.log("-------------login: session.user_id", req.session.user_id);
         res.status(200).json({username: dbObj.username});
-      } else {
-        res.status(403).send(msg);
+        return;
       }
+      res.status(403).send(msg);
     });
   });
 
@@ -81,6 +98,7 @@ module.exports = (dataHelper) => {
         req.session.email = dbObj.email;
         res.status(200).json(dbObj);
       }
+      res.status(500).send();
     });
   });
 
