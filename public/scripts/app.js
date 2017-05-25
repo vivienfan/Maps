@@ -4,6 +4,9 @@ $(document).ready(function() {
   var global_username = '';
   var global_email = '';
 
+  $('.dropdown').addClass('hide')
+
+
 
 //   $.ajax({
 //   url: '/lists',
@@ -50,6 +53,7 @@ $(document).ready(function() {
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
         $('#regmodal').modal('hide');
+        $('.dropdown').removeClass('hide')
        },
       error: function(err) {
         console.log(err);
@@ -80,6 +84,7 @@ $(document).ready(function() {
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
         $('#loginmodal').modal('hide');
+        $('.dropdown').removeClass('hide')
 
 
       },
@@ -88,6 +93,28 @@ $(document).ready(function() {
       }
     });
   });
+
+  $("#logout").on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: '/logout/',
+      method: 'POST',
+      success: function() {
+        //Hide register and login buttons
+        console.log("I am heree")
+        global_username = "";
+        global_email = "";
+        $('#display_username').text(`Hello ${global_username}!`)
+        $('#login_nav').removeClass('hide');
+        $('#reg_nav').removeClass('hide');
+        $('.dropdown').addClass('hide')
+      },
+      error: function(err) {
+        console.log('logout error', err);
+      }
+    });
+  });
+
 
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
