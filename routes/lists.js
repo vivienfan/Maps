@@ -21,7 +21,7 @@ module.exports = (dataHelper) => {
       } else {
         let arr = [];
         let contris = [];
-        if (contributions) {
+        if (contributions && contributions.length !== 0) {
           contributions.forEach((element) => {
             arr.push(element.l_id);
             contris.push({title: element.title, descritpion:element.description});
@@ -38,6 +38,16 @@ module.exports = (dataHelper) => {
     });
     // res.status(200);
   });
+
+  // method: get
+  // URL: /lists/favourites/:uid
+  // client input: req.params
+  // server output: err / [ { lid: int, title: str, description: str } ]
+  //
+  // retrieve the favourite lists for user
+  // router.get('/favourites/:uid'){
+
+  // }
 
 
   // method: get
@@ -57,15 +67,15 @@ module.exports = (dataHelper) => {
     let lid = req.params.lid;
     dataHelper.getListInfo(lid, (err, listInfo) => {
       if (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
       } else {
         dataHelper.getContributorName(lid, (err, contributors) => {
           if (err) {
-            res.status(500).send(err.message);
+            res.status(400).send(err.message);
           } else {
             dataHelper.getMapsByListId(lid, (err, maps) => {
               if (err) {
-                res.status(500).send(err.message);
+                res.status(400).send(err.message);
               } else {
                 res.status(200).json({ listInfo: listInfo, contributors: contributors, maps: maps });
               }
@@ -94,7 +104,7 @@ module.exports = (dataHelper) => {
   });
 
   // method: post
-  // URL: /lists/:id/addContributor
+  // URL: /lists/:lid/addContributor
   // client input: req.param, req.body = { username: str }
   // server output: none
   //
@@ -129,10 +139,15 @@ module.exports = (dataHelper) => {
       if (err) {
         res.status(500).send(err.message);
       } else {
-        res.status(200).json({ lid: lid });
+        res.status(200).json(lid);
       }
     });
   })
 
   return router;
 }
+
+
+// profile page favourate_list (list object)
+
+// progile page contribution_list (list object)

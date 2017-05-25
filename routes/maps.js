@@ -17,7 +17,7 @@ module.exports = (dataHelper) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
-        res.status(200).json(mapInfo, pointsInfo);
+        res.status(200).json(mapInfo);
       }
     });
   });
