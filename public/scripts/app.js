@@ -1,11 +1,30 @@
 $(document).ready(function() {
   //Rendering Favourited Lists
-
   var global_username = '';
   var global_email = '';
 
+
   $('.dropdown').addClass('hide');
-  renderListsForHome();
+  // renderListsForHome();
+
+  $.ajax({
+    url: '/me',
+    method: 'GET',
+    dataType: 'json',
+    success: function(suc) {
+      //Hide register and login buttons
+      console.log(suc);
+
+      global_username = suc.username;
+      global_email = suc.email;
+
+      console.log('global u', global_username. global_email)
+    },
+    error: function(err) {
+      console.log('me', err);
+    }
+  });
+
 
 
 //
@@ -146,6 +165,7 @@ $(document).ready(function() {
 
   function renderFavourites(lists){
     console.log("i am in renderFavourites")
+    console.log(lists);
     lists.forEach( function (list) {
       console.log("For each is working!!")
       // debugger;
