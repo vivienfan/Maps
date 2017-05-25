@@ -25,11 +25,11 @@ $(document).ready(function() {
 // // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
   // LOGIN
-  $("#register").on('click', 'button', function (e) {
+  $("#register").on('click', function (e) {
     e.preventDefault();
-    var email = $(this).siblings(".email").val();
-    var password = $(this).siblings(".password").val();
-    var username = $(this).siblings(".username").val();
+    var email = $(this).siblings(".reg_email").val();
+    var password = $(this).siblings(".reg_password").val();
+    var username = $(this).siblings(".reg_username").val();
 
     console.log(email, password, username);
 
