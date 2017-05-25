@@ -106,44 +106,44 @@ $(document).ready(function() {
 
 
 //Lists.ejs
-  function createContributor(suc)
+  function createContributor(suc) {}
 
   $.ajax({
     url: '/lists/:lid',
     method: 'GET',
-    dataType: 'json'
-      success: function(suc) {
-        //add class
-        //Hide register and login buttons
-        $('#lid_info').append($('<h3>').text((`Title: ${suc.listinfo.title}`));
-        $('#lid_info').append($('<h3>').text((`Description: ${suc.listinfo.Description}`));
+    dataType: 'json',
+    success: function(suc) {
+      //add class
+      //Hide register and login buttons
+      $('#lid_info').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
+      $('#lid_info').append($('<h3>').text((`Description: ${suc.listinfo.Description}`)));
 
-        //TODO: Append every contributor of the lid in the container.
+      //TODO: Append every contributor of the lid in the container.
 
-        $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`);
+      createContributer(suc.contributor)
+      $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
 
-
-
+    },
       error: function(err) {
-        console.log('err');
+      console.log('err');
       }
+})
+
+
+
 });
-
-
-
-
 
 
 
 //For Maps
 
-var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    maxZoom: 18,
-    id: 'your.mapbox.project.id',
-    accessToken: 'your.mapbox.public.access.token'
-}).addTo(mymap);
-
-});
+// var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+//
+// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+//     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+//     maxZoom: 18,
+//     id: 'your.mapbox.project.id',
+//     accessToken: 'your.mapbox.public.access.token'
+// }).addTo(mymap);
+//
+// });
