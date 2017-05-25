@@ -21,6 +21,17 @@ exports.seed = function(knex, Promise) {
       {p_id: 2, m_id: 2, title: 'the', description: 'something', image:'image', longitude: -33.3, latitude: 33.3},
       {p_id: 3, m_id: 3, title: '?', description: 'something', image:'image', longitude: -33.3, latitude: 33.3}
     ]);
+  })
+  .then(function() {
+    knex('contributions').del().insert([
+      {u_id: 1, l_id: 1},
+      {u_id: 2, l_id: 1}
+    ]);
+  })
+  .then(function() {
+    knex('favourites').del().insert([
+      {u_id: 3, l_id: 1}
+    ]);
   });
 
   // Promise.all([
