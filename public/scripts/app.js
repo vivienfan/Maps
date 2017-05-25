@@ -136,8 +136,8 @@ $(document).ready(function() {
   }
 
   function createMap(map){
-    var $map = $('<article>')
-    $map.append($('<p>').text(map.m_id)).addClass('mapId')
+    var $map = $('<article>').attr('data-map_id', map.m_id)
+    // $map.append($('<p>').text(map.m_id)).addClass('mapId')
     $map.append($('<p>').text(map.title))
     $map.append($('<p>').text(map.description))
 
@@ -251,3 +251,10 @@ $(document).ready(function() {
       })
     });
 });
+
+
+// var a = $('<section>').attr('data-map_id', m_id);
+//
+// find the value
+//
+// var map_id =  a.data('m_id')
