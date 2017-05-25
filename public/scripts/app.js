@@ -102,11 +102,61 @@ $(document).ready(function() {
   });
 })
 
-// Profile.ejs
+// Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+  $.ajax({
+  url: '/profile/:username',
+  method: 'GET',
+  dataType: 'json',
+  success: function(suc) {
+
+    //TODO: Create both function to render data for user fabourites and user contributors
+
+   },
+  error: function(err) {
+    console.log('getting the info from the username error');
+    }
+  });
 
 
-//Lists.ejs
-  function createContributor(suc) {}
+//Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+  function createSingleContributor(cont) {
+    var $contributor = $('<article>')
+    $contributor.append($('<p>').text(cont.username));
+    $contributor.append($('<br>'));
+    return $contributor;
+  }
+
+  function createContributors(contributors) {
+  contributors.forEach( function (contributor) {
+    console.log("For each is working!!")
+    // debugger;
+    $('#lid_contributors').append(createSingleContributor(contributor))
+  });
+  }
+
+  function createMap(map){
+    var $map = $('<article>')
+    $map.append($('<p>').text(map.m_id)).addClass('mapId')
+    $map.append($('<p>').text(map.title))
+    $map.append($('<p>').text(map.description))
+
+    // Adding the buttons for edit and delete
+    var $edit = $('<button class ="editMap" onClick="editMap()" />')
+    $edit.append($('<p>').text("Edit"))
+    var $del = $('<button class ="delMap" onClick="delMap()"/>')
+    $del.append($('<p>').text("Delete"))
+    $map.append($edit);
+    $map.append($del);
+    return $map;
+
+  }
+
+  function createMaps(maps){
+    maps.forEach(function (map) {
+      $('#lid_maps').append(createMap(map))
+    })
+  }
 
   $.ajax({
     url: '/lists/:lid',
@@ -120,30 +170,87 @@ $(document).ready(function() {
 
       //TODO: Append every contributor of the lid in the container.
 
-      createContributer(suc.contributor)
-      $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
+      createContributers(suc.contrbutors)
+      // $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
 
-    },
+      //TODO: Append every mapid in the map container
+
+      createMaps(suc.maps)
+
+
+
+      },
       error: function(err) {
       console.log('err');
       }
-})
+});
 
+    //TODO: Create a function for every edit Button.
+    $(".editMap").on('click', 'button', function (e) {
+      var map_id = $(this).siblings('.mapId')
 
+      $.ajax({
+        url: '', //EDIT mapid url
+        method: 'PUT',
+        data: map_id,
+        success: function(suc) {
+          //Delete the whole map article
 
+        },
+        error: function(err) {
+          console.log('Delete Error')
+        }
+      })
+    });
+
+    //TODO: Create a function for every edit Delete.
+    $(".delMap").on('click', 'button', function (e) {
+      var map_id = $(this).siblings('.mapId')
+
+      $.ajax({
+        url: '', //delete mapid url
+        method: 'DELETE',
+        data: map_id,
+        success: function(suc) {
+          //Delete the map id article or refresh the page.
+
+        },
+        error: function(err) {
+          console.log('Delete Error')
+        }
+      })
+    });
+    $("#addMap").on('click', 'button', function (e) {
+
+      $.ajax({
+        url: '',
+        method: 'POST',
+        // datatype: 'json',
+        success: function(suc) {
+          //Delete the map id article or refresh the page.
+
+        },
+        error: function(err) {
+          console.log('Delete Error')
+        }
+      })
+    });
+
+    $("#addContributor").on('click', 'button', function (e) {
+      $.ajax({
+        url: '',
+        method: 'POST',
+        // datatype: 'json',
+        success: function(suc) {
+          //Delete the map id article or refresh the page.
+
+        },
+        error: function(err) {
+          console.log('Delete Error')
+        }
+      })
+    });
 });
 
 
-
-//For Maps
-
-// var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-//
-// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-//     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-//     maxZoom: 18,
-//     id: 'your.mapbox.project.id',
-//     accessToken: 'your.mapbox.public.access.token'
-// }).addTo(mymap);
-//
 // });
