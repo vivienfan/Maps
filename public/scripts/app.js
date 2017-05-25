@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 
   $('.dropdown').addClass('hide');
-  renderListsForHome();
+  // renderListsForHome();
 
   $.ajax({
     url: '/me',
@@ -21,6 +21,8 @@ $(document).ready(function() {
         // TOOD:
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
+        $('.dropdown').removeClass('hide');
+
       }
     }
   });
