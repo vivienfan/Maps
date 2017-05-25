@@ -12,22 +12,17 @@ $(document).ready(function() {
     method: 'GET',
     dataType: 'json',
     success: function(suc) {
-      //Hide register and login buttons
-      console.log(suc);
-
-      global_username = suc.username;
-      global_email = suc.email;
-
-      console.log('global u', global_username. global_email)
-    },
-    error: function(err) {
-      console.log('me', err);
+      if (suc) {
+        //Hide register and login buttons
+        global_username = suc.username;
+        global_email = suc.email;
+        console.log('global u', global_username, global_email);
+        // TOOD:
+      }
     }
   });
 
 
-
-//
 // // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
   // LOGIN
