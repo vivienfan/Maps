@@ -105,6 +105,30 @@ $(document).ready(function() {
 // Profile.ejs
 
 
+//Lists.ejs
+  function createContributor(suc)
+
+  $.ajax({
+    url: '/lists/:lid',
+    method: 'GET',
+    dataType: 'json'
+      success: function(suc) {
+        //add class
+        //Hide register and login buttons
+        $('#lid_info').append($('<h3>').text((`Title: ${suc.listinfo.title}`));
+        $('#lid_info').append($('<h3>').text((`Description: ${suc.listinfo.Description}`));
+
+        //TODO: Append every contributor of the lid in the container.
+
+
+
+
+      error: function(err) {
+        console.log('err');
+      }
+});
+
+
 
 
 
