@@ -1,14 +1,3 @@
-$(() => {
-  $.ajax({
-    method: "GET",
-    url: "/api/users"
-  }).done((users) => {
-    for(user of users) {
-      $("<div>").text(user.name).appendTo($("body"));
-    }
-  });;
-});
-
 function createFavourite(list) {
   console.log("I am in createFavourite");
   var $listItem = $('<article>')
@@ -17,7 +6,6 @@ function createFavourite(list) {
   return $listItem;
 }
 
-
 function renderFavourites(lists){
   console.log("i am in renderFavourites")
   lists.forEach( function (list) {
@@ -25,7 +13,6 @@ function renderFavourites(lists){
     // debugger;
     $('#listfav').prepend(createFavourite(list))});
   }
-
 
 
 $(document).ready(function() {
@@ -55,7 +42,6 @@ $(document).ready(function() {
 // // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
   // LOGIN
-
   $("#register").on('click', 'button', function (e) {
     e.preventDefault();
     var email = $(this).siblings(".email").val();
@@ -64,23 +50,22 @@ $(document).ready(function() {
 
     console.log(email, password, username);
 
-
     $.ajax({
-    url: '/register/',
-    method: 'POST',
-    data: {email: email,
-      password: password,
-       username: username},
-    dataType: 'json',
-    success: function(suc) {
-      //add class
-      //Hide register and login buttons
-     },
-    error: function(err) {
-      console.log('register error');
-    }
+      url: '/register/',
+      method: 'POST',
+      data: {email: email,
+        password: password,
+         username: username},
+      dataType: 'json',
+      success: function(suc) {
+        //add class
+        //Hide register and login buttons
+       },
+      error: function(err) {
+        console.log('register error');
+      }
+    });
   });
-});
 
   $("#login").on('click', function (e) {
     e.preventDefault();
@@ -90,43 +75,40 @@ $(document).ready(function() {
 
     console.log(email, password);
 
-
     $.ajax({
-    url: '/login/',
-    method: 'POST',
-    data: {email: email,
-      password: password,
-    },
-    dataType: 'json',
-    success: function(suc) {
-      //Hide register and login buttons
-      global_username = suc.username;
-      global_email = suc.email;
-      $('#display_username').text(`Hello ${global_username}!`);
-
-
-     },
-    error: function(err) {
-      console.log('login error');
+      url: '/login/',
+      method: 'POST',
+      data: {email: email,
+        password: password,
+      },
+      dataType: 'json',
+      success: function(suc) {
+        //Hide register and login buttons
+        global_username = suc.username;
+        global_email = suc.email;
+        $('#display_username').text(`Hello ${global_username}!`);
+      },
+      error: function(err) {
+        console.log('login error');
       }
     });
   });
 
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-  $.ajax({
-  url: '', //profile/:username,
-  method: 'GET',
-  dataType: 'json',
-  success: function(suc) {
+  // $.ajax({
+  // url: '', //profile/:username,
+  // method: 'GET',
+  // dataType: 'json',
+  // success: function(suc) {
 
-    //TODO: Create both function to render data for user fabourites and user contributors
+  //   //TODO: Create both function to render data for user fabourites and user contributors
 
-   },
-  error: function(err) {
-    console.log('getting the error from the username ajax');
-    }
-  });
+  //  },
+  // error: function(err) {
+  //   console.log('getting the error from the username ajax');
+  //   }
+  // });
 
 
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -138,11 +120,11 @@ $(document).ready(function() {
   }
 
   function createContributors(contributors) {
-  contributors.forEach( function (contributor) {
-    console.log("For each is working!!")
-    // debugger;
-    $('#lid_contributors').append(createSingleContributor(contributor))
-  });
+    contributors.forEach( function (contributor) {
+      console.log("For each is working!!")
+      // debugger;
+      $('#lid_contributors').append(createSingleContributor(contributor))
+    });
   }
 
   function createMap(map){
@@ -159,7 +141,6 @@ $(document).ready(function() {
     $map.append($edit);
     $map.append($del);
     return $map;
-
   }
 
   function createMaps(maps){
@@ -195,76 +176,77 @@ $(document).ready(function() {
 //       }
 // });
 
-    //TODO: Create a function for every edit Button.
-    $(".editMap").on('click', 'button', function (e) {
-      e.preventDefault();
-      var map_id = $(this).siblings('.mapId')
+  //TODO: Create a function for every edit Button.
+  $(".editMap").on('click', 'button', function (e) {
+    e.preventDefault();
+    var map_id = $(this).siblings('.mapId')
 
-      $.ajax({
-        url: '/maps/' + map_id, //EDIT mapid url
-        method: 'PUT',
-        data: map_id,
-        success: function(suc) {
-          //Delete the whole map article
+    $.ajax({
+      url: '/maps/' + map_id, //EDIT mapid url
+      method: 'PUT',
+      data: map_id,
+      success: function(suc) {
+        //Delete the whole map article
 
-        },
-        error: function(err) {
-          console.log('Edit Error')
-        }
-      })
-    });
-
-    //TODO: Create a function for every edit Delete.
-    $(".delMap").on('click', 'button', function (e) {
-      e.preventDefault();
-      var map_id = $(this).siblings('.mapId')
-
-      $.ajax({
-        url: '', //delete mapid url
-        method: 'DELETE',
-        data: map_id,
-        success: function(suc) {
-          //Delete the map id article or refresh the page.
-
-        },
-        error: function(err) {
-          console.log('Delete Error')
-        }
-      })
-    });
-    $("#addMap").on('click', 'button', function (e) {
-      e.preventDefault();
-
-      $.ajax({
-        url: '',
-        method: 'POST',
-        // datatype: 'json',
-        success: function(suc) {
-          //Delete the map id article or refresh the page.
-
-        },
-        error: function(err) {
-          console.log('Add Error')
-        }
-      })
-    });
-
-    $("#addContributor").on('click', 'button', function (e) {
-      e.preventDefault();
-      $.ajax({
-        url: '',
-        method: 'POST',
-        // datatype: 'json',
-        success: function(suc) {
-          //Delete the map id article or refresh the page.
-
-        },
-        error: function(err) {
-          console.log('Delete Error')
-        }
-      })
-    });
+      },
+      error: function(err) {
+        console.log('Edit Error')
+      }
+    })
   });
+
+  //TODO: Create a function for every edit Delete.
+  $(".delMap").on('click', 'button', function (e) {
+    e.preventDefault();
+    var map_id = $(this).siblings('.mapId')
+
+    $.ajax({
+      url: '', //delete mapid url
+      method: 'DELETE',
+      data: map_id,
+      success: function(suc) {
+        //Delete the map id article or refresh the page.
+
+      },
+      error: function(err) {
+        console.log('Delete Error')
+      }
+    })
+  });
+
+  $("#addMap").on('click', 'button', function (e) {
+    e.preventDefault();
+
+    $.ajax({
+      url: '',
+      method: 'POST',
+      // datatype: 'json',
+      success: function(suc) {
+        //Delete the map id article or refresh the page.
+
+      },
+      error: function(err) {
+        console.log('Add Error')
+      }
+    })
+  });
+
+  $("#addContributor").on('click', 'button', function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: '',
+      method: 'POST',
+      // datatype: 'json',
+      success: function(suc) {
+        //Delete the map id article or refresh the page.
+
+      },
+      error: function(err) {
+        console.log('Delete Error')
+      }
+    })
+  });
+});
 
 
 
