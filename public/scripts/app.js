@@ -9,7 +9,6 @@ $(() => {
   });;
 });
 
-
 function createFavourite(list) {
   console.log("I am in createFavourite");
   var $listItem = $('<article>')
@@ -31,6 +30,11 @@ function renderFavourites(lists){
 
 $(document).ready(function() {
   //Rendering Favourited Lists
+
+  var global_username = '';
+  var global_email = '';
+
+
   $.ajax({
   url: '/lists',
   method: 'GET',
@@ -53,6 +57,7 @@ $(document).ready(function() {
   // LOGIN
 
   $("#register").on('click', 'button', function (e) {
+    e.preventDefault();
     var email = $(this).siblings(".email").val();
     var password = $(this).siblings(".password").val();
     var username = $(this).siblings(".username").val();
@@ -75,10 +80,13 @@ $(document).ready(function() {
       console.log('register error');
     }
   });
+});
 
-  $("#login").on('click', 'button', function (e) {
-    var email = $(this).siblings(".email").val();
-    var password = $(this).siblings(".password").val();
+  $("#login").on('click', function (e) {
+    e.preventDefault();
+    console.log("here!!!");
+    var email = $(this).siblings(".login_email").val();
+    var password = $(this).siblings(".login_password").val();
 
     console.log(email, password);
 
@@ -92,15 +100,16 @@ $(document).ready(function() {
     dataType: 'json',
     success: function(suc) {
       //Hide register and login buttons
-      $('#display_username').text(`Hello ${suc.username}!`);
-
+      global_username = suc.username;
+      global_email = suc.email;
+      $('#display_username').text(`Hello ${global_username}!`);
      },
     error: function(err) {
       console.log('login error');
       }
     });
   });
-})
+});
 
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -187,6 +196,7 @@ $(document).ready(function() {
 
     //TODO: Create a function for every edit Button.
     $(".editMap").on('click', 'button', function (e) {
+      e.preventDefault();
       var map_id = $(this).siblings('.mapId')
 
       $.ajax({
@@ -205,6 +215,7 @@ $(document).ready(function() {
 
     //TODO: Create a function for every edit Delete.
     $(".delMap").on('click', 'button', function (e) {
+      e.preventDefault();
       var map_id = $(this).siblings('.mapId')
 
       $.ajax({
@@ -221,6 +232,7 @@ $(document).ready(function() {
       })
     });
     $("#addMap").on('click', 'button', function (e) {
+      e.preventDefault();
 
       $.ajax({
         url: '',
@@ -237,6 +249,7 @@ $(document).ready(function() {
     });
 
     $("#addContributor").on('click', 'button', function (e) {
+      e.preventDefault();
       $.ajax({
         url: '',
         method: 'POST',
