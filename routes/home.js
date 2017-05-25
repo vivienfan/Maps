@@ -79,7 +79,7 @@ module.exports = (dataHelper) => {
         req.session.user_id = dbObj.uid;
         req.session.username = dbObj.username;
         req.session.email = dbObj.email;
-        res.status(200).send();
+        res.status(200).json(dbObj);
       }
     });
   });
