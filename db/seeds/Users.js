@@ -7,7 +7,8 @@ let users = [
 ];
 
 let lists = [
-  {l_id: 1,   title: 'apple',   description: 'description',   public: true}
+  {l_id: 1,   title: 'apple',   description: 'description',   public: true},
+  {l_id: 2,   title: 'orange',  description: 'description',   public: true}
 ];
 
 let maps = [
