@@ -9,10 +9,10 @@ module.exports = (dataHelper) => {
   // client input: req.param
   // server output: err / { email: str }
   //
-  //
   // retrieve user info from db
   router.get('/:username', (req, res) => {
-    dataHelper.getUserInfo(req.params.username, (err, obj) => {
+    let username = req.params.username;
+    dataHelper.getUserInfo(username, (err, obj) => {
       if (err) {
         res.status(500).send(err.message);
       } else {

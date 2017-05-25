@@ -23,6 +23,7 @@ const homeRoute       = require('./routes/home.js')(dataHelper);
 const profilesRoutes  = require('./routes/profiles.js')(dataHelper);
 const listsRoutes     = require('./routes/lists.js')(dataHelper);
 const mapsRoutes      = require('./routes/maps.js')(dataHelper);
+const pointsRoutes    = require('./routes/points.js')(dataHelper);
 const usersRoutes     = require('./routes/users.js')(knex);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -54,6 +55,7 @@ app.use('/', homeRoute);
 app.use('/profiles', profilesRoutes);
 app.use('/lists', listsRoutes);
 app.use('/maps', mapsRoutes);
+app.use('/points', pointsRoutes);
 app.use('/api/users', usersRoutes);
 
 app.listen(PORT, () => {
