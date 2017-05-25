@@ -120,6 +120,7 @@ $(document).ready(function() {
 
         //TODO: Append every contributor of the lid in the container.
 
+        $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`);
 
 
 
