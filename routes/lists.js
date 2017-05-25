@@ -67,7 +67,7 @@ module.exports = (dataHelper) => {
     })
   });
 
-  router.add('/:lid/add_contributor', (req, res) => {
+  router.post('/:lid/add_contributor', (req, res) => {
     let obj = {
       username: req.body.username,
       lid: req.params.lid
