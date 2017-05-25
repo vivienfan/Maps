@@ -72,7 +72,7 @@ $(document).ready(function() {
       //Hide register and login buttons
      },
     error: function(err) {
-      console.log('err');
+      console.log('register error');
     }
   });
 
@@ -96,7 +96,7 @@ $(document).ready(function() {
 
      },
     error: function(err) {
-      console.log('err');
+      console.log('login error');
       }
     });
   });
@@ -105,7 +105,7 @@ $(document).ready(function() {
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   $.ajax({
-  url: '/profile/:username',
+  url: '', //profile/:username,
   method: 'GET',
   dataType: 'json',
   success: function(suc) {
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
    },
   error: function(err) {
-    console.log('getting the info from the username error');
+    console.log('getting the error from the username ajax');
     }
   });
 
@@ -159,7 +159,7 @@ $(document).ready(function() {
   }
 
   $.ajax({
-    url: '/lists/:lid',
+    url: '/lists/',
     method: 'GET',
     dataType: 'json',
     success: function(suc) {
@@ -190,7 +190,7 @@ $(document).ready(function() {
       var map_id = $(this).siblings('.mapId')
 
       $.ajax({
-        url: '', //EDIT mapid url
+        url: '/maps/' + map_id, //EDIT mapid url
         method: 'PUT',
         data: map_id,
         success: function(suc) {
@@ -198,7 +198,7 @@ $(document).ready(function() {
 
         },
         error: function(err) {
-          console.log('Delete Error')
+          console.log('Edit Error')
         }
       })
     });
@@ -231,7 +231,7 @@ $(document).ready(function() {
 
         },
         error: function(err) {
-          console.log('Delete Error')
+          console.log('Add Error')
         }
       })
     });
@@ -251,6 +251,3 @@ $(document).ready(function() {
       })
     });
 });
-
-
-// });
