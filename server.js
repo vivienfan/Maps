@@ -2,20 +2,21 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || 'development';
-const express     = require('express');
-const bodyParser  = require('body-parser');
-const sass        = require('node-sass-middleware');
-const app         = express();
+const PORT            = process.env.PORT || 8080;
+const ENV             = process.env.ENV || 'development';
+const express         = require('express');
+const bodyParser      = require('body-parser');
+const sass            = require('node-sass-middleware');
+const app             = express();
 
-const knexConfig  = require('./knexfile');
-const knex        = require('knex')(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig      = require('./knexfile');
+const knex            = require('knex')(knexConfig[ENV]);
+const morgan          = require('morgan');
+const knexLogger      = require('knex-logger');
+const cookieSession   = require('cookie-session');
+const methodOverride  = require('method-override');
 
 const dataHelper      = require('./lib/dataHelper.js')(knex);
-const cookieSession   = require('cookie-session');
 
 // Seperated Routes for each Resource
 const homeRoute       = require('./routes/home.js')(dataHelper);
@@ -46,6 +47,7 @@ app.use(cookieSession({
   keys: ["This-is-my-secrete-key"],
   maxAge: 20 * 365 * 24 * 60 * 60 * 1000 // 20 years
 }));
+app.use(methodOverride('_method'));
 
 // Mount all routes
 app.use('/', homeRoute);
