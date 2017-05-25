@@ -37,41 +37,37 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
           </ul>
-          <form class="navbar-form navbar-right">
+          <div class="navbar-form navbar-right">
               <button id="login_nav" type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
               <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".register-modal"> Register</button>
-
-          </form>
+          </div>
           <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Your profile</li>
-            <li><a href="#">Maps</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Your profile</li>
+                <li><a href="#">Maps</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Logout</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-
-
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
 
     <div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <section id="login_container">
-            <form>
+            <div>
               <label for="email_id" class ="labelLogEmail">Email id </label>
               <input class="login_email" type="email" name="email"> <br>
               <label for="password">Password</label>
               <input class="login_password" type="password" name="password"> <br>
               <button id = "login"> Login </button>
-            </form>
+            </div>
           </section>'
         </div>
       </div>
@@ -81,16 +77,16 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <section id="register_container">
-                    <form>
-                      <label for="email_id" class="labelRegEmail">Email id </label>
-                      <input class="email" type="email" name="email"> <br>
-                      <label for="password">Password</label>
-                      <input class="password" type="password" name="password"> <br>
-                      <label for="username">Username</label>
-                      <input class="username" type="text" name="username"> <br>
-                      <button id="register">Register</button>
-                    </form>
-                  </section>
+              <div>
+                <label for="email_id" class="labelRegEmail">Email id </label>
+                <input class="email" type="email" name="email"> <br>
+                <label for="password">Password</label>
+                <input class="password" type="password" name="password"> <br>
+                <label for="username">Username</label>
+                <input class="username" type="text" name="username"> <br>
+                <button id="register">Register</button>
+              </div>
+            </section>
         </div>
       </div>
     </div>
