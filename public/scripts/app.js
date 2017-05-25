@@ -106,7 +106,7 @@ $(document).ready(function() {
 
 
 //Lists.ejs
-  function createContributor(suc)
+  function createContributor(suc) {
 
   $.ajax({
     url: '/lists/:lid',
