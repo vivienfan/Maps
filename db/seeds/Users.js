@@ -1,7 +1,9 @@
+const bcrypt = require('bcrypt');
+
 let users = [
-  {id: 1,   name: 'Alice',    email:'alice@h.com',    password:'alice',     username:'alice'},
-  {id: 2,   name: 'Bob',      email:'bob@h.com',      password:'bob',       username:'bob'},
-  {id: 3,   name: 'Charlie',  email:'charlie@h.com',  password:'charlie',   username:'charlie'}
+  {id: 1,   name: 'Alice',    email:'alice@h.com',    password:bcrypt.hashSync('alice', 10),     username:'alice'},
+  {id: 2,   name: 'Bob',      email:'bob@h.com',      password:bcrypt.hashSync('bob', 10),       username:'bob'},
+  {id: 3,   name: 'Charlie',  email:'charlie@h.com',  password:bcrypt.hashSync('charlie', 10),   username:'charlie'}
 ];
 
 let lists = [

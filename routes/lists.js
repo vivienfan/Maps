@@ -8,36 +8,45 @@ module.exports = (dataHelper) => {
   // method: get
   // URL: /lists
   // client input: none
-  // server output: err / { contribution: [], public: [] }
-  // contribution, public = { l_id: int, title: str, description: str }
+  // server output: err / [{ l_id: int, title: str, description: str }]
   //
-  // main page, render all contributions
-  // and all the rest public lists ordered by number of favourites
+  // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
+    dataHelper.getAllPublicLists((err, publics) => {
+      if (err) {
+        res.status(500).send();
+        return;
+      }
+      res.status(200).json(publics);
+    });
+  })
+
+
+
+/*  router.get('/', (req, res) => {
     let uid = req.session.user_id;
     dataHelper.getAllContributionForUser(uid, (err, contributions) => {
       if (err) {
         res.status(500).send(err.message);
-      } else {
-        let arr = [];
-        let contris = [];
-        if (contributions && contributions.length !== 0) {
-          contributions.forEach((element) => {
-            arr.push(element.l_id);
-            contris.push({title: element.title, descritpion:element.description});
-          });
-        }
-        dataHelper.getAllPublicListsExcept(arr, (err, publics) => {
-          if (err) {
-            res.status(500).send(err.message);
-          } else {
-            res.status(200).json({contribution: contris, public: publics});
-          }
+        return;
+      }
+      console.log("contributions: ", contributions);
+      let contris = [];
+      if (contributions && contributions.length !== 0) {
+        contributions.forEach((element) => {
+          contris.push({title: element.title, descritpion:element.description});
         });
       }
+      dataHelper.getAllPublicListsExcept(uid, (err, publics) => {
+        if (err) {
+          res.status(500).send(err.message);
+          return;
+        }
+        console.log("public lists:", publics);
+        res.status(200).json({contribution: contris, public: publics});
+      });
     });
-    // res.status(200);
-  });
+  });*/
 
   // method: get
   // URL: /lists/favourites/:uid

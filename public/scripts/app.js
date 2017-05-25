@@ -4,26 +4,10 @@ $(document).ready(function() {
   var global_username = '';
   var global_email = '';
 
-  $('.dropdown').addClass('hide')
+  $('.dropdown').addClass('hide');
+  renderListsForHome();
 
 
-
-//   $.ajax({
-//   url: '/lists',
-//   method: 'GET',
-//   dataType: 'json',
-//   success: function(data) {
-//
-//     if (data.length > 0) {
-//       renderFavourites(data)
-//     }
-//     //add class
-//     //Hide register and login buttons
-//    },
-//   error: function(err) {
-//     console.log('err');
-//   }
-// });
 //
 // // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
@@ -115,6 +99,24 @@ $(document).ready(function() {
     });
   });
 
+  function renderListsForHome() {
+    console.log("get all lists for home page");
+    $.ajax({
+      url: '/lists',
+      method: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        if (data.length > 0) {
+          renderFavourites(data)
+        }
+        //add class
+        //Hide register and login buttons
+      },
+      error: function(err) {
+        console.log('err');
+      }
+    });
+  }
 
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
