@@ -22,7 +22,7 @@ module.exports = (dataHelper) => {
           res.status(200).json(obj);
         }
       }
-    }
+    });
   });
 
 
