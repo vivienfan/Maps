@@ -5,19 +5,22 @@ $(document).ready(function() {
 
 
   $('.dropdown').addClass('hide');
-  // renderListsForHome();
+  renderListsForHome();
 
   $.ajax({
     url: '/me',
     method: 'GET',
     dataType: 'json',
     success: function(suc) {
+      console.log(suc)
       if (suc) {
         //Hide register and login buttons
         global_username = suc.username;
         global_email = suc.email;
         console.log('global u', global_username, global_email);
         // TOOD:
+        $('#login_nav').addClass('hide');
+        $('#reg_nav').addClass('hide');
       }
     }
   });
