@@ -35,24 +35,24 @@ $(document).ready(function() {
   var global_email = '';
 
 
-  $.ajax({
-  url: '/lists',
-  method: 'GET',
-  dataType: 'json',
-  success: function(data) {
-
-    if (data.length > 0) {
-      renderFavourites(data)
-    }
-    //add class
-    //Hide register and login buttons
-   },
-  error: function(err) {
-    console.log('err');
-  }
-});
-
-// renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
+//   $.ajax({
+//   url: '/lists',
+//   method: 'GET',
+//   dataType: 'json',
+//   success: function(data) {
+//
+//     if (data.length > 0) {
+//       renderFavourites(data)
+//     }
+//     //add class
+//     //Hide register and login buttons
+//    },
+//   error: function(err) {
+//     console.log('err');
+//   }
+// });
+//
+// // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
   // LOGIN
 
@@ -103,13 +103,14 @@ $(document).ready(function() {
       global_username = suc.username;
       global_email = suc.email;
       $('#display_username').text(`Hello ${global_username}!`);
+
+
      },
     error: function(err) {
       console.log('login error');
       }
     });
   });
-});
 
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
@@ -167,32 +168,32 @@ $(document).ready(function() {
     })
   }
 
-  $.ajax({
-    url: '/lists/',
-    method: 'GET',
-    dataType: 'json',
-    success: function(suc) {
-      //add class
-      //Hide register and login buttons
-      $('#lid_info').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
-      $('#lid_info').append($('<h3>').text((`Description: ${suc.listinfo.Description}`)));
-
-      //TODO: Append every contributor of the lid in the container.
-
-      createContributers(suc.contrbutors)
-      // $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
-
-      //TODO: Append every mapid in the map container
-
-      createMaps(suc.maps)
-
-
-
-      },
-      error: function(err) {
-      console.log('err');
-      }
-});
+//   $.ajax({
+//     url: '/lists/',
+//     method: 'GET',
+//     dataType: 'json',
+//     success: function(suc) {
+//       //add class
+//       //Hide register and login buttons
+//       $('#lid_info').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
+//       $('#lid_info').append($('<h3>').text((`Description: ${suc.listinfo.Description}`)));
+//
+//       //TODO: Append every contributor of the lid in the container.
+//
+//       createContributers(suc.contrbutors)
+//       // $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
+//
+//       //TODO: Append every mapid in the map container
+//
+//       createMaps(suc.maps)
+//
+//
+//
+//       },
+//       error: function(err) {
+//       console.log('err');
+//       }
+// });
 
     //TODO: Create a function for every edit Button.
     $(".editMap").on('click', 'button', function (e) {
@@ -263,6 +264,7 @@ $(document).ready(function() {
         }
       })
     });
+  });
 
 
 
