@@ -92,6 +92,7 @@ $(document).ready(function() {
     dataType: 'json',
     success: function(suc) {
       //Hide register and login buttons
+      $('#display_username').text(`Hello ${suc.username}!`);
 
      },
     error: function(err) {
@@ -101,7 +102,6 @@ $(document).ready(function() {
   });
 })
 
-});
 // Profile.ejs
 
 
@@ -120,3 +120,5 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     id: 'your.mapbox.project.id',
     accessToken: 'your.mapbox.public.access.token'
 }).addTo(mymap);
+
+});

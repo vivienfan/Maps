@@ -43,7 +43,6 @@
 
           </form>
           <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -66,10 +65,12 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <section id="login_container">
-            <form action="/login" method="POST">
-              <input class="login_email" type="email" name="email">
-              <input class="login_password" type="password" name="password">
-              <button id> Login </button>
+            <form>
+              <label for="email_id" class ="labelLogEmail">Email id </label>
+              <input class="login_email" type="email" name="email"> <br>
+              <label for="password">Password</label>
+              <input class="login_password" type="password" name="password"> <br>
+              <button id = "login"> Login </button>
             </form>
           </section>'
         </div>
@@ -80,18 +81,23 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <section id="register_container">
-                    <form action="/register" method="POST">
-                      <input class="email" type="email" name="email">
-                      <input class="password" type="password" name="password">
-                      <input class="username" type="text" name="username">
-                      <button> Register </button>
+                    <form>
+                      <label for="email_id" class="labelRegEmail">Email id </label>
+                      <input class="email" type="email" name="email"> <br>
+                      <label for="password">Password</label>
+                      <input class="password" type="password" name="password"> <br>
+                      <label for="username">Username</label>
+                      <input class="username" type="text" name="username"> <br>
+                      <button id="register">Register</button>
                     </form>
                   </section>
         </div>
       </div>
     </div>
-    <main class = "container">
 
+
+    <main class = "container">
+    <h2 id="display_username"></h2>
     <h3> Favorite List </h3>
       <section id="listfav">
         <h4> example</h4>
