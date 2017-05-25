@@ -66,10 +66,12 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <section id="login_container">
-            <form action="/login" method="POST">
+            <form>
+              <label for="email_id">Email id</label>
               <input class="login_email" type="email" name="email">
+              <label for="password">password</label>
               <input class="login_password" type="password" name="password">
-              <button id> Login </button>
+              <button id = "login"> Login </button>
             </form>
           </section>'
         </div>
@@ -80,11 +82,14 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <section id="register_container">
-                    <form action="/register" method="POST">
+                    <form>
+                      <label for="email_id">email id</label>
                       <input class="email" type="email" name="email">
+                      <label for="password">password</label>
                       <input class="password" type="password" name="password">
+                      <label for="username">username</label>
                       <input class="username" type="text" name="username">
-                      <button> Register </button>
+                      <button id="register"> Register </button>
                     </form>
                   </section>
         </div>
