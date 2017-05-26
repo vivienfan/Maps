@@ -37,7 +37,7 @@
             <h2> USERNAME FAVORITES </h2>
             <% favouriteLists.forEach(function (list) { %>
               <li>
-                <%= list.title%> => <%= list.description %>
+                <b> <%= list.title%> </b> <%= list.description %>
                 <button>
                   Favourite
                 </button>
@@ -52,12 +52,12 @@
             <ul>
               <% contributedLists.forEach(function (list) { %>
                 <li>
-                  <%= list.title%> => <%= list.description %>
+                  <b> <%= list.title%> </b> <%= list.description %>
                   <div method="POST" action="/lists/<%= list.lid %>">
-                    <input type="submit" value="Edit">
+                    <input type="submit" value="Edit List" class="btn btn-primary" >
                   </div>
                   <div method="POST" action="/lists/<%= list.lid %>/delete">
-                    <input type="submit" value="Delete">
+                    <input type="submit" value="Delete List" class="btn btn-primary">
                   </div>
                 </li>
               <%  }); %>
