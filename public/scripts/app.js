@@ -61,6 +61,10 @@ $(document).ready(function() {
        },
       error: function(err) {
         console.log(err);
+        var $regError = $('<div>');
+        $regError.text('Registration Error-And the server message is ->', err);
+        $regError.addClass('alert alert-danger');
+        $('#login_container').append($regError);
       }
     });
   });
@@ -94,6 +98,10 @@ $(document).ready(function() {
       },
       error: function(err) {
         console.log('login error');
+        var $loginError = $('<div>');
+        $loginError.text('Invalid email and password-And the server message is ->', err);
+        $loginError.addClass('alert alert-danger');
+        $('#login_container').append($loginError);
       }
     });
   });

@@ -53,10 +53,10 @@
               <% contributedLists.forEach(function (list) { %>
                 <li>
                   <%= list.title%> => <%= list.description %>
-                  <div method="POST" action="/lists/<%= list.lid%>">
+                  <div method="POST" action="/lists/<%= list.lid %>">
                     <input type="submit" value="Edit">
                   </div>
-                  <div method="POST" action="/lists/<%= list.lid%>/delete">
+                  <div method="POST" action="/lists/<%= list.lid %>/delete">
                     <input type="submit" value="Delete">
                   </div>
                 </li>

@@ -22,10 +22,10 @@
                 <li>
                   <%= mlist.title  %> => <%= mlist.description %>
                   <div method="POST" action="/maps/<%= mlist.mid %>">
-                    <input type="submit" value="show" class='btn btn-primary'>
+                    <input type="submit" value="show" class="btn btn-primary">
                   </div>
                   <div method="POST" action="/maps/<%= mlist.mid %>/delete">
-                    <input type="submit" value="delete" class='btn btn-warning'>
+                    <input type="submit" value="delete" class="btn btn-warning">
                   </div>
                 </li>
               <% }); %>
@@ -41,7 +41,7 @@
               <li>
                 <%= contlist.username %>
                 <div method="POST" action="/users/<%= contlist.username %>">
-                  <input type="submit" value="show">
+                  <input type="submit" value="View User" class="btn btn-primary">
                 </div>
               </li>
             <% }); %>
