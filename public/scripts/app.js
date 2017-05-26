@@ -164,11 +164,14 @@ $(document).ready(function() {
 
     var $listFav = $('<div>');
     $listFav.addClass('col-md-3');
+    if (list.count === null){
+      $listFav.append("0 Favourites")
+    } else {
     $listFav.append(`${list.count} Favourites`);
+    }
     $listItem.append($listFav);
-
-    var $buttonL = $(`<div class='col-md-3' method='GET' action ='lists/${list.l_id}'>`);
-    $buttonL.append($("<input type='submit' value='View List' class = 'btn btn-primary'>"));
+    var $buttonL = $(`<a name='View List' class = 'btn btn-primary' href='lists/${list.l_id}'>`);
+    $buttonL.text('View List')
     $listItem.append($buttonL);
     $listItem.append($('<b>'));
     $listItem.append($('<b>'));
