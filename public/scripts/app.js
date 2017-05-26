@@ -342,7 +342,7 @@ $(document).ready(function() {
     })
   });
 
-  $("#addMap").on('click', 'button', function (e) {
+  $(".addMap").on('click', function (e) {
     e.preventDefault();
 
     $.ajax({
