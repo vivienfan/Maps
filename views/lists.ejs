@@ -7,7 +7,7 @@
         <div class="col-md-5">
           <section class = "listandMaps">
             <section id="lid_info">
-              <h3> <%listInfo.title%> => <% listInfo.description %> </h3>
+              <h3> <% listInfo.title %> => <% listInfo.description %> </h3>
                 <div method="POST" action="/maps/new">
                   <input type="submit" value="Add Map">
                 </div>
@@ -20,11 +20,11 @@
               <ul>
               <% maps.forEach(function (mlist) { %>
                 <li>
-                  <%= mlist.title%> => <%=mlist.description %>
-                  <div method="POST" action="/maps/<%= mlist.mid%>">
+                  <%= mlist.title  %> => <%= mlist.description %>
+                  <div method="POST" action="/maps/<%= mlist.mid %>">
                     <input type="submit" value="show">
                   </div>
-                  <div method="POST" action="/maps/<%= mlist.mid%>/delete">
+                  <div method="POST" action="/maps/<%= mlist.mid %>/delete">
                     <input type="submit" value="delete">
                   </div>
                 </li>
@@ -40,7 +40,7 @@
             <% contributors.forEach(function (contlist) { %>
               <li>
                 <%= contlist.username %>
-                <div method="POST" action="/users/<%= countlist.username%>">
+                <div method="POST" action="/users/<%= countlist.username %>">
                   <input type="submit" value="show">
                 </div>
               </li>
