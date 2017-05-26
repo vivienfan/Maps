@@ -5,7 +5,7 @@ $(document).ready(function() {
 
 
   $('.dropdown').addClass('hide');
-  // renderListsForHome();
+  renderListsForHome();
 
   $.ajax({
     url: '/me',
@@ -111,7 +111,7 @@ $(document).ready(function() {
         $('#display_username').text(`Hello ${global_username}!`)
         $('#login_nav').removeClass('hide');
         $('#reg_nav').removeClass('hide');
-        $('.dropdown').addClass('hide')
+        $('.dropdown').addClass('hide');
         window.location.href = "/";
       },
       error: function(err) {
@@ -141,9 +141,30 @@ $(document).ready(function() {
 
   function createFavourite(list) {
     console.log("I am in createFavourite");
-    var $listItem = $('<article>')
-    $listItem.append($('<h4>').text(list.title));
-    $listItem.append($('<p>').text(list.description));
+    var $listItem = $('<div>');
+    $listItem.addClass('row');
+
+    var $listTitle =$('<div>');
+    $listTitle.addClass('col-md-3');
+    $listTitle.append($('<b>').text(list.title));
+    $listItem.append($listTitle);
+
+    var $listDesc =$('<div>');
+    $listDesc.addClass('col-md-3');
+    $listDesc.append(`${list.description}`);
+    $listItem.append($listDesc);
+
+    var $listFav = $('<div>');
+    $listFav.addClass('col-md-3');
+    $listFav.append(`${list.count} Favourites`);
+    $listItem.append($listFav);
+
+    var $buttonL = $(`<div class='col-md-3' method='GET' action ='lists/${list.l_id}'>`);
+    $buttonL.append($("<input type='submit' value='View List' class = 'btn btn-primary'>"));
+    $listItem.append($buttonL);
+    $listItem.append($('<b>'));
+    $listItem.append($('<b>'));
+    // $listItem.append($('<input>').text("View List"));
     return $listItem;
   }
 
@@ -153,7 +174,7 @@ $(document).ready(function() {
     lists.forEach( function (list) {
       console.log("For each is working!!")
       // debugger;
-      $('#listfav').prepend(createFavourite(list))
+      $('#listfav').append(createFavourite(list))
     });
   }
 
