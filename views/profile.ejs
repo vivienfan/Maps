@@ -39,17 +39,15 @@
           </ul>
           <div class="navbar-form navbar-right">
               <button id="login_nav" type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
-              <button id="reg_nav" type="button" class="btn btn-primary register_show" data-toggle="modal" data-target=".register-modal"> Register</button>
+              <button id ="reg_nav" type="button" class="btn btn-primary" data-toggle="modal" data-target=".register-modal"> Register</button>
           </div>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Your profile</li>
-                <li><a href="#">Maps</a></li>
-                <li><a href="#">Something else here</a></li>
+                <li><button id="yourProf" class ="btn btn-primary" type="button">Your profile </button></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="#">Logout</a></li>
+                <li><button id="logout" class ="btn btn-primary" type="button">Logout</button></li>
               </ul>
             </li>
           </ul>
@@ -57,7 +55,7 @@
       </div><!-- /.container-fluid -->
     </nav>
 
-    <div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div id = "loginmodal" class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <section id="login_container">
@@ -73,17 +71,17 @@
       </div>
     </div>
 
-    <div class="modal fade register-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div id="regmodal" class="modal fade register-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <section id="register_container">
               <div>
                 <label for="email_id" class="labelRegEmail">Email id </label>
-                <input class="email" type="email" name="email"> <br>
+                <input class="reg_email" type="email" name="email"> <br>
                 <label for="password">Password</label>
-                <input class="password" type="password" name="password"> <br>
+                <input class="reg_password" type="password" name="password"> <br>
                 <label for="username">Username</label>
-                <input class="username" type="text" name="username"> <br>
+                <input class="reg_username" type="text" name="username"> <br>
                 <button id="register">Register</button>
               </div>
             </section>
@@ -95,12 +93,33 @@
   <main class = "container">
     <div class = "row">
       <div class="col-md-5">
-        <section class = "userFavorite">
-        </section>
+        <section class = "userFavourites">
+          <h2> USER FAVORITES </h2>
+          <% favouriteLists.forEach(function (list) {%>
+            <li>
+              <%= list.title%> => <%= list.description %>
+              <button>
+                Favourite
+              </button>
+            </li>
 
+            }) %>
+        </section>
       </div>
       <div class="col-md-5">
         <section class = "userContributions">
+          <h2> USER CONTRIBUTIONS </h2>
+          <% contributedLists.forEach(function (list) {%>
+            <li>
+              <%= list.title%> => <%= list.description %>
+              <div method="POST" action="/lists/<%= list.lid%>">
+                <input type="submit" value="Edit">
+              </div>
+              <div method="POST" action="/lists/<%= list.lid%>/delete">
+                <input type="submit" value="Delete">
+              </div>
+            </li>
+            }) %>
         </section>
       </div>
     </div>

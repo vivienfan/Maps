@@ -19,6 +19,7 @@ $(document).ready(function() {
         global_email = suc.email;
         console.log('global u', global_username, global_email);
         // TOOD:
+        $('#display_username').text(`Hello ${global_username}!`);
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
         $('.dropdown').removeClass('hide');
@@ -127,33 +128,15 @@ $(document).ready(function() {
       success: function(data) {
         if (data.length > 0) {
           renderFavourites(data)
-        }
+          }
         //add class
         //Hide register and login buttons
-      },
+        },
       error: function(err) {
         console.log('err');
-      }
+        }
     });
   }
-
-// Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-  // $.ajax({
-  // url: '', //profile/:username,
-  // method: 'GET',
-  // dataType: 'json',
-  // success: function(suc) {
-
-  //   //TODO: Create both function to render data for user fabourites and user contributors
-
-  //  },
-  // error: function(err) {
-  //   console.log('getting the error from the username ajax');
-  //   }
-  // });
-
-
 
   function createFavourite(list) {
     console.log("I am in createFavourite");
@@ -172,6 +155,62 @@ $(document).ready(function() {
       $('#listfav').prepend(createFavourite(list))
     });
   }
+
+
+// Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+
+  $("#yourProf").on('click', function (e) {
+  $.ajax({
+    url: '/profiles/' + global_username, //profile/:username,
+    method: 'GET',
+    dataType: 'json',
+    success: function(suc) {
+
+      //TODO: Create both function to render data for user fabourites and user contributors
+      // contributedLists(suc)
+      //
+      // favouritedLists(suc)
+
+
+     },
+    error: function(err) {
+      console.log('getting the error from the username ajax');
+      }
+    });
+  });
+
+  function contributedLists(lists){
+    console.log("Inside Contributed lists function rendering ", lists)
+    lists.forEach( function (list) {
+      console.log("For each is working!! in contributedLists")
+      // debugger;
+      $('#userContributions').append(createSingleList(list))
+      });
+    }
+
+  function createSingleList(list) {
+    var $list = $('<article>')
+    $contributor.append($('<p>').text(list.title));
+    $contributor.append($('<br>'));
+    $contributor.append($('<p>').text(list.description));
+    $contributor.append($('<br>'));
+    return $list;
+  };
+
+  function favouritedLists(lists){
+    lists.forEach( function (list) {
+      console.log("Inside favourited lists function rendering ", lists)
+      console.log("For each is working!! in favouritedLists")
+      // debugger;
+      $('#userFavourites').append(createSingleList(list));
+        })
+      };
+
+
+
+
 
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   function createSingleContributor(cont) {
@@ -302,13 +341,14 @@ $(document).ready(function() {
       success: function(suc) {
         //Delete the map id article or refresh the page.
 
-      },
+        },
       error: function(err) {
         console.log('Delete Error')
-      }
-    })
-  });
+        }
+      })
+  })
 });
+
 
 
 
