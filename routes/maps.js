@@ -24,7 +24,7 @@ module.exports = (dataHelper) => {
   });
 
   // method: get
-  // URL: /maps/auth
+  // URL: /maps/:mid/auth
   // client input: none
   // server output: err / none
   router.get('/:mid/auth', (req, res) => {
@@ -33,16 +33,33 @@ module.exports = (dataHelper) => {
     let canView = false;
     let canEdit = false;
     // check if the list where map is belong to is public
-    dataHelper.getListAccessByMapId(mid, (err, res) => {
+    dataHelper.getListAccessByMapId(mid, (err, view) => {
       if(err) {
-        res.status(400).send(err);
+        res.status(404).send(err);
         return;
       }
-      canView = res;
+      canView = view.public;
     })
     .then(() => {
-      return dataHelper.getContributionBy
+      return dataHelper.getContributorForMap(mid, uid, (err, edit) => {
+        if (err) {
+          res.status(404).send(err);
+          return;
+        }
+        canEdit = edit;
+      });
     })
+    .then(() => {
+      console.log(canView, canEdit);
+      if (!(canView || canEdit)) {
+        res.status(403).send();
+        return;
+      }
+      res.status(200).json({ canView: canView, canEdit: canEdit });
+    })
+    .catch((err) => {
+      return;
+    });
   })
 
   // method: post
