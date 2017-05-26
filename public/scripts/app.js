@@ -355,7 +355,6 @@ $(document).ready(function() {
       title: newTitle,
       description: newDesc },
       success: function(suc) {
-        //Delete the map id article or refresh the page.
         window.location.href="../maps/"+suc.mid;
       },
       error: function(err) {
@@ -364,18 +363,26 @@ $(document).ready(function() {
     })
   });
 
-  $(".addContributor").on('click', 'button', function (e) {
+  $(".addCont").on('click', function (e) {
     e.preventDefault();
+    console.log("the add contributor button was clicked");
     var newContusername = $(this).siblings(".username").val();
     var lid = $(this).data('lid');
+    console.log('Here is the lid that was clicked', lid);
 
 
     $.ajax({
-      url: '',
+      url: lid + '/addContributor',
       method: 'POST',
-      // data: ,
+      data: {username: newContusername},
       success: function(suc) {
         //Delete the map id article or refresh the page.
+        var $contItem = $('<li>');
+        $contItem.append(newContusername);
+        $contItem.append($(`<a href="/profiles/${newContusername}" class="btn btn-primary">`).text('View user'))
+        $('#lid_contributors').append($contItem)
+
+
 
         },
       error: function(err) {
