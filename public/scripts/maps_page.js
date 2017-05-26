@@ -1,5 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
   var myMap;
+  var mid = $("body").data("mid");
   var latitude = 43.6532;
   var longitude = -79.3832;
 
@@ -7,34 +8,39 @@ $(document).ready(function() {
   var popup = L.popup();
 
   var addPopupHTML = $("#addPopup").children(".markerPopup").html();
-  console.log(addPopupHTML);
 
-  // function getLocation() {
-  //   if (navigator.geolocation) {
-  //       navigator.geolocation.getCurrentPosition(showPosition);
-  //       latitude = position.coords.latitude;
-  //       longitude = position.coords.longitude;
-  //       console.log('get location');
-  //   }
-  //   // else, use default coordinates;
-  // }
-
-  function addPoint(point) {
-    // L.marker([point.latitude, point.longitude])
-    // .addTo(myMap)
-    // .on("clicke", myFnc);
+  function createPointInfo(point) {
+    var $container = $("<div>").attr("data-pid", point.p_id);
+    var $title = $("<label>").text(point.title);
+    var $description = $("<p>").text(point.description);
+    var $br = $("<br>");
+    var $button = $("<button>", { class: "edit-point"}).text("Edit");
+    if (point.image) {
+      var $img = $("<img>").attr("src", point.image).css("width", "100px");
+      $container.append($title, $description, $img, $br, $button);
+    } else {
+      $container.append($title, $description, $button);
+    }
+    return $container.html();
   }
 
   function initPoints() {
-    console.log("hereher");
-    if (points.length !== 0) {
-      points.forEach((point) => {
-        // addPoint(point);
-      });
-    }
-
-    L.marker([latitude, longitude]).addTo(myMap)
-      .bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+    console.log("initPoints");
+    $.ajax({
+      url: `/points/all/${mid}`,
+      method: "GET",
+      dataType: 'json',
+      success: function (points) {
+        if (points.length !== 0) {
+          points.forEach((point) => {
+            console.log(point);
+            var content = createPointInfo(point);
+            L.marker([point.latitude, point.longitude]).addTo(myMap)
+              .bindPopup(content);
+          });
+        }
+      }
+    });
   }
 
   function onMapClick(e) {
