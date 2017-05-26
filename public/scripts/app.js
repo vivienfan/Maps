@@ -344,13 +344,24 @@ $(document).ready(function() {
 
   $(".addMap").on('click', function (e) {
     e.preventDefault();
+    var newTitle = $(this).siblings(".newMapTitle").val();
+    var newDesc = $(this).siblings(".newMapDesc").val();
+    var lid = $(this).data('lid');
+
+
+
+
+
 
     $.ajax({
-      url: '',
+      url: '/maps/new',
       method: 'POST',
-      // datatype: 'json',
+      data: {lid: lid,
+      title: newTitle,
+      description: newDesc },
       success: function(suc) {
         //Delete the map id article or refresh the page.
+        window.location.href="maps/"+suc.mid;
 
       },
       error: function(err) {
