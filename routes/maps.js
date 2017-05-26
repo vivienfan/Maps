@@ -17,7 +17,8 @@ module.exports = (dataHelper) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
-        res.status(200).json(mapInfo);
+        mapInfo.mid = mid;
+        res.status(200).render("../views/maps", mapInfo);
       }
     });
   });

@@ -106,6 +106,8 @@ $(document).ready(function () {
   });
 
   $('#points-list').on('click', '.point-edit' ,function(e) {
+
+ //   $('#edit-point-modal').find('.textbox-title').val();
     console.log("edit");
   });
 
