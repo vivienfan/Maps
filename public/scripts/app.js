@@ -64,7 +64,7 @@ $(document).ready(function() {
         var $regError = $('<div>');
         $regError.text('Registration Error-And the server message is ->', err);
         $regError.addClass('alert alert-danger');
-        $('#login_container').append($regError);
+        $('#register_container').append($regError);
       }
     });
   });
