@@ -17,6 +17,7 @@ module.exports = (dataHelper) => {
         res.status(500).send();
         return;
       }
+      console.log(publics);
       res.status(200).json(publics);
     });
   })

@@ -68,6 +68,7 @@ module.exports = (dataHelper) => {
   //
   // clear the cookies for the user
   router.post('/logout', (req, res) => {
+    console.log("logout");
     req.session.user_id = null;
     req.session.username = null;
     req.session.email = null;
@@ -92,11 +93,13 @@ module.exports = (dataHelper) => {
         res.status(403).send(err.message);
         return;
       }
+      console.log(dbObj);
       if (dbObj) {
         req.session.user_id = dbObj.id;
         req.session.username = dbObj.username;
         req.session.email = dbObj.email;
         res.status(200).json(dbObj);
+        return;
       }
       res.status(500).send();
     });

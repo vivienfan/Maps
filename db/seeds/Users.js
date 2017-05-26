@@ -8,7 +8,8 @@ let users = [
 
 let lists = [
   {l_id: 1,   title: 'apple',   description: 'description',   public: true},
-  {l_id: 2,   title: 'orange',  description: 'description',   public: true}
+  {l_id: 2,   title: 'orange',  description: 'description',   public: true},
+  {l_id: 3,   title: 'lime',    description: 'description',   public: true}
 ];
 
 let maps = [
@@ -29,7 +30,9 @@ let contributions = [
 ];
 
 let favourites = [
-  {u_id: 1,   l_id: 1}
+  {u_id: 1,   l_id: 1},
+  {u_id: 2,   l_id: 2},
+  {u_id: 3,   l_id: 2}
 ];
 
 exports.seed = function(knex, Promise) {
@@ -60,15 +63,3 @@ exports.seed = function(knex, Promise) {
     return knex('favourites').insert(favourites);
   });
 };
-
-
-// exports.seed = function(knex, Promise) {
-//   // Deletes ALL existing entries
-//   return knex('users').del()
-//     .then(function () {
-//       return knex('users').insert([
-//         {id: 1,   name: 'Alice',    email:'alice@h.com',    password:'alice',     username:'alice'},
-//         {id: 2,   name: 'Bob',      email:'bob@h.com',      password:'bob',       username:'bob'}
-//       ]);
-//     });
-// };

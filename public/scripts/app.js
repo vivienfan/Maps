@@ -112,6 +112,7 @@ $(document).ready(function() {
         $('#login_nav').removeClass('hide');
         $('#reg_nav').removeClass('hide');
         $('.dropdown').addClass('hide')
+        window.location.href = "/";
       },
       error: function(err) {
         console.log('logout error', err);
@@ -162,23 +163,7 @@ $(document).ready(function() {
 
 
   $("#yourProf").on('click', function (e) {
-  $.ajax({
-    url: '/profiles/' + global_username, //profile/:username,
-    method: 'GET',
-    dataType: 'json',
-    success: function(suc) {
-
-      //TODO: Create both function to render data for user fabourites and user contributors
-      // contributedLists(suc)
-      //
-      // favouritedLists(suc)
-
-
-     },
-    error: function(err) {
-      console.log('getting the error from the username ajax');
-      }
-    });
+    window.location=`/profiles/${global_username}`;
   });
 
   function contributedLists(lists){
