@@ -4,7 +4,7 @@
   <body>
     <main class = "container">
       <div class = "row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <section class = "listandMaps">
             <section id="lid_info">
               <h3> <% listInfo.title %> => <% listInfo.description %> </h3>
@@ -22,10 +22,10 @@
                 <li>
                   <%= mlist.title  %> => <%= mlist.description %>
                   <div method="POST" action="/maps/<%= mlist.mid %>">
-                    <input type="submit" value="show">
+                    <input type="submit" value="show" class='btn btn-primary'>
                   </div>
                   <div method="POST" action="/maps/<%= mlist.mid %>/delete">
-                    <input type="submit" value="delete">
+                    <input type="submit" value="delete" class='btn btn-warning'>
                   </div>
                 </li>
               <% }); %>
@@ -33,7 +33,7 @@
             </section>
           </section>
         </div>
-        <div class="col-mid-5">
+        <div class="col-mid-3">
           <section id="lid_contributors">
             <h3> List of contributors </h3>
             <ul>
