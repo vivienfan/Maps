@@ -4,9 +4,13 @@
 <!-- main part of the page---->
   <body>
     <main class = "container">
-      Welcome to "users.username" Page
+      <h1> Welcome to "username" Page </h1>
+      <div method="POST" action="/lists/new">
+        <input class = "btn btn-primary" type="submit" value="Create new list">
+      </div>
+
       <div class = "row">
-        <div class="col-md-5">
+        <div class="col-md-6">
           <section class = "userFavourites">
             <h2> USER FAVORITES </h2>
             <% favouriteLists.forEach(function (list) { %>
@@ -20,7 +24,7 @@
             <%  }); %>
           </section>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <section class = "userContributions">
             <h2> USER CONTRIBUTIONS </h2>
             <ul>
