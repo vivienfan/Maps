@@ -100,6 +100,7 @@ $(document).ready(function () {
       method: 'POST',
       data: m_data,
       dataType: 'json',
+      async: false,
       success: function(res) {
         m_data.pid = res.pid;
         addPoint(m_data);

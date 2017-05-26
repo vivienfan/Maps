@@ -12,6 +12,7 @@ module.exports = (dataHelper) => {
   //
   // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
+    console.log("get /lists");
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
         res.status(500).send();

@@ -4,45 +4,41 @@
   <body>
     <main class = "container">
       <div class = "row">
-        <div class="col-md-5">
+        <div class="col-md-9">
           <section class = "listandMaps">
             <section id="lid_info">
-              <h3> <% listInfo.title %> => <% listInfo.description %> </h3>
+              <h3> <b> <% listInfo.title %> </b> <% listInfo.description %> </h3>
                 <div method="POST" action="/maps/new">
                   <input type="submit" value="Add Map">
                 </div>
-                <div method="POST" action="/maps/new">
+                <div method="POST" action="/<% listInfo.l_id %>/addContributor">
                   <input type="text" name="username">
                   <input type="submit" value="Add Contributor">
                 </div>
             </section>
-            <section class =showMaps>
-              <ul>
+            <section class="showMaps">
+
               <% maps.forEach(function (mlist) { %>
-                <li>
-                  <%= mlist.title  %> => <%= mlist.description %>
-                  <div method="POST" action="/maps/<%= mlist.mid %>">
-                    <input type="submit" value="show">
-                  </div>
+
+                  <b> <%= mlist.title  %> </b> <%= mlist.description %>
+                  <a href="/maps/<%= mlist.m_id %>" class="btn btn-primary"> Show Map </a>
                   <div method="POST" action="/maps/<%= mlist.mid %>/delete">
-                    <input type="submit" value="delete">
+                    <input type="submit" value="Delete" class="btn btn-warning">
                   </div>
-                </li>
+
               <% }); %>
-              </ul>
+
             </section>
           </section>
         </div>
-        <div class="col-mid-5">
+        <div class="col-mid-3">
           <section id="lid_contributors">
             <h3> List of contributors </h3>
             <ul>
             <% contributors.forEach(function (contlist) { %>
               <li>
                 <%= contlist.username %>
-                <div method="POST" action="/users/<%= contlist.username %>">
-                  <input type="submit" value="show">
-                </div>
+                  <a href="/profiles/<%= contlist.username %>" class="btn btn-primary"> View User </a>
               </li>
             <% }); %>
             </ul>

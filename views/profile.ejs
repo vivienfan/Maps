@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <% include ./partials/_headers %>
-<!-- main part of the page---->
+<!-- main part of the page -->
   <body>
     <main class = "container">
       <h1> Welcome to "username" Page </h1>
@@ -37,7 +37,7 @@
             <h2> USERNAME FAVORITES </h2>
             <% favouriteLists.forEach(function (list) { %>
               <li>
-                <%= list.title%> => <%= list.description %>
+                <b> <%= list.title%> </b> <%= list.description %>
                 <button>
                   Favourite
                 </button>
@@ -52,12 +52,10 @@
             <ul>
               <% contributedLists.forEach(function (list) { %>
                 <li>
-                  <%= list.title%> => <%= list.description %>
-                  <div method="POST" action="/lists/<%= list.lid%>">
-                    <input type="submit" value="Edit">
-                  </div>
-                  <div method="POST" action="/lists/<%= list.lid%>/delete">
-                    <input type="submit" value="Delete">
+                  <b> <%= list.title%> </b> <%= list.description %>
+                    <a class="btn btn-primary" type="submit" value="Edit List" href="/lists/<%= list.l_id %>"> Edit List </a>
+                  <div method="POST" action="/lists/<%= list.l_id %>/delete" style="float:right">
+                    <input type="submit" value="Delete List" class="btn btn-danger">
                   </div>
                 </li>
               <%  }); %>
