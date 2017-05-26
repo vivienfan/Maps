@@ -41,6 +41,9 @@ module.exports = (dataHelper) => {
       };
       console.log(tempVar);
       res.render('../views/profile', tempVar);
+    })
+    .catch((err) => {
+      return;
     });
   });
 
