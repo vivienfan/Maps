@@ -109,17 +109,19 @@
       <div class="col-md-5">
         <section class = "userContributions">
           <h2> USER CONTRIBUTIONS </h2>
-          <% contributedLists.forEach(function (list) { %>
-            <li>
-              <%= list.title%> => <%= list.description %>
-              <div method="POST" action="/lists/<%= list.lid%>">
-                <input type="submit" value="Edit">
-              </div>
-              <div method="POST" action="/lists/<%= list.lid%>/delete">
-                <input type="submit" value="Delete">
-              </div>
-            </li>
-          <%  }); %>
+          <ul>
+            <% contributedLists.forEach(function (list) { %>
+              <li>
+                <%= list.title%> => <%= list.description %>
+                <div method="POST" action="/lists/<%= list.lid%>">
+                  <input type="submit" value="Edit">
+                </div>
+                <div method="POST" action="/lists/<%= list.lid%>/delete">
+                  <input type="submit" value="Delete">
+                </div>
+              </li>
+            <%  }); %>
+          </ul>
         </section>
       </div>
     </div>

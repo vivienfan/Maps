@@ -92,20 +92,52 @@
     </div>
 
     <main class = "container">
-    <h2 id="display_username"></h2>
-    <section id="lid_info">
-    </section>
-    <section id="lid_contributors">
-      <h3> List of contributors </h3>
-    </section>
-
-    <button id="addMap"> Add Map </button>
-    <button id="addCont"> Add Contributors </button>
-
-    <section id="lid_maps">
-      <h3> List of contributors </h3>
-    </section>
-
-  </main>
+      <div class = "row">
+        <div class="col-md-5">
+          <section class = "listandMaps">
+            <section id="lid_info">
+              <h3> <%list.title%> => <% list.description %> </h3>
+                <div method="POST" action="/maps/new">
+                  <input type="submit" value="Add Map">
+                </div>
+                <div method="POST" action="/maps/new">
+                  <input type="text" name="username">
+                  <input type="submit" value="Add Contributor">
+                </div>
+            </section>
+            <section class =showMaps>
+              <ul>
+              <% mapLists.forEach(function (mlist) { %>
+                <li>
+                  <%= mlist.title%> => <%=mlist.description %>
+                  <div method="POST" action="/maps/<%= mlist.mid%>">
+                    <input type="submit" value="show">
+                  </div>
+                  <div method="POST" action="/maps/<%= mlist.mid%>/delete">
+                    <input type="submit" value="delete">
+                  </div>
+                </li>
+              <% }); %>
+              </ul>
+            </section>
+          </section>
+        </div>
+        <div class="col-mid-5">
+          <section id="lid_contributors">
+            <h3> List of contributors </h3>
+            <ul>
+            <% contLists.forEach(function (contlist) { %>
+              <li>
+                <%= contist.title%> => <%=contlist.description %>
+                <div method="POST" action="/users/<%= countlist.username%>">
+                  <input type="submit" value="show">
+                </div>
+              </li>
+            <% }); %>
+            </ul>
+          </section>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
