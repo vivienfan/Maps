@@ -88,7 +88,12 @@ module.exports = (dataHelper) => {
             res.status(400).send(err.message);
             return;
           }
-          res.status(200).json({ listInfo: listInfo, contributors: contributors, maps: maps });
+          var tempVar = {
+            maps: maps,
+            listInfo: listInfo,
+            contributors: contributors
+          }
+          res.render("../views/lists", tempVar);
         });
       });
     });

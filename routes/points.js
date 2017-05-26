@@ -13,7 +13,7 @@ module.exports = (dataHelper) => {
   //        title: str,
   //        description: str,
   //        image: str,
-  //        longtitude: float,
+  //        longitude: float,
   //        latitude: float
   //    } ]
   //
@@ -36,26 +36,27 @@ module.exports = (dataHelper) => {
   //      title: str,
   //      description: str,
   //      image: str,
-  //      longtitude: float,
+  //      longitude: float,
   //      latitude: float
   //    }
   // server output: err / { p_id: int }
   //
-  // add a new map into maps table
+  // add a new point into maps table
   router.post('/:mid/new', (req,res) => {
     let obj = {
        mid: req.params.mid,
        title: req.body.title,
        description: req.body.description,
        image: req.body.image,
-       longtitude: req.body.longtitude,
+       longitude: req.body.longitude,
        latitude: req.body.latitude
      }
     dataHelper.addPointToMap(obj, (err, pid) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
-        res.status(200).json(pid);
+        let obj = { pid: pid };
+        res.status(200).json(obj);
       }
     })
   });
@@ -79,7 +80,7 @@ module.exports = (dataHelper) => {
        title: req.body.title,
        description: req.body.description,
        image: req.body.image,
-       longtitude: req.body.longtitude,
+       longitude: req.body.longitude,
        latitude: req.body.latitude
      }
     dataHelper.updatePointByPointId(obj, (err) => {
