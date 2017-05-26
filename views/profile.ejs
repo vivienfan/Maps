@@ -53,11 +53,9 @@
               <% contributedLists.forEach(function (list) { %>
                 <li>
                   <b> <%= list.title%> </b> <%= list.description %>
-                  <div method="POST" action="/lists/<%= list.lid %>">
-                    <input type="submit" value="Edit List" class="btn btn-primary" >
-                  </div>
-                  <div method="POST" action="/lists/<%= list.lid %>/delete">
-                    <input type="submit" value="Delete List" class="btn btn-primary">
+                    <a class="btn btn-primary" type="submit" value="Edit List" href="/lists/<%= list.l_id %>"> Edit List </a>
+                  <div method="POST" action="/lists/<%= list.l_id %>/delete" style="float:right">
+                    <input type="submit" value="Delete List" class="btn btn-danger">
                   </div>
                 </li>
               <%  }); %>
