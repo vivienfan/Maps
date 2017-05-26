@@ -33,17 +33,20 @@
           </section>
         </div>
         <div class="col-mid-2">
-          <section id="lid_contributors">
+
             <h3> List of contributors </h3>
             <ul>
+              <section id="lid_contributors">
             <% contributors.forEach(function (contlist) { %>
               <li>
                 <%= contlist.username %>
                   <a href="/profiles/<%= contlist.username %>" class="btn btn-primary"> View User </a>
               </li>
-            <% }); %>
+
+              <% }); %>
+              </section>
             </ul>
-          </section>
+
         </div>
       </div>
     </main>
