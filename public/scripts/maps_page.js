@@ -9,8 +9,6 @@ $(document).ready(function () {
   var points = [];
   var popup = L.popup();
 
-  // var addPopupHTML = $("#addPopup").children(".markerPopup").html();
-
   function createPointPopup(point) {
     var $div = $("<div>").attr("data-pid", point.p_id);
     var $title = $("<label>").text(point.title);
@@ -24,7 +22,10 @@ $(document).ready(function () {
   }
 
   function createPointInfo(point) {
-    var $div = $("<div>").attr("data-pid", point.p_id);
+    var $div = $("<div>", { class: "point-detail" })
+      .attr("data-pid", point.p_id)
+      .attr("data-lat", point.latitude)
+      .attr("data-lng", point.longitude);
     var $title = $("<label>").text(point.title);
     var $description = $("<p>").text(point.description);
     var $img = $("<img>").attr("src", point.image).css("width", "200px");
@@ -50,13 +51,15 @@ $(document).ready(function () {
   }
 
   function initPoints() {
+    $('#points-list').empty();
     $.ajax({
       url: '/points/all/' + mid,
       method: 'GET',
       dataType: 'json',
-      success: function (points) {
+      success: function (res) {
+        points = res;
         if (points.length !== 0) {
-          points.forEach((point) => {
+          points.forEach(function(point) {
             addPoint(point);
           });
         }
@@ -84,7 +87,7 @@ $(document).ready(function () {
 
   myMap.on('click', onMapClick);
 
-  $('.add-new-point').on('click',function(e) {
+  $('#add-new-point').on('click',function(e) {
     var m_data = {
       title: $(this).parent(".modal-footer").siblings(".modal-body").children('.textbox-title').val(),
       description: $(this).parent(".modal-footer").siblings(".modal-body").children('.textbox-description').val(),
@@ -93,7 +96,7 @@ $(document).ready(function () {
       latitude: latitude
     };
     $.ajax({
-      url: 'points/' + mid + '/new',
+      url: '../points/' + mid + '/new',
       method: 'POST',
       data: m_data,
       dataType: 'json',
@@ -106,12 +109,48 @@ $(document).ready(function () {
   });
 
   $('#points-list').on('click', '.point-edit' ,function(e) {
+    var pid = $(this).closest('.point-detail').data('pid');
+    var point = points.filter(function(p) {
+      return p.p_id === pid;
+    });
+    $('#edit-point-modal')
+      .attr('data-pid', pid)
+      .attr('data-lat', point[0].latitude)
+      .attr('data-lng', point[0].longitude);
+    $('#edit-point-modal').find('.textbox-title').val(point[0].title);
+    $('#edit-point-modal').find('.textbox-description').val(point[0].description);
+    $('#edit-point-modal').find('.textbox-image').val(point[0].image);
+    $('#edit-point-modal').modal('toggle');
+  });
 
- //   $('#edit-point-modal').find('.textbox-title').val();
-    console.log("edit");
+  $('#edit-point-modal').on('click', function(e) {
+    var pid = $('#edit-point-modal').data('pid');
+    var m_data = {
+      title: $('#edit-point-modal').find('.textbox-title').val(),
+      description: $('#edit-point-modal').find('.textbox-description').val(),
+      image: $('#edit-point-modal').find('.textbox-image').val(),
+      latitude: $('#edit-point-modal').data('lat'),
+      longitude: $('#edit-point-modal').data('lng')
+    }
+    $.ajax({
+      url: '../points/' + pid,
+      method: 'PUT',
+      data: m_data,
+      success: function(res) {
+        window.location.href = "/maps/" + mid;
+        $('#edit-point-modal').modal('toggle');
+      }
+    });
   });
 
   $('#points-list').on('click', '.point-delete' ,function(e) {
-    console.log("delete");
+    var pid = $(this).closest('.point-detail').data('pid');
+    $.ajax({
+      url: '../points/' + pid,
+      method: 'DELETE',
+      success: function(res) {
+        window.location.href = "/maps/" + mid;
+      }
+    });
   });
 });

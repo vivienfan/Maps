@@ -99,7 +99,7 @@ module.exports = (dataHelper) => {
   //
   // delete points from map_points table
   router.delete('/:pid', (req, res) => {
-    let pid = req.params.mid;
+    let pid = req.params.pid;
     dataHelper.dropPoint(pid, (err) => {
       if (err) {
         res.status(400).send(err.message);
