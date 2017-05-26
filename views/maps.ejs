@@ -3,18 +3,22 @@
   <head>
     <title>Home Page</title>
 
-    <link rel="stylesheet" href="vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="styles/layout.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/layout.css" type="text/css" />
 
-    <script type="text/javascript" src="vendor/jquery-3.0.0.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="../vendor/jquery-3.0.0.js"></script>
+    <script type="text/javascript" src="../scripts/maps_page.js"></script>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+
+<!-- Modal Script. -->
+
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
 
 
-<!-- Modal Script. -->
-    <script type="text/javascript" src="scripts/maps_page.js"></script>
 
 <!-- leaflet -->
     <meta charset="utf-8" />
@@ -99,6 +103,8 @@
 
 
   <main class = "container" style="padding: 0px; ">
+      <h1><%=title%></h1>
+      <h2><%=description%></h2>
     <div class="col-md-8 my_map">
       <div id="leafletmap" style="width:780px; height: 400px;"></div>
     </div>

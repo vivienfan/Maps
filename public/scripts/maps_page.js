@@ -93,10 +93,11 @@ $(document).ready(function () {
       latitude: latitude
     };
     $.ajax({
-      url: 'points/' + mid + '/new',
+      url: '../points/' + mid + '/new',
       method: 'POST',
       data: m_data,
       dataType: 'json',
+      async: false,
       success: function(res) {
         m_data.pid = res.pid;
         addPoint(m_data);
