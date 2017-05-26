@@ -5,8 +5,18 @@
   <body>
     <main class = "container">
       <h1> Welcome to "username" Page </h1>
+      <br>
       <div method="POST" action="/lists/new">
+        <label>Title:</label>
+        <input type="text" name="title">
+        <label>Description:</label>
+        <input type="text" name="description">
+        <label>Privacy</label>
+        <input type="radio" name="public" value="public" checked> Public
+        <input type="radio" name="public" value="private"> Private
         <input class = "btn btn-primary" type="submit" value="Create new list">
+        <br>
+        <br>
       </div>
 
       <div class = "row">
