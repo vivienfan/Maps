@@ -15,7 +15,7 @@ module.exports = (dataHelper) => {
     console.log("get /lists");
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
-        res.status(500).send();
+        res.status(400).send();
         return;
       }
       console.log(publics);
@@ -110,7 +110,7 @@ module.exports = (dataHelper) => {
   router.delete('/:lid', (req, res) => {
     dataHelper.dropList(lid, (err) => {
       if(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
         return;
       }
       res.status(200).send();
@@ -130,7 +130,7 @@ module.exports = (dataHelper) => {
     }
     dataHelper.addContributor(obj, (err) => {
       if(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
         return;
       }
       res.status(200).send();
@@ -151,7 +151,7 @@ module.exports = (dataHelper) => {
     };
     dataHelper.addList(obj, (err, lid) => {
       if (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
         return;
       }
       res.status(200).json({ lid: lid });
