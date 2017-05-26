@@ -348,11 +348,6 @@ $(document).ready(function() {
     var newDesc = $(this).siblings(".newMapDesc").val();
     var lid = $(this).data('lid');
 
-
-
-
-
-
     $.ajax({
       url: '/maps/new',
       method: 'POST',
@@ -361,21 +356,24 @@ $(document).ready(function() {
       description: newDesc },
       success: function(suc) {
         //Delete the map id article or refresh the page.
-        window.location.href="maps/"+suc.mid;
-
+        window.location.href="../maps/"+suc.mid;
       },
       error: function(err) {
-        console.log('Add Error')
+        console.log('Add Map Error')
       }
     })
   });
 
-  $("#addContributor").on('click', 'button', function (e) {
+  $(".addContributor").on('click', 'button', function (e) {
     e.preventDefault();
+    var newContusername = $(this).siblings(".username").val();
+    var lid = $(this).data('lid');
+
+
     $.ajax({
       url: '',
       method: 'POST',
-      // datatype: 'json',
+      // data: ,
       success: function(suc) {
         //Delete the map id article or refresh the page.
 
