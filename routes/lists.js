@@ -12,6 +12,7 @@ module.exports = (dataHelper) => {
   //
   // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
+    console.log("get /lists");
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
         res.status(500).send();
@@ -88,7 +89,12 @@ module.exports = (dataHelper) => {
             res.status(400).send(err.message);
             return;
           }
-          res.status(200).json({ listInfo: listInfo, contributors: contributors, maps: maps });
+          var tempVar = {
+            maps: maps,
+            listInfo: listInfo,
+            contributors: contributors
+          }
+          res.render("../views/lists", tempVar);
         });
       });
     });

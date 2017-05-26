@@ -19,9 +19,10 @@ let maps = [
 ];
 
 let map_points = [
-  {p_id: 1,   m_id: 1,  title: 'fruits',  description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -33.3,   latitude: 33.3 },
-  {p_id: 2,   m_id: 2,  title: 'the',     description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -33.3,   latitude: 33.3},
-  {p_id: 3,   m_id: 3,  title: '?',       description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -33.3,   latitude: 33.3}
+  {p_id: 1,   m_id: 1,  title: 'fruits',  description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -79.3832,   latitude: 43.6532 },
+  {p_id: 2,   m_id: 1,  title: 'drinks',  description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -79.4032,   latitude: 43.7032 },
+  {p_id: 3,   m_id: 2,  title: 'the',     description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -79.3832,   latitude: 43.6532},
+  {p_id: 4,   m_id: 3,  title: '?',       description: 'something',   image:'https://www.w3schools.com/css/trolltunga.jpg',  longitude: -79.3832,   latitude: 43.6532}
 ];
 
 let contributions = [
