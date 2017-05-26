@@ -23,6 +23,28 @@ module.exports = (dataHelper) => {
     });
   });
 
+  // method: get
+  // URL: /maps/auth
+  // client input: none
+  // server output: err / none
+  router.get('/:mid/auth', (req, res) => {
+    let uid = req.session.uid;
+    let mid = req.params.mid;
+    let canView = false;
+    let canEdit = false;
+    // check if the list where map is belong to is public
+    dataHelper.getListAccessByMapId(mid, (err, res) => {
+      if(err) {
+        res.status(400).send(err);
+        return;
+      }
+      canView = res;
+    })
+    .then(() => {
+      return dataHelper.getContributionBy
+    })
+  })
+
   // method: post
   // URL: /maps/new
   // client input: req.body = { lid: int, title: str, description: str }
@@ -39,7 +61,7 @@ module.exports = (dataHelper) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
-        res.status(200).json(mid);
+        res.status(200).json({ mid: mid });
       }
     })
   });
