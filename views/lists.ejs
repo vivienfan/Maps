@@ -1,102 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Home Page</title>
-
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-<!-- Modal Script. -->
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.0/animate.min.css">
-
-  </head>
-
+  <% include ./partials/_headers %>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">MAPS</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-          </ul>
-          <div class="navbar-form navbar-right">
-              <button id="login_nav" type="button" class="btn btn-primary" data-toggle="modal" data-target=".login-modal">Login</button>
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".register-modal"> Register</button>
-          </div>
-          <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Your profile</li>
-                <li><a href="#">Maps</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
-
-    <div class="modal fade login-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-          <section id="login_container">
-            <div>
-              <label for="email_id" class ="labelLogEmail">Email id </label>
-              <input class="login_email" type="email" name="email"> <br>
-              <label for="password">Password</label>
-              <input class="login_password" type="password" name="password"> <br>
-              <button id = "login"> Login </button>
-            </div>
-          </section>'
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade register-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-      <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <section id="register_container">
-              <div>
-                <label for="email_id" class="labelRegEmail">Email id </label>
-                <input class="email" type="email" name="email"> <br>
-                <label for="password">Password</label>
-                <input class="password" type="password" name="password"> <br>
-                <label for="username">Username</label>
-                <input class="username" type="text" name="username"> <br>
-                <button id="register">Register</button>
-              </div>
-            </section>
-        </div>
-      </div>
-    </div>
-
     <main class = "container">
       <div class = "row">
         <div class="col-md-5">
           <section class = "listandMaps">
             <section id="lid_info">
-              <h3> <%list.title%> => <% list.description %> </h3>
+              <h3> <%listInfo.title%> => <% listInfo.description %> </h3>
                 <div method="POST" action="/maps/new">
                   <input type="submit" value="Add Map">
                 </div>
@@ -107,7 +18,7 @@
             </section>
             <section class =showMaps>
               <ul>
-              <% mapLists.forEach(function (mlist) { %>
+              <% maps.forEach(function (mlist) { %>
                 <li>
                   <%= mlist.title%> => <%=mlist.description %>
                   <div method="POST" action="/maps/<%= mlist.mid%>">
@@ -126,9 +37,9 @@
           <section id="lid_contributors">
             <h3> List of contributors </h3>
             <ul>
-            <% contLists.forEach(function (contlist) { %>
+            <% conntributors.forEach(function (contlist) { %>
               <li>
-                <%= contist.title%> => <%=contlist.description %>
+                <%= contlist.username %>
                 <div method="POST" action="/users/<%= countlist.username%>">
                   <input type="submit" value="show">
                 </div>
