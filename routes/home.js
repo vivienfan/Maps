@@ -12,7 +12,7 @@ module.exports = (dataHelper) => {
   //
   // render index.ejs
   router.get('/', (req, res) => {
-    res.render('../views/index');
+    res.render('../views/maps', {mid: 1});
   });
 
   // method: get

@@ -9,23 +9,24 @@ $(document).ready(function () {
 
   var addPopupHTML = $("#addPopup").children(".markerPopup").html();
 
-  function createPointInfo(point) {
-    var $container = $("<div>").attr("data-pid", point.p_id);
+  function createPointPopup(point) {
+    var $div = $("<div>").attr("data-pid", point.p_id);
     var $title = $("<label>").text(point.title);
     var $description = $("<p>").text(point.description);
     var $br = $("<br>");
     var $button = $("<button>", { class: "edit-point"}).text("Edit");
     if (point.image) {
       var $img = $("<img>").attr("src", point.image).css("width", "100px");
-      $container.append($title, $description, $img, $br, $button);
+      $div.append($title, $description, $img, $br, $button);
     } else {
-      $container.append($title, $description, $button);
+      $div.append($title, $description, $button);
     }
+    var $container = $("<section>");
+    $container.append($div);
     return $container.html();
   }
 
   function initPoints() {
-    console.log("initPoints");
     $.ajax({
       url: `/points/all/${mid}`,
       method: "GET",
@@ -33,10 +34,10 @@ $(document).ready(function () {
       success: function (points) {
         if (points.length !== 0) {
           points.forEach((point) => {
-            console.log(point);
-            var content = createPointInfo(point);
+            var content = createPointPopup(point);
             L.marker([point.latitude, point.longitude]).addTo(myMap)
               .bindPopup(content);
+            $('#points-list').append(content);
           });
         }
       }
@@ -49,8 +50,6 @@ $(document).ready(function () {
       .setContent(addPopupHTML)
       .openOn(myMap);
   }
-
-
 
   myMap = L.map('leafletmap').setView([latitude, longitude], 13);
 
@@ -65,4 +64,12 @@ $(document).ready(function () {
   initPoints();
 
   myMap.on('click', onMapClick);
+
+  $(".my_map").on('click', ".add-new-point" ,function(e) {
+    console.log("add point");
+  });
+
+  $(".my_map").on('click', ".edit-point" ,function(e) {
+    console.log("edit point");
+  });
 });
