@@ -95,7 +95,7 @@
       <div class="col-md-5">
         <section class = "userFavourites">
           <h2> USER FAVORITES </h2>
-          <% favouriteLists.forEach(function (list) {%>
+          <% favouriteLists.forEach(function (list) { %>
             <li>
               <%= list.title%> => <%= list.description %>
               <button>
@@ -103,13 +103,13 @@
               </button>
             </li>
 
-            }) %>
+          <%  }); %>
         </section>
       </div>
       <div class="col-md-5">
         <section class = "userContributions">
           <h2> USER CONTRIBUTIONS </h2>
-          <% contributedLists.forEach(function (list) {%>
+          <% contributedLists.forEach(function (list) { %>
             <li>
               <%= list.title%> => <%= list.description %>
               <div method="POST" action="/lists/<%= list.lid%>">
@@ -119,7 +119,7 @@
                 <input type="submit" value="Delete">
               </div>
             </li>
-            }) %>
+          <%  }); %>
         </section>
       </div>
     </div>
