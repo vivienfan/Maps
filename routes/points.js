@@ -55,8 +55,7 @@ module.exports = (dataHelper) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
-        let obj = { pid: pid };
-        res.status(200).json(obj);
+        res.status(200).json({ pid: pid });
       }
     })
   });

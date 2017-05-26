@@ -154,7 +154,7 @@ module.exports = (dataHelper) => {
         res.status(500).send(err.message);
         return;
       }
-      res.status(200).json(lid);
+      res.status(200).json({ lid: lid });
     });
   })
 
