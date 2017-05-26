@@ -230,42 +230,49 @@ $(document).ready(function() {
 
 
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  function createSingleContributor(cont) {
-    var $contributor = $('<article>')
-    $contributor.append($('<p>').text(cont.username));
-    $contributor.append($('<br>'));
-    return $contributor;
-  }
 
-  function createContributors(contributors) {
-    contributors.forEach( function (contributor) {
-      console.log("For each is working!!")
-      // debugger;
-      $('#lid_contributors').append(createSingleContributor(contributor))
-    });
-  }
 
-  function createMap(map){
-    var $map = $('<article>').attr('data-map_id', map.m_id)
-    // $map.append($('<p>').text(map.m_id)).addClass('mapId')
-    $map.append($('<p>').text(map.title))
-    $map.append($('<p>').text(map.description))
 
-    // Adding the buttons for edit and delete
-    var $edit = $('<button class ="editMap" onClick="editMap()" />')
-    $edit.append($('<p>').text("Edit"))
-    var $del = $('<button class ="delMap" onClick="delMap()"/>')
-    $del.append($('<p>').text("Delete"))
-    $map.append($edit);
-    $map.append($del);
-    return $map;
-  }
 
-  function createMaps(maps){
-    maps.forEach(function (map) {
-      $('#lid_maps').append(createMap(map))
-    })
-  }
+
+
+
+  // function createSingleContributor(cont) {
+  //   var $contributor = $('<article>')
+  //   $contributor.append($('<p>').text(cont.username));
+  //   $contributor.append($('<br>'));
+  //   return $contributor;
+  // }
+  //
+  // function createContributors(contributors) {
+  //   contributors.forEach( function (contributor) {
+  //     console.log("For each is working!!")
+  //     // debugger;
+  //     $('#lid_contributors').append(createSingleContributor(contributor))
+  //   });
+  // }
+  //
+  // function createMap(map){
+  //   var $map = $('<article>').attr('data-map_id', map.m_id)
+  //   // $map.append($('<p>').text(map.m_id)).addClass('mapId')
+  //   $map.append($('<p>').text(map.title))
+  //   $map.append($('<p>').text(map.description))
+  //
+  //   // Adding the buttons for edit and delete
+  //   var $edit = $('<button class ="editMap" onClick="editMap()" />')
+  //   $edit.append($('<p>').text("Edit"))
+  //   var $del = $('<button class ="delMap" onClick="delMap()"/>')
+  //   $del.append($('<p>').text("Delete"))
+  //   $map.append($edit);
+  //   $map.append($del);
+  //   return $map;
+  // }
+  //
+  // function createMaps(maps){
+  //   maps.forEach(function (map) {
+  //     $('#lid_maps').append(createMap(map))
+  //   })
+  // }
 
 //   $.ajax({
 //     url: '/lists/',
@@ -295,36 +302,39 @@ $(document).ready(function() {
 // });
 
   //TODO: Create a function for every edit Button.
-  $(".editMap").on('click', 'button', function (e) {
-    e.preventDefault();
-    var map_id = $(this).siblings('.mapId')
-
-    $.ajax({
-      url: '/maps/' + map_id, //EDIT mapid url
-      method: 'PUT',
-      data: map_id,
-      success: function(suc) {
-        //Delete the whole map article
-
-      },
-      error: function(err) {
-        console.log('Edit Error')
-      }
-    })
-  });
+  // $(".editMap").on('click', 'button', function (e) {
+  //   e.preventDefault();
+  //   var map_id = $(this).siblings('.mapId')
+  //
+  //   $.ajax({
+  //     url: '/maps/' + map_id, //EDIT mapid url
+  //     method: 'POST',
+  //     data: map_id,
+  //     success: function(suc) {
+  //       //Delete the whole map article
+  //
+  //     },
+  //     error: function(err) {
+  //       console.log('Edit Error')
+  //     }
+  //   })
+  // });
 
   //TODO: Create a function for every edit Delete.
-  $(".delMap").on('click', 'button', function (e) {
+  $(".deleteMap").on('click', function (e) {
     e.preventDefault();
-    var map_id = $(this).siblings('.mapId')
+    var map_id = $(this).data('mid')
+    console.log("here is the map_id I am fetching", map_id);
+    var divDelete = $(this).closest('.divMap');
+    console.log(divDelete);
+
 
     $.ajax({
-      url: '', //delete mapid url
+      url: '/maps/' +  map_id, //delete mapid url
       method: 'DELETE',
       data: map_id,
       success: function(suc) {
-        //Delete the map id article or refresh the page.
-
+          $(divDelete).empty();
       },
       error: function(err) {
         console.log('Delete Error')
