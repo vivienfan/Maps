@@ -40,7 +40,7 @@
             <% contributors.forEach(function (contlist) { %>
               <li>
                 <%= contlist.username %>
-                <div method="POST" action="/users/<%= countlist.username %>">
+                <div method="POST" action="/users/<%= contlist.username %>">
                   <input type="submit" value="show">
                 </div>
               </li>
