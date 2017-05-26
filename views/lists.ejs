@@ -17,16 +17,18 @@
                 </div>
             </section>
             <section class="showMaps">
-
+              <ul>
               <% maps.forEach(function (mlist) { %>
+                <div class='divMap' data-divmid = "<%= mlist.m_id %>">
+                  <li>
+                    <b> <%= mlist.title  %> </b> <%= mlist.description %>
 
-                  <b> <%= mlist.title  %> </b> <%= mlist.description %>
-                  <a href="/maps/<%= mlist.m_id %>" class="btn btn-primary"> Show Map </a>
-                  <div method="POST" action="/maps/<%= mlist.mid %>/delete">
-                    <input type="submit" value="Delete" class="btn btn-warning">
-                  </div>
-
+                    <a  href="/maps/<%= mlist.m_id %>" class="btn btn-primary"> Show Map </a>
+                    <a class="btn btn-danger deleteMap" data-mid ="<%= mlist.m_id %>"> Delete Map </a>
+                  </li>
+                </div>
               <% }); %>
+              </ul>
 
             </section>
           </section>
