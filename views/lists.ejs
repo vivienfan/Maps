@@ -41,12 +41,14 @@
           <ul class="list-unstyled">
             <section id="lid_contributors">
               <% contributors.forEach(function (contlist) { %>
-                <li>
-                  <a href="/profiles/<%= contlist.username %>"><%= contlist.username %></a>
-                  <%  if (canEdit) { %>
-                  <a href="/profiles/<%= contlist.username %>" class="btn btn-danger" >Delete</a>
-                  <% }  %>
-                </li>
+                <div class="divCont">
+                  <li>
+                    <a href="/profiles/<%= contlist.username %>"><%= contlist.username %></a>
+                    <%  if (canEdit) { %>
+                    <a href="/profiles/<%= contlist.username %>" class="btn btn-danger delCont" data-Cont="<%= contlist.username %>" data-cLid="<%= listInfo.l_id %>">Delete</a>
+                    <% }  %>
+                  </li>
+                </div>
               <% }); %>
             </section>
             <input type="text" name="username" class="username">
