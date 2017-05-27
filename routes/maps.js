@@ -14,53 +14,42 @@ module.exports = (dataHelper, utility) => {
   router.get('/:mid', (req, res) => {
     let mid = req.params.mid;
     let uid = req.session.user_id;
-    let mapInfo;
-    let canView = false;
     let canEdit = false;
-    dataHelper.getMapInfoByMapId(mid, (err, map) => {
+    dataHelper.getMapInfoByMapId(mid, (err, mapInfo) => {
       if (err) {
-        res.status(400).send(err.message);
+        res.status(500).send(err.message);
         return;
       }
-      mapInfo = map;
-    })
-    .then(() => {
-      return dataHelper.getListAccessByMapId(mid, (err, view) => {
+      if (!mapInfo || mapInfo.length === 0){
+        res.status(404).send();
+        return;
+      }
+      dataHelper.getListAccessByMapId(mid, (err, view) => {
         if(err) {
-          res.status(400).send(err.message);
+          res.status(500).send(err.message);
           return;
         }
-        canView = view.public;
+        dataHelper.getContributorForMap(mid, (err, contrs) => {
+          if (err) {
+            res.status(500).send(err.message);
+            return;
+          }
+          if (uid && utility.isAContributor(uid, contrs)){
+            canEdit = true;
+          }
+          if (!(view.public || canEdit)) {
+            res.status(403).send();
+            return;
+          }
+          let tempVar = {
+            mid: mid,
+            title: mapInfo.title,
+            description: mapInfo.description,
+            canEdit: canEdit
+          }
+          res.render("../views/maps", tempVar);
+        });
       });
-    })
-    .then(() => {
-      return dataHelper.getContributorForMap(mid, (err, contrs) => {
-        if (err) {
-          res.status(400).send(err.message);
-          return;
-        }
-        if (uid && utility.isAContributor(uid, contrs)){
-          canEdit = true;
-        }
-      });
-    })
-    .then(() => {
-      if (!(canView || canEdit)) {
-        res.status(403).send();
-        return;
-      }
-      let tempVar = {
-        mid: mid,
-        title: mapInfo.title,
-        description: mapInfo.description,
-        canEdit: canEdit
-      }
-      res.render("../views/maps", tempVar);
-      return;
-    })
-    .catch((err) => {
-      console.error(err);
-      return;
     });
   });
 
