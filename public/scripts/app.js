@@ -206,7 +206,7 @@ $(document).ready(function() {
     console.log(listTitle);
     var listDesc = $(this).closest('.newContributor').find('.listDesc').val();
     console.log(listDesc);
-    var isPublic = ($('.public').attr('checked') === 'checked');
+    var isPublic = ($(".public").is(":checked"));
     console.log(isPublic);
 
 
