@@ -115,9 +115,8 @@ $(document).ready(function () {
       dataType: 'json',
       async: false,
       success: function(res) {
-        m_data.pid = res.pid;
-        addPoint(m_data);
-        $('#add-point-modal').modal('toggle');
+        window.location.href = "/maps/" + mid;
+        $('#edit-point-modal').modal('toggle');
       }
     });
   });
