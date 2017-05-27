@@ -63,46 +63,6 @@ module.exports = (dataHelper) => {
     });
   });
 
-  // // method: get
-  // // URL: /maps/:mid/auth
-  // // client input: none
-  // // server output: err / none
-  // router.get('/:mid/auth', (req, res) => {
-  //   let uid = req.session.uid;
-  //   let mid = req.params.mid;
-  //   let canView = false;
-  //   let canEdit = false;
-  //   // check if the list where map is belong to is public
-  //   console.log(uid, mid);
-  //   dataHelper.getListAccessByMapId(mid, (err, view) => {
-  //     if(err) {
-  //       res.status(404).send(err);
-  //       return;
-  //     }
-  //     canView = view.public;
-  //   })
-  //   .then(() => {
-  //     return dataHelper.getContributorForMap(mid, uid, (err, edit) => {
-  //       if (err) {
-  //         res.status(404).send(err);
-  //         return;
-  //       }
-  //       canEdit = edit;
-  //     });
-  //   })
-  //   .then(() => {
-  //     console.log(canView, canEdit);
-  //     if (!(canView || canEdit)) {
-  //       res.status(403).send();
-  //       return;
-  //     }
-  //     res.status(200).json({ canView: canView, canEdit: canEdit });
-  //   })
-  //   .catch((err) => {
-  //     return;
-  //   });
-  // })
-
   // method: post
   // URL: /maps/new
   // client input: req.body = { lid: int, title: str, description: str }

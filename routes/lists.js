@@ -103,18 +103,28 @@ module.exports = (dataHelper) => {
   // method: post
   // URL: /lists/add-fav
   // client input: { lid: int }
-  // server output: err / none
+  // server output: err / { action: bool, count: int }
   //
   // store favourites
-  router.post('/add-fav', (req, res) => {
-    let lid = req.body.lid;
-    dataHelper.addFav(lid, (err) => {
+  router.post('/add-fav/:lid/:uid', (req, res) => {
+    console.log("herrrre");
+    let obj = {
+      lid: req.params.lid,
+      uid: req.params.uid
+      // lid: req.body.lid,
+      // uid: req.session.uid
+    };
+    dataHelper.addFav(obj, (err, toFav, counts) => {
       if (err) {
-        res.status(400).send(err.message);
+        res.status(500).send();
         return;
       }
-      res.status(200).send();
-    })
+      let resObj = {
+        toFav: toFav,
+        counts: counts
+      }
+      res.status(200).json(resObj);
+    });
   })
 
   // method: delete
