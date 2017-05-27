@@ -37,8 +37,8 @@ $(document).ready(function() {
       success: function(data) {
         console.log(data.publics);
         console.log(data.favs);
-        if (data.length > 0) {
-          renderFavourites(data.publics)
+        if (data.publics) {
+          renderFavourites(data.publics, data.favs)
         }
         //add class
         //Hide register and login buttons
@@ -49,7 +49,7 @@ $(document).ready(function() {
     });
   }
 
-  function createFavourite(list) {
+  function createFavourite(list, favs) {
     console.log("I am in createFavourite");
     var $listItem = $('<div>');
     $listItem.addClass('row');
@@ -80,6 +80,14 @@ $(document).ready(function() {
       $spanBadge.addClass('badge');
       $spanBadge.text(list.count)
       $listFavButton.prepend($spanBadge)
+      console.log('Inside the createFavorite function will check the whole list', favs)
+      console.log('and I am checking the list.l_id with ', list.l_lid);
+      if (favs){
+        if (list.l_id in favs){
+          console.log("it is in favs")
+          $listFavButton.addClass('active');
+        }
+      }
       $listFav.append($listFavButton)
 
     }
@@ -93,10 +101,10 @@ $(document).ready(function() {
     return $listItem;
   }
 
-  function renderFavourites(lists){
+  function renderFavourites(lists, favs){
     console.log('I am in render favorites');
     lists.forEach( function (list) {
-      $('#listfav').append(createFavourite(list))
+      $('#listfav').append(createFavourite(list, favs))
     });
   }
 
@@ -112,14 +120,16 @@ $(document).ready(function() {
       method: 'POST',
       data: {lid: lid},
       success: function(suc) {
-        console.log(suc.count);
-        console.log(suc.action);
-        if (suc.action) {
-          $(this).addClass('active');
-          $(this).children('.badge').text(suc.count);
+        console.log('this is the success object', suc)
+        console.log(suc.toFav);
+        console.log(suc.counts);
+        if (suc.toFav) {
+          console.log('it is true ->' + suc.ToFav)
+          $(e.target).addClass('active');
+          $(e.target).children('.badge').text(suc.counts);
         } else {
-          $(this).removeClass('active');
-          $(this).children('.badge').text(suc.count);
+          $(e.target).removeClass('active');
+          $(e.target).children('.badge').text(suc.counts);
         }
         },
       error: function(err) {
