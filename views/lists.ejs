@@ -51,8 +51,10 @@
                 </div>
               <% }); %>
             </section>
-            <input type="text" name="username" class="username">
-            <button class="btn btn-primary addCont" data-lid="<%= listInfo.l_id %>"> Add Contributor</button>
+            <%  if (canEdit) { %>
+              <input type="text" name="username" class="username">
+              <button class="btn btn-primary addCont" data-lid="<%= listInfo.l_id %>"> Add Contributor</button>
+            <% }  %>
           </ul>
         </div>
       </div>
