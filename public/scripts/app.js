@@ -35,9 +35,11 @@ $(document).ready(function() {
       method: 'GET',
       dataType: 'json',
       success: function(data) {
+        console.log(data.publics);
+        console.log(data.favs);
         if (data.length > 0) {
-          renderFavourites(data)
-          }
+          renderFavourites(data.publics)
+        }
         //add class
         //Hide register and login buttons
         },
@@ -48,7 +50,7 @@ $(document).ready(function() {
   }
 
   function createFavourite(list) {
-    // console.log("I am in createFavourite");
+    console.log("I am in createFavourite");
     var $listItem = $('<div>');
     $listItem.addClass('row');
 
@@ -92,6 +94,7 @@ $(document).ready(function() {
   }
 
   function renderFavourites(lists){
+    console.log('I am in render favorites');
     lists.forEach( function (list) {
       $('#listfav').append(createFavourite(list))
     });
@@ -341,7 +344,9 @@ $(document).ready(function() {
         console.log('Delete Error')
         }
       })
-  })
+    })
+
+
 });
 
 

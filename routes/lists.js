@@ -16,7 +16,6 @@ module.exports = (dataHelper) => {
   router.get('/', (req, res) => {
     console.log("get /lists");
     let uid = req.session.uid;
-    uid = 1;
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
         res.status(500).send();
@@ -213,4 +212,3 @@ module.exports = (dataHelper) => {
 
   return router;
 }
-

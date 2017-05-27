@@ -4,7 +4,7 @@
   <body>
     <main class = "container">
       <div class = "row">
-        <div class="col-md-10">
+        <div class="col-md-9">
           <section class = "listandMaps">
             <section id="lid_info">
               <h3> <b> <%= listInfo.title %> </b> <%= listInfo.description %> </h3>
@@ -32,7 +32,7 @@
             </section>
           </section>
         </div>
-        <div class="col-mid-2">
+        <div class="col-mid-3">
 
             <h3> List of contributors </h3>
             <ul>
@@ -41,6 +41,7 @@
               <li>
                 <%= contlist.username %>
                   <a href="/profiles/<%= contlist.username %>" class="btn btn-primary"> View User </a>
+                  <a href="/profiles/<%= contlist.username %>" class="btn btn-danger" >Delete Contribtor</a>
               </li>
 
               <% }); %>
