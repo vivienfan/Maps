@@ -71,6 +71,15 @@ module.exports = (dataHelper) => {
     });
   })
 
+  function isContributor(uid, contributors) {
+    let result = false;
+    contributors.forEach((contributor) => {
+      if (contributor.id === uid) {
+        result = true;
+      }
+    });
+    return result;
+  }
 
   // method: get
   // URL: /lists/:lid
@@ -97,18 +106,24 @@ module.exports = (dataHelper) => {
           res.status(400).send(err.message);
           return;
         }
-        dataHelper.getMapsByListId(lid, (err, maps) => {
-          if (err) {
-            res.status(400).send(err.message);
+        let isContributor = isContributor(uid, contributors);
+        if (listInfo.public || isContributor) {
+          dataHelper.getMapsByListId(lid, (err, maps) => {
+            if (err) {
+              res.status(400).send(err.message);
+              return;
+            }
+            var tempVar = {
+              maps: maps,
+              listInfo: listInfo,
+              contributors: contributors,
+              canEdit: isContributor
+            }
+            res.render("../views/lists", tempVar);
             return;
-          }
-          var tempVar = {
-            maps: maps,
-            listInfo: listInfo,
-            contributors: contributors
-          }
-          res.render("../views/lists", tempVar);
-        });
+          });
+        }
+        res.status(403).send();
       });
     });
   });
