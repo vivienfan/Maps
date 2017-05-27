@@ -111,30 +111,32 @@ $(document).ready(function() {
 
   $("#listfav").on('click', '.favoriteButton', function (e) {
     e.preventDefault();
-    var lid = $(this).data('l_id')
-    console.log('the button is clicked and this is the lid', lid)
-    // $(this).children('.badge').text('1')
-    // $(this).addClass('active');
-    $.ajax({
-      url: '/lists/add-fav',
-      method: 'POST',
-      data: {lid: lid},
-      success: function(suc) {
-        console.log('this is the success object', suc)
-        console.log(suc.toFav);
-        console.log(suc.counts);
-        if (suc.toFav) {
-          console.log('it is true ->' + suc.ToFav)
-          $(e.target).addClass('active');
-        } else {
-          $(e.target).removeClass('active');
-        }
-        $(e.target).children('.badge').text(suc.counts);
-        },
-      error: function(err) {
-        console.log(err);
-        }
-      });
+    if (global_username) {
+      var lid = $(this).data('l_id')
+      console.log('the button is clicked and this is the lid', lid)
+      // $(this).children('.badge').text('1')
+      // $(this).addClass('active');
+      $.ajax({
+        url: '/lists/add-fav',
+        method: 'POST',
+        data: {lid: lid},
+        success: function(suc) {
+          console.log('this is the success object', suc)
+          console.log(suc.toFav);
+          console.log(suc.counts);
+          if (suc.toFav) {
+            console.log('it is true ->' + suc.ToFav)
+            $(e.target).addClass('active');
+          } else {
+            $(e.target).removeClass('active');
+          }
+          $(e.target).children('.badge').text(suc.counts);
+          },
+        error: function(err) {
+          console.log(err);
+          }
+        });
+      }
     });
 
 
