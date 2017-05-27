@@ -45,7 +45,7 @@
                   <li>
                     <a href="/profiles/<%= contlist.username %>"><%= contlist.username %></a>
                     <%  if (canEdit) { %>
-                    <a href="/profiles/<%= contlist.username %>" class="btn btn-danger delCont" data-Cont="<%= contlist.username %>" data-cLid="<%= listInfo.l_id %>">Delete</a>
+                    <a class="btn btn-danger delCont" data-Cont="<%= contlist.username %>" data-cLid="<%= listInfo.l_id %>">Delete</a>
                     <% }  %>
                   </li>
                 </div>

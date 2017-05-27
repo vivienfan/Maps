@@ -203,6 +203,7 @@ $(document).ready(function() {
         $('#reg_nav').addClass('hide');
         $('#loginmodal').modal('hide');
         $('.dropdown').removeClass('hide')
+        location.reload();
 
 
       },
@@ -273,7 +274,7 @@ $(document).ready(function() {
 
     },
       error: function(err) {
-        console.log('Delete Error')
+        console.log('Create list console.error();')
       }
     })
   });
@@ -341,10 +342,13 @@ $(document).ready(function() {
       data: {username: newContusername},
       success: function(suc) {
         //Delete the map id article or refresh the page.
+        var $newCont = $('<div>')
+        $newCont.addClass('divCont')
         var $contItem = $('<li>');
-        $contItem.append(newContusername);
-        $contItem.append($(`<a href="/profiles/${newContusername}" class="btn btn-primary">`).text('View user'))
-        $('#lid_contributors').append($contItem)
+        $contItem.append($(`<a href="/profiles/${newContusername}">`).text(newContusername))
+        $contItem.append($(`<a class="btn btn-danger delCont" data-cont="${newContusername}" data-clid="${lid}">`).text('Delete'))
+        $newCont.append($contItem)
+        $('#lid_contributors').append($newCont)
         },
       error: function(err) {
         console.log('Delete Error')
@@ -352,7 +356,7 @@ $(document).ready(function() {
       })
     })
 
-    $(".delCont").on('click', function (e) {
+    $("#lid_contributors").on('click', ".delCont", function (e) {
       e.preventDefault();
       console.log("the del contributor button was clicked");
       var delContusername = $(this).data('cont')
@@ -368,11 +372,10 @@ $(document).ready(function() {
       $.ajax({
         url: '/lists/' + delLid + '/dropContributor',
         method: 'DELETE',
-        data: delContusername,
+        data: { username: delContusername },
         success: function(suc) {
           //Delete the map id article or refresh the page.
           divDeleteCont.empty();
-
           },
         error: function(err) {
           console.log('Delete Error')
