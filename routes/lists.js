@@ -27,13 +27,13 @@ module.exports = (dataHelper) => {
     let uid = req.session.user_id;;
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
-        res.status(500).send();
+        res.status(500).send(err.message);
         return;
       }
       if (uid) {
         dataHelper.getAllFavListIdByUid(uid, (err, favs) => {
           if (err) {
-            res.status(500).send();
+            res.status(500).send(err.message);
             return;
           }
           res.status(200).json({ publics: publics, favs: favs });
@@ -141,7 +141,7 @@ module.exports = (dataHelper) => {
     };
     dataHelper.addFav(obj, (err, toFav, counts) => {
       if (err) {
-        res.status(500).send();
+        res.status(500).send(err.message);
         return;
       }
       let resObj = {
@@ -175,7 +175,8 @@ module.exports = (dataHelper) => {
       username: req.body.username,
       lid: req.params.lid
     }
-    dataHelper.dropContributor(obj, (err) => {
+    console.log(obj);
+      dataHelper.dropContributor(obj, (err) => {
       if (err) {
         res.status(400).send(err.message);
         return;
@@ -214,7 +215,8 @@ module.exports = (dataHelper) => {
     let obj = {
       title: req.body.title,
       description: req.body.description,
-      public: req.body.public
+      public: req.body.public,
+      uid: req.session.user_id
     };
     dataHelper.addList(obj, (err, lid) => {
       if (err) {
