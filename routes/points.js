@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (dataHelper) => {
+module.exports = (dataHelper, utility) => {
 
   // method: get
   // URL: /points/all/:mid

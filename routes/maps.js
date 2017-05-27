@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (dataHelper) => {
+module.exports = (dataHelper, utility) => {
 
   // method: get
   // URL: /maps/:mid
@@ -39,13 +39,13 @@ module.exports = (dataHelper) => {
           res.status(400).send(err.message);
           return;
         }
-        if (uid && contrs.includes(uid)){
+        if (uid && utility.isAContributor(uid, contrs)){
           canEdit = true;
         }
       });
     })
     .then(() => {
-      if (!canView && !canEdit) {
+      if (!(canView || canEdit)) {
         res.status(403).send();
         return;
       }

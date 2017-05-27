@@ -17,14 +17,14 @@ const cookieSession   = require('cookie-session');
 const methodOverride  = require('method-override');
 
 const dataHelper      = require('./lib/dataHelper.js')(knex);
+const utility         = require('./lib/utility.js');
 
 // Seperated Routes for each Resource
-const homeRoute       = require('./routes/home.js')(dataHelper);
-const profilesRoutes  = require('./routes/profiles.js')(dataHelper);
-const listsRoutes     = require('./routes/lists.js')(dataHelper);
-const mapsRoutes      = require('./routes/maps.js')(dataHelper);
-const pointsRoutes    = require('./routes/points.js')(dataHelper);
-const usersRoutes     = require('./routes/users.js')(knex);
+const homeRoute       = require('./routes/home.js')(dataHelper, utility);
+const profilesRoutes  = require('./routes/profiles.js')(dataHelper, utility);
+const listsRoutes     = require('./routes/lists.js')(dataHelper, utility);
+const mapsRoutes      = require('./routes/maps.js')(dataHelper, utility);
+const pointsRoutes    = require('./routes/points.js')(dataHelper, utility);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -56,7 +56,6 @@ app.use('/profiles', profilesRoutes);
 app.use('/lists', listsRoutes);
 app.use('/maps', mapsRoutes);
 app.use('/points', pointsRoutes);
-app.use('/api/users', usersRoutes);
 
 app.listen(PORT, () => {
   console.log('Example app listening on port ' + PORT);
