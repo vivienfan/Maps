@@ -13,7 +13,7 @@ module.exports = (dataHelper) => {
   // retrieve map info and all points belong to the map from db
   router.get('/:mid', (req, res) => {
     let mid = req.params.mid;
-    let uid = req.session.uid;
+    let uid = req.session.user_id;
     let mapInfo;
     let canView = false;
     let canEdit = false;

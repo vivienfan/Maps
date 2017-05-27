@@ -3,6 +3,16 @@
 const express = require('express');
 const router  = express.Router();
 
+function isContributor(uid, contributors) {
+  let result = false;
+  contributors.forEach((contributor) => {
+    if (contributor.id === uid) {
+      result = true;
+    }
+  });
+  return result;
+}
+
 module.exports = (dataHelper) => {
 
   // method: get
@@ -15,7 +25,7 @@ module.exports = (dataHelper) => {
   // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
     console.log("get /lists");
-    let uid = req.session.uid;
+    let uid = req.session.user_id;;
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
         res.status(500).send();
@@ -70,16 +80,6 @@ module.exports = (dataHelper) => {
     });
   })
 
-  function isContributor(uid, contributors) {
-    let result = false;
-    contributors.forEach((contributor) => {
-      if (contributor.id === uid) {
-        result = true;
-      }
-    });
-    return result;
-  }
-
   // method: get
   // URL: /lists/:lid
   // client input: req.params
@@ -105,7 +105,9 @@ module.exports = (dataHelper) => {
           res.status(400).send(err.message);
           return;
         }
-        let isContributor = isContributor(uid, contributors);
+        //let isContributor = isContributor(uid, contributors);
+        isContributor = true;
+        console.log(isContributor);
         if (listInfo.public || isContributor) {
           dataHelper.getMapsByListId(lid, (err, maps) => {
             if (err) {
@@ -121,8 +123,9 @@ module.exports = (dataHelper) => {
             res.render("../views/lists", tempVar);
             return;
           });
+        } else {
+          res.status(403).send();
         }
-        res.status(403).send();
       });
     });
   });
@@ -137,7 +140,7 @@ module.exports = (dataHelper) => {
     console.log("herrrre");
     let obj = {
       lid: req.body.lid,
-      uid: req.session.uid
+      uid: req.session.user_id
     };
     dataHelper.addFav(obj, (err, toFav, counts) => {
       if (err) {
