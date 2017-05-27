@@ -38,7 +38,7 @@
             <ul class="list-unstyled">
               <% favouriteLists.forEach(function (list) { %>
                 <li>
-                  <b> <%= list.title%> </b> <%= list.description %>
+                  <b> <a href="/lists/<%= list.l_id %>"> <%= list.title%> </a> </b> <%= list.description %>
                 </li>
               <% }); %>
             </ul>
