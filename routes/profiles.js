@@ -36,6 +36,7 @@ module.exports = (dataHelper) => {
     .then(() => {
       console.log('render page');
       let tempVar = {
+        username: username,
         favouriteLists: favourite,
         contributedLists: contribution
       };
