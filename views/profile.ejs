@@ -39,9 +39,6 @@
               <% favouriteLists.forEach(function (list) { %>
                 <li>
                   <b> <%= list.title%> </b> <%= list.description %>
-                  <button>
-                    Favourite
-                  </button>
                 </li>
               <% }); %>
             </ul>
@@ -53,13 +50,21 @@
             <section class = "userContributions">
             <% contributedLists.forEach(function (list) { %>
               <li>
-                <b><a type="submit" value="Edit List" href="/lists/<%= list.l_id %> "><%= list.title %></a></b>
-                <p><%= list.description %></p><!--<%=list.l_id%>-->
-                <% if (canEdit) { %>
-                  <div method="POST" action="/lists/<%= list.l_id %>/delete" style="float:right">
-                    <input type="submit" value="Delete List" class="btn btn-danger">
+                <div class ="row">
+                  <div class = "col-md-4">
+                    <b><a type="submit" value="Edit List" href="/lists/<%= list.l_id %> "><%= list.title %></a></b>
                   </div>
-                <% } %>
+                  <div class = "col-md-4">
+                    <p><%= list.description %></p>
+                  </div><!--<%=list.l_id%>-->
+                  <% if (canEdit) { %>
+                    <div class = "col-md-4">
+                      <div method="POST" action="/lists/<%= list.l_id %>/delete" style="float:right">
+                        <input type="submit" value="Delete List" class="btn btn-danger">
+                      </div>
+                    </div>
+                  <% } %>
+              </div>
               </li>
             <% }); %>
             </section>
