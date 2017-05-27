@@ -44,7 +44,8 @@ $(document).ready(function () {
       .attr("data-lng", point.longitude);
     var $title = $("<label>").text(point.title);
     var $description = $("<p>").text(point.description);
-    var $img = $("<img>").attr("src", point.image).css("width", "200px");
+    var $img = $("<img>").attr("src", point.image)
+    // .css("width", "400px");
     $div.append($title, $description, $img);
     if(canEdit) {
       var $br = $("<br>");
@@ -64,6 +65,8 @@ $(document).ready(function () {
     L.marker([point.latitude, point.longitude])
     .addTo(myMap)
     .bindPopup(popContent);
+
+    // infoContent.addClass("eachPoint"); //Milind Attempting to style
 
     $('#points-list').append(infoContent);
   }

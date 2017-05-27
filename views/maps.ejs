@@ -29,15 +29,15 @@
 </head>
 
 <body data-mid="<%=mid%>" data-canedit="<%=canEdit%>">
-  <main class = "container" style="padding: 0px; ">
+
       <h1><%=title%></h1>
       <h2><%=description%></h2>
-    <div class="col-md-8 my_map">
-      <div id="leafletmap" style="width:780px; height: 400px;"></div>
+    <div class="col-md-12 my_map">
+      <div id="leafletmap" style="width:100%; height: 400px;"></div>
     </div>
-    <div id="points-list" class="col-md-3">
+    <div id="points-list" class="col-md-12">
     </div>
-  </main>
+
 
   <div class="modal fade" id="add-point-modal" role="dialog">
     <div class="modal-dialog">
