@@ -27,7 +27,7 @@ module.exports = (dataHelper) => {
     .then(() => {
       return dataHelper.getListAccessByMapId(mid, (err, view) => {
         if(err) {
-          res.status(400).send(err);
+          res.status(400).send(err.message);
           return;
         }
         canView = view.public;
@@ -36,7 +36,7 @@ module.exports = (dataHelper) => {
     .then(() => {
       return dataHelper.getContributorForMap(mid, (err, contrs) => {
         if (err) {
-          res.status(400).send(err);
+          res.status(400).send(err.message);
           return;
         }
         if (uid && contrs.includes(uid)){
@@ -59,6 +59,7 @@ module.exports = (dataHelper) => {
       return;
     })
     .catch((err) => {
+      console.error(err);
       return;
     });
   });
