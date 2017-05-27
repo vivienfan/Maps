@@ -13,54 +13,95 @@ module.exports = (dataHelper) => {
   // retrieve map info and all points belong to the map from db
   router.get('/:mid', (req, res) => {
     let mid = req.params.mid;
-    dataHelper.getMapInfoByMapId(mid, (err, mapInfo) => {
-      if (err) {
-        res.status(400).send(err.message);
-      } else {
-        mapInfo.mid = mid;
-        res.status(200).render("../views/maps", mapInfo);
-      }
-    });
-  });
-
-  // method: get
-  // URL: /maps/:mid/auth
-  // client input: none
-  // server output: err / none
-  router.get('/:mid/auth', (req, res) => {
     let uid = req.session.uid;
-    let mid = req.params.mid;
+    let mapInfo;
     let canView = false;
     let canEdit = false;
-    // check if the list where map is belong to is public
-    dataHelper.getListAccessByMapId(mid, (err, view) => {
-      if(err) {
-        res.status(404).send(err);
+    dataHelper.getMapInfoByMapId(mid, (err, map) => {
+      if (err) {
+        res.status(400).send(err.message);
         return;
       }
-      canView = view.public;
+      mapInfo = map;
     })
     .then(() => {
-      return dataHelper.getContributorForMap(mid, uid, (err, edit) => {
-        if (err) {
-          res.status(404).send(err);
+      return dataHelper.getListAccessByMapId(mid, (err, view) => {
+        if(err) {
+          res.status(400).send(err);
           return;
         }
-        canEdit = edit;
+        canView = view.public;
       });
     })
     .then(() => {
-      console.log(canView, canEdit);
-      if (!(canView || canEdit)) {
+      return dataHelper.getContributorForMap(mid, (err, contrs) => {
+        if (err) {
+          res.status(400).send(err);
+          return;
+        }
+        if (uid && contrs.includes(uid)){
+          canEdit = true;
+        }
+      });
+    })
+    .then(() => {
+      if (!canView && !canEdit) {
         res.status(403).send();
         return;
       }
-      res.status(200).json({ canView: canView, canEdit: canEdit });
+      let tempVar = {
+        mid: mid,
+        title: mapInfo.title,
+        description: mapInfo.description,
+        canEdit: canEdit
+      }
+      res.render("../views/maps", tempVar);
+      return;
     })
     .catch((err) => {
       return;
     });
-  })
+  });
+
+  // // method: get
+  // // URL: /maps/:mid/auth
+  // // client input: none
+  // // server output: err / none
+  // router.get('/:mid/auth', (req, res) => {
+  //   let uid = req.session.uid;
+  //   let mid = req.params.mid;
+  //   let canView = false;
+  //   let canEdit = false;
+  //   // check if the list where map is belong to is public
+  //   console.log(uid, mid);
+  //   dataHelper.getListAccessByMapId(mid, (err, view) => {
+  //     if(err) {
+  //       res.status(404).send(err);
+  //       return;
+  //     }
+  //     canView = view.public;
+  //   })
+  //   .then(() => {
+  //     return dataHelper.getContributorForMap(mid, uid, (err, edit) => {
+  //       if (err) {
+  //         res.status(404).send(err);
+  //         return;
+  //       }
+  //       canEdit = edit;
+  //     });
+  //   })
+  //   .then(() => {
+  //     console.log(canView, canEdit);
+  //     if (!(canView || canEdit)) {
+  //       res.status(403).send();
+  //       return;
+  //     }
+  //     res.status(200).json({ canView: canView, canEdit: canEdit });
+  //   })
+  //   .catch((err) => {
+  //     return;
+  //   });
+  // })
 
   // method: post
   // URL: /maps/new

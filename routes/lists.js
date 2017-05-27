@@ -100,14 +100,31 @@ module.exports = (dataHelper) => {
     });
   });
 
+  // method: post
+  // URL: /lists/add-fav
+  // client input: { lid: int }
+  // server output: err / none
+  //
+  // store favourites
+  router.post('/add-fav', (req, res) => {
+    let lid = req.body.lid;
+    dataHelper.addFav(lid, (err) => {
+      if (err) {
+        res.status(400).send(err.message);
+        return;
+      }
+      res.status(200).send();
+    })
+  })
+
   // method: delete
   // URL: /lists/:lid
   // client input: req.param
   // server output: err / none
   //
   // deletes the list from database
-  // TODO: redirect?
   router.delete('/:lid', (req, res) => {
+    let lid = req.params.lid;
     dataHelper.dropList(lid, (err) => {
       if(err) {
         res.status(400).send(err.message);

@@ -1,6 +1,7 @@
 $(document).ready(function () {
   var myMap;
   var mid = $("body").data("mid");
+  var canEdit = $("body").data("canedit");
   var LAT = 43.6532;
   var LNG = -79.3832;
   var latitude;
@@ -8,6 +9,21 @@ $(document).ready(function () {
 
   var points = [];
   var popup = L.popup();
+
+  /*---------------- Initialization ----------------*/
+  myMap = L.map('leafletmap').setView([LAT, LNG], 11);
+
+  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
+    maxZoom: 18,
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    id: 'mapbox.streets'
+  }).addTo(myMap);
+
+  initPoints();
+
+  /*---------------- Helper Function ----------------*/
 
   function createPointPopup(point) {
     var $div = $("<div>").attr("data-pid", point.p_id);
@@ -29,11 +45,13 @@ $(document).ready(function () {
     var $title = $("<label>").text(point.title);
     var $description = $("<p>").text(point.description);
     var $img = $("<img>").attr("src", point.image).css("width", "200px");
-    var $br = $("<br>");
-    var $edit = $("<button>", { class: "point-edit" }).text("Edit");
-    var $delete = $("<button>", { class: "point-delete" }).text("Delete");
-    $div.append($title, $description, $img, $br, $edit, $delete);
-
+    $div.append($title, $description, $img);
+    if(canEdit) {
+      var $br = $("<br>");
+      var $edit = $("<button>", { class: "point-edit" }).text("Edit");
+      var $delete = $("<button>", { class: "point-delete" }).text("Delete");
+      $div.append($br, $edit, $delete);
+    }
     var $container = $("<section>");
     $container.append($div);
     return $container.html();
@@ -68,22 +86,14 @@ $(document).ready(function () {
   }
 
   function onMapClick(e) {
-    latitude = e.latlng.lat;
-    longitude = e.latlng.lng;
-    $('#add-point-modal').modal('toggle');
+    if (canEdit) {
+      latitude = e.latlng.lat;
+      longitude = e.latlng.lng;
+      $('#add-point-modal').modal('toggle');
+    }
   }
 
-  myMap = L.map('leafletmap').setView([LAT, LNG], 11);
-
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-    maxZoom: 18,
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-      '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-      'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-    id: 'mapbox.streets'
-  }).addTo(myMap);
-
-  initPoints();
+  /*---------------- Event Handler ----------------*/
 
   myMap.on('click', onMapClick);
 
