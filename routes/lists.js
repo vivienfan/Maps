@@ -8,20 +8,33 @@ module.exports = (dataHelper) => {
   // method: get
   // URL: /lists
   // client input: none
-  // server output: err / [{ l_id: int, title: str, description: str }]
+  // server output: err / { publics:[], favs: [] }
+  //  publics = [{ l_id: int, title: str, description: str }]
+  //  favs = [ {l_id: int }]
   //
   // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
     console.log("get /lists");
+    let uid = req.session.uid;
+    uid = 1;
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
-        res.status(400).send();
+        res.status(500).send();
         return;
       }
-      console.log(publics);
-      res.status(200).json(publics);
+      if (uid) {
+        dataHelper.getAllFavListIdByUid(uid, (err, favs) => {
+          if (err) {
+            res.status(500).send();
+            return;
+          }
+          res.status(200).json({ publics: publics, favs: favs });
+        });
+      } else {
+        res.status(200).json({ publics: publics, favs: null });
+      }
     });
-  })
+  });
 
   // method: get
   // URL: /lists/fav/:uid
@@ -106,13 +119,11 @@ module.exports = (dataHelper) => {
   // server output: err / { action: bool, count: int }
   //
   // store favourites
-  router.post('/add-fav/:lid/:uid', (req, res) => {
+  router.post('/add-fav', (req, res) => {
     console.log("herrrre");
     let obj = {
-      lid: req.params.lid,
-      uid: req.params.uid
-      // lid: req.body.lid,
-      // uid: req.session.uid
+      lid: req.body.lid,
+      uid: req.session.uid
     };
     dataHelper.addFav(obj, (err, toFav, counts) => {
       if (err) {
