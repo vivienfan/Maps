@@ -34,6 +34,8 @@ module.exports = (dataHelper) => {
       })
     })
     .then(() => {
+      console.log(favourite);
+      console.log(contribution);
       console.log('render page');
       let tempVar = {
         username: username,
