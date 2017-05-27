@@ -198,32 +198,37 @@ $(document).ready(function() {
     window.location=`/profiles/${global_username}`;
   });
 
-  function contributedLists(lists){
-    console.log("Inside Contributed lists function rendering ", lists)
-    lists.forEach( function (list) {
-      console.log("For each is working!! in contributedLists")
-      // debugger;
-      $('#userContributions').append(createSingleList(list))
-      });
-    }
+  $(".newList").on('click', function (e) {
+    e.preventDefault();
+    var map_id = $(this).data('mid')
+    console.log("here is the map_id I am fetching", map_id);
+    var listTitle = $(this).closest('.newContributor').find('.listTitle').val();
+    console.log(listTitle);
+    var listDesc = $(this).closest('.newContributor').find('.listDesc').val();
+    console.log(listDesc);
+    var isPublic = ($('.public').attr('checked') === 'checked');
+    console.log(isPublic);
 
-  function createSingleList(list) {
-    var $list = $('<article>')
-    $contributor.append($('<p>').text(list.title));
-    $contributor.append($('<br>'));
-    $contributor.append($('<p>').text(list.description));
-    $contributor.append($('<br>'));
-    return $list;
-  };
 
-  function favouritedLists(lists){
-    lists.forEach( function (list) {
-      console.log("Inside favourited lists function rendering ", lists)
-      console.log("For each is working!! in favouritedLists")
-      // debugger;
-      $('#userFavourites').append(createSingleList(list));
-        })
-      };
+
+    $.ajax({
+      url: '/lists/new',
+      method: 'POST',
+      data: {title: listTitle,
+        description: listDesc,
+        public: isPublic
+      },
+      success: function(suc) {
+
+      window.location.href="../lists/" + suc.lid;
+
+    },
+      error: function(err) {
+        console.log('Delete Error')
+      }
+    })
+  });
+
 
 
 
@@ -231,96 +236,6 @@ $(document).ready(function() {
 
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
-
-
-
-
-
-
-  // function createSingleContributor(cont) {
-  //   var $contributor = $('<article>')
-  //   $contributor.append($('<p>').text(cont.username));
-  //   $contributor.append($('<br>'));
-  //   return $contributor;
-  // }
-  //
-  // function createContributors(contributors) {
-  //   contributors.forEach( function (contributor) {
-  //     console.log("For each is working!!")
-  //     // debugger;
-  //     $('#lid_contributors').append(createSingleContributor(contributor))
-  //   });
-  // }
-  //
-  // function createMap(map){
-  //   var $map = $('<article>').attr('data-map_id', map.m_id)
-  //   // $map.append($('<p>').text(map.m_id)).addClass('mapId')
-  //   $map.append($('<p>').text(map.title))
-  //   $map.append($('<p>').text(map.description))
-  //
-  //   // Adding the buttons for edit and delete
-  //   var $edit = $('<button class ="editMap" onClick="editMap()" />')
-  //   $edit.append($('<p>').text("Edit"))
-  //   var $del = $('<button class ="delMap" onClick="delMap()"/>')
-  //   $del.append($('<p>').text("Delete"))
-  //   $map.append($edit);
-  //   $map.append($del);
-  //   return $map;
-  // }
-  //
-  // function createMaps(maps){
-  //   maps.forEach(function (map) {
-  //     $('#lid_maps').append(createMap(map))
-  //   })
-  // }
-
-//   $.ajax({
-//     url: '/lists/',
-//     method: 'GET',
-//     dataType: 'json',
-//     success: function(suc) {
-//       //add class
-//       //Hide register and login buttons
-//       $('#lid_info').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
-//       $('#lid_info').append($('<h3>').text((`Description: ${suc.listinfo.Description}`)));
-//
-//       //TODO: Append every contributor of the lid in the container.
-//
-//       createContributers(suc.contrbutors)
-//       // $('$lid_contributors').append($('<h3>').text((`Title: ${suc.listinfo.title}`)));
-//
-//       //TODO: Append every mapid in the map container
-//
-//       createMaps(suc.maps)
-//
-//
-//
-//       },
-//       error: function(err) {
-//       console.log('err');
-//       }
-// });
-
-  //TODO: Create a function for every edit Button.
-  // $(".editMap").on('click', 'button', function (e) {
-  //   e.preventDefault();
-  //   var map_id = $(this).siblings('.mapId')
-  //
-  //   $.ajax({
-  //     url: '/maps/' + map_id, //EDIT mapid url
-  //     method: 'POST',
-  //     data: map_id,
-  //     success: function(suc) {
-  //       //Delete the whole map article
-  //
-  //     },
-  //     error: function(err) {
-  //       console.log('Edit Error')
-  //     }
-  //   })
-  // });
-
-  //TODO: Create a function for every edit Delete.
   $(".deleteMap").on('click', function (e) {
     e.preventDefault();
     var map_id = $(this).data('mid')
