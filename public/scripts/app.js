@@ -210,7 +210,6 @@ $(document).ready(function() {
     console.log(isPublic);
 
 
-
     $.ajax({
       url: '/lists/new',
       method: 'POST',
