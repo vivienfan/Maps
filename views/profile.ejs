@@ -6,27 +6,27 @@
     <main class = "container">
       <h1> Welcome to "username" Page </h1>
       <br>
-      <div class = "row">
-        <div method="POST" action="/lists/new">
+      <div class = "row newContributor">
+        <div class="">
           <div class="col-md-1">
             <label>Title:</label>
           </div>
           <div class="col-md-2">
-            <input type="text" name="title">
+            <input type="text" name="title" class="listTitle">
           </div>
           <div class ="col-md-1">
             <label>Description:</label>
           </div>
           <div class ="col-md-2">
-            <input type="text" name="description">
+            <input type="text" name="description" class="listDesc">
           </div>
           <div class = "col-md-4">
             <label>Privacy</label>
-            <input type="radio" name="public" value="public" checked> Public
+            <input class="public" type="radio" name="public" value="public"> Public
             <input type="radio" name="public" value="private"> Private
           </div>
           <div class = "col-md-2">
-            <input class = "btn btn-primary" type="submit" value="Create new list"><br><br>
+            <a class = "btn btn-primary newList" data-username=""> Create new List</a><br><br>
           </div>
         </div>
       </div>
@@ -47,9 +47,9 @@
           </section>
         </div>
         <div class="col-md-6">
-          <section class = "userContributions">
             <h2> USERNAME CONTRIBUTIONS </h2>
             <ul>
+              <section class = "userContributions">
               <% contributedLists.forEach(function (list) { %>
                 <li>
                   <b> <%= list.title%> </b> <%= list.description %>
@@ -59,8 +59,9 @@
                   </div>
                 </li>
               <%  }); %>
+              </section>
             </ul>
-          </section>
+
         </div>
       </div>
 
