@@ -215,7 +215,8 @@ module.exports = (dataHelper) => {
     let obj = {
       title: req.body.title,
       description: req.body.description,
-      public: req.body.public
+      public: req.body.public,
+      uid: req.session.user_id
     };
     dataHelper.addList(obj, (err, lid) => {
       if (err) {
