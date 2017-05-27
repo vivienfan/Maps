@@ -24,7 +24,6 @@ module.exports = (dataHelper) => {
   //
   // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
-    console.log("get /lists");
     let uid = req.session.user_id;;
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
@@ -137,7 +136,6 @@ module.exports = (dataHelper) => {
   //
   // store favourites
   router.post('/add-fav', (req, res) => {
-    console.log("herrrre");
     let obj = {
       lid: req.body.lid,
       uid: req.session.user_id
