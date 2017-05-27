@@ -38,7 +38,8 @@ module.exports = (dataHelper) => {
       let tempVar = {
         username: username,
         favouriteLists: favourite,
-        contributedLists: contribution
+        contributedLists: contribution,
+        canEdit: (username === req.session.username)
       };
       console.log(tempVar);
       res.render('../views/profile', tempVar);

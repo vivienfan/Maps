@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-   <% include ./partials/_headers %>
-<!-- main part of the page -->
+  <% include ./partials/_headers %>
+  <!-- main part of the page -->
   <body>
     <main class = "container">
-      <h1> Welcome to <%= username %>'s Page </h1>
+      <h1> Welcome to <b><%= username %></b>'s Page </h1>
       <br>
-      <div class = "row newContributor">
-        <div class="">
+      <% if (canEdit) { %>
+        <div class = "row newContributor">
           <div class="col-md-1">
             <label>Title:</label>
           </div>
@@ -29,43 +29,43 @@
             <a class = "btn btn-primary newList" data-username=""> Create new List</a><br><br>
           </div>
         </div>
-      </div>
+      <% } %>
 
       <div class = "row">
         <div class="col-md-6">
           <section class = "userFavourites">
             <h2> <%= username %>'s FAVORITES </h2>
-            <% favouriteLists.forEach(function (list) { %>
-              <li>
-                <b> <%= list.title%> </b> <%= list.description %>
-                <button>
-                  Favourite
-                </button>
-              </li>
-
-            <%  }); %>
+            <ul class="list-unstyled">
+              <% favouriteLists.forEach(function (list) { %>
+                <li>
+                  <b> <%= list.title%> </b> <%= list.description %>
+                  <button>
+                    Favourite
+                  </button>
+                </li>
+              <% }); %>
+            </ul>
           </section>
         </div>
         <div class="col-md-6">
-            <h2> <%= username %>'s CONTRIBUTIONS </h2>
-            <ul>
-              <section class = "userContributions">
-              <% contributedLists.forEach(function (list) { %>
-                <li>
-                  <b> <%= list.title %> </b> <%= list.description %> <%=list.l_id%>
-
-                    <a class="btn btn-primary" type="submit" value="Edit List" href="/lists/<%= list.l_id %> "> Edit List </a>
+          <h2><%= username %>'s CONTRIBUTIONS</h2>
+          <ul class="list-unstyled">
+            <section class = "userContributions">
+            <% contributedLists.forEach(function (list) { %>
+              <li>
+                <b><a type="submit" value="Edit List" href="/lists/<%= list.l_id %> "><%= list.title %></a></b>
+                <p><%= list.description %></p><!--<%=list.l_id%>-->
+                <% if (canEdit) { %>
                   <div method="POST" action="/lists/<%= list.l_id %>/delete" style="float:right">
                     <input type="submit" value="Delete List" class="btn btn-danger">
                   </div>
-                </li>
-              <%  }); %>
-              </section>
-            </ul>
-
+                <% } %>
+              </li>
+            <% }); %>
+            </section>
+          </ul>
         </div>
       </div>
-
     </main>
   </body>
 </html>
