@@ -126,11 +126,10 @@ $(document).ready(function() {
         if (suc.toFav) {
           console.log('it is true ->' + suc.ToFav)
           $(e.target).addClass('active');
-          $(e.target).children('.badge').text(suc.counts);
         } else {
           $(e.target).removeClass('active');
-          $(e.target).children('.badge').text(suc.counts);
         }
+        $(e.target).children('.badge').text(suc.counts);
         },
       error: function(err) {
         console.log(err);
@@ -346,15 +345,37 @@ $(document).ready(function() {
         $contItem.append(newContusername);
         $contItem.append($(`<a href="/profiles/${newContusername}" class="btn btn-primary">`).text('View user'))
         $('#lid_contributors').append($contItem)
-
-
-
         },
       error: function(err) {
         console.log('Delete Error')
         }
       })
     })
+
+    $(".delCont").on('click', function (e) {
+      e.preventDefault();
+      console.log("the del contributor button was clicked");
+      var newContusername = $(this).siblings(".username").val();
+      var lid = $(this).data('lid');
+      console.log('Here is the lid that was clicked', lid);
+
+
+      $.ajax({
+        url: lid + '/addContributor',
+        method: 'POST',
+        data: {username: newContusername},
+        success: function(suc) {
+          //Delete the map id article or refresh the page.
+          var $contItem = $('<li>');
+          $contItem.append(newContusername);
+          $contItem.append($(`<a href="/profiles/${newContusername}" class="btn btn-primary">`).text('View user'))
+          $('#lid_contributors').append($contItem)
+          },
+        error: function(err) {
+          console.log('Delete Error')
+          }
+        })
+      })
 
 
 });
