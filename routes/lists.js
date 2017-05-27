@@ -170,6 +170,21 @@ module.exports = (dataHelper) => {
     })
   });
 
+  // URL: /lists/:lid/dropContributor
+  router.delete('/:lid/dropContributor', (req, res) => {
+    let obj = {
+      username: req.body.username,
+      lid: req.params.lid
+    }
+    dataHelper.dropContributor(obj, (err) => {
+      if (err) {
+        res.status(400).send(err.message);
+        return;
+      }
+      res.status(200).send();
+    })
+  });
+
   // method: post
   // URL: /lists/:lid/addContributor
   // client input: req.param, req.body = { username: str }
