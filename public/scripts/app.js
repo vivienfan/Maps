@@ -355,21 +355,24 @@ $(document).ready(function() {
     $(".delCont").on('click', function (e) {
       e.preventDefault();
       console.log("the del contributor button was clicked");
-      var newContusername = $(this).siblings(".username").val();
-      var lid = $(this).data('lid');
-      console.log('Here is the lid that was clicked', lid);
+      var delContusername = $(this).data('cont')
+      var delLid = $(this).data('clid');
+      console.log('Here is the lid that was clicked->', delLid);
+      console.log('here is the delContusername that was clciked->', delContusername)
+
+      var divDeleteCont = $(this).closest('.divCont')
+
+
 
 
       $.ajax({
-        url: lid + '/addContributor',
-        method: 'POST',
-        data: {username: newContusername},
+        url: '/lists/' + delLid + '/dropContributor',
+        method: 'DELETE',
+        data: delContusername,
         success: function(suc) {
           //Delete the map id article or refresh the page.
-          var $contItem = $('<li>');
-          $contItem.append(newContusername);
-          $contItem.append($(`<a href="/profiles/${newContusername}" class="btn btn-primary">`).text('View user'))
-          $('#lid_contributors').append($contItem)
+          divDeleteCont.empty();
+
           },
         error: function(err) {
           console.log('Delete Error')
