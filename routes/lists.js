@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 
-function isContributor(uid, contributors) {
+function isAContributor(uid, contributors) {
   let result = false;
   contributors.forEach((contributor) => {
     if (contributor.id === uid) {
@@ -104,8 +104,7 @@ module.exports = (dataHelper) => {
           res.status(400).send(err.message);
           return;
         }
-        //let isContributor = isContributor(uid, contributors);
-        isContributor = true;
+        let isContributor = isAContributor(uid, contributors);
         console.log(isContributor);
         if (listInfo.public || isContributor) {
           dataHelper.getMapsByListId(lid, (err, maps) => {
