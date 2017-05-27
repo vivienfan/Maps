@@ -4,7 +4,7 @@
 <!-- main part of the page -->
   <body>
     <main class = "container">
-      <h1> Welcome to "username" Page </h1>
+      <h1> Welcome to <%= username %>'s Page </h1>
       <br>
       <div class = "row newContributor">
         <div class="">
@@ -34,7 +34,7 @@
       <div class = "row">
         <div class="col-md-6">
           <section class = "userFavourites">
-            <h2> <%= username.username %> FAVORITES </h2>
+            <h2> <%= username %>'s FAVORITES </h2>
             <% favouriteLists.forEach(function (list) { %>
               <li>
                 <b> <%= list.title%> </b> <%= list.description %>
@@ -47,12 +47,13 @@
           </section>
         </div>
         <div class="col-md-6">
-            <h2> <%= username.username %> CONTRIBUTIONS </h2>
+            <h2> <%= username %>'s CONTRIBUTIONS </h2>
             <ul>
               <section class = "userContributions">
               <% contributedLists.forEach(function (list) { %>
                 <li>
                   <b> <%= list.title %> </b> <%= list.description %> <%=list.l_id%>
+
                     <a class="btn btn-primary" type="submit" value="Edit List" href="/lists/<%= list.l_id %> "> Edit List </a>
                   <div method="POST" action="/lists/<%= list.l_id %>/delete" style="float:right">
                     <input type="submit" value="Delete List" class="btn btn-danger">

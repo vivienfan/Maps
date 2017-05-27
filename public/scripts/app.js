@@ -28,6 +28,104 @@ $(document).ready(function() {
     }
   });
 
+  function renderListsForHome() {
+    console.log("get all lists for home page");
+    $.ajax({
+      url: '/lists',
+      method: 'GET',
+      dataType: 'json',
+      success: function(data) {
+        if (data.length > 0) {
+          renderFavourites(data)
+          }
+        //add class
+        //Hide register and login buttons
+        },
+      error: function(err) {
+        console.log('err');
+        }
+    });
+  }
+
+  function createFavourite(list) {
+    // console.log("I am in createFavourite");
+    var $listItem = $('<div>');
+    $listItem.addClass('row');
+
+    var $listTitle =$('<div>');
+    $listTitle.addClass('col-md-3');
+    $listTitle.append($('<b>').text(list.title));
+    $listItem.append($listTitle);
+
+    var $listDesc =$('<div>');
+    $listDesc.addClass('col-md-3');
+    $listDesc.append(`${list.description}`);
+    $listItem.append($listDesc);
+
+    var $listFav = $('<div>');
+    var $listFavButton = $(`<a class='btn btn-primary favoriteButton' data-l_id='${list.l_id}'>`)
+    $listFavButton.text('  Favourite');
+    $listFav.addClass('col-md-3');
+    if (list.count === null){
+      var $spanBadge = $('<span>');
+      $spanBadge.addClass('badge');
+      $spanBadge.text("0")
+      $listFavButton.prepend($spanBadge)
+      $listFav.append($listFavButton)
+
+    } else {
+      var $spanBadge = $('<span>');
+      $spanBadge.addClass('badge');
+      $spanBadge.text(list.count)
+      $listFavButton.prepend($spanBadge)
+      $listFav.append($listFavButton)
+
+    }
+    $listItem.append($listFav);
+    var $buttonL = $(`<a name='View List' class='btn btn-primary' href='lists/${list.l_id}'>`);
+    $buttonL.text('View List')
+    $listItem.append($buttonL);
+    $listItem.append($('<b>'));
+    $listItem.append($('<b>'));
+    // $listItem.append($('<input>').text("View List"));
+    return $listItem;
+  }
+
+  function renderFavourites(lists){
+    lists.forEach( function (list) {
+      $('#listfav').append(createFavourite(list))
+    });
+  }
+
+
+  $("#listfav").on('click', '.favoriteButton', function (e) {
+    e.preventDefault();
+    var lid = $(this).data('l_id')
+    console.log('the button is clicked and this is the lid', lid)
+    // $(this).children('.badge').text('1')
+    // $(this).addClass('active');
+    $.ajax({
+      url: '/lists/add-fav',
+      method: 'POST',
+      data: {lid: lid},
+      success: function(suc) {
+        console.log(suc.count);
+        console.log(suc.action);
+        if (suc.action) {
+          $(this).addClass('active');
+          $(this).children('.badge').text(suc.count);
+        } else {
+          $(this).removeClass('active');
+          $(this).children('.badge').text(suc.count);
+        }
+        },
+      error: function(err) {
+        console.log(err);
+        }
+      });
+    });
+
+
 
 // // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
@@ -128,66 +226,6 @@ $(document).ready(function() {
     });
   });
 
-  function renderListsForHome() {
-    console.log("get all lists for home page");
-    $.ajax({
-      url: '/lists',
-      method: 'GET',
-      dataType: 'json',
-      success: function(data) {
-        if (data.length > 0) {
-          renderFavourites(data)
-          }
-        //add class
-        //Hide register and login buttons
-        },
-      error: function(err) {
-        console.log('err');
-        }
-    });
-  }
-
-  function createFavourite(list) {
-    console.log("I am in createFavourite");
-    var $listItem = $('<div>');
-    $listItem.addClass('row');
-
-    var $listTitle =$('<div>');
-    $listTitle.addClass('col-md-3');
-    $listTitle.append($('<b>').text(list.title));
-    $listItem.append($listTitle);
-
-    var $listDesc =$('<div>');
-    $listDesc.addClass('col-md-3');
-    $listDesc.append(`${list.description}`);
-    $listItem.append($listDesc);
-
-    var $listFav = $('<div>');
-    $listFav.addClass('col-md-3');
-    if (list.count === null){
-      $listFav.append("0 Favourites")
-    } else {
-    $listFav.append(`${list.count} Favourites`);
-    }
-    $listItem.append($listFav);
-    var $buttonL = $(`<a name='View List' class = 'btn btn-primary' href='lists/${list.l_id}'>`);
-    $buttonL.text('View List')
-    $listItem.append($buttonL);
-    $listItem.append($('<b>'));
-    $listItem.append($('<b>'));
-    // $listItem.append($('<input>').text("View List"));
-    return $listItem;
-  }
-
-  function renderFavourites(lists){
-    console.log("i am in renderFavourites")
-    console.log(lists);
-    lists.forEach( function (list) {
-      console.log("For each is working!!")
-      // debugger;
-      $('#listfav').append(createFavourite(list))
-    });
-  }
 
 
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
