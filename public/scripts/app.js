@@ -280,6 +280,25 @@ $(document).ready(function() {
       }
     })
   });
+  $(".userContributions").on('click', '.delList', function (e) {
+    console.log("Button is clicked");
+    var lid = $(this).data('lid');
+    console.log(lid)
+    var dList = $(this).closest('.delRow')
+
+    $.ajax({
+      url: '/lists/' + lid,
+      method: 'DELETE',
+      success: function(suc) {
+
+        $(dList).empty();
+
+    },
+      error: function(err) {
+        console.log('Create list console.error();')
+      }
+    })
+  });
 
 
 
