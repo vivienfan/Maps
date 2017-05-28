@@ -11,8 +11,13 @@ $(document).ready(function () {
   var popup = L.popup();
   var markerArray = [];
 
+  var arrowIcon = L.icon({
+    iconUrl: 'https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png',
+    iconSize: [38, 50]
+  });
+
   /*---------------- Initialization ----------------*/
-  myMap = L.map('leafletmap').setView([LAT, LNG], 11);
+  myMap = L.map('leafletmap').setView([LAT, LNG], 13);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -85,7 +90,7 @@ $(document).ready(function () {
             addPoint(point);
           });
           var group = L.featureGroup(markerArray);
-          myMap.fitBounds(group.getBounds());
+          myMap.fitBounds(group.getBounds(), {padding: [50, 50]});
         }
       }
     });
@@ -169,4 +174,22 @@ $(document).ready(function () {
       }
     });
   });
+
+  $("#location-search").on("keypress", function(e) {
+    if(e.which == 13) {
+      let location = $(this).val().replace(/\s/g, "+");
+      console.log(location);
+      $.ajax({
+        url: '../points/serach/' + location,
+        method: 'GET',
+        dataType: 'json',
+        success:function(res) {
+          $(e.target).val('');
+          L.marker([res.lat, res.lng], {icon: arrowIcon}).addTo(myMap);
+          myMap.panTo(new L.LatLng(res.lat, res.lng));
+        }
+      });
+    }
+  });
+
 });
