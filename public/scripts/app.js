@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  //Rendering Favourited Lists
+  // This is for checking if there is global username then hide certian objects.
   var global_username = '';
   var global_email = '';
 
@@ -16,8 +16,6 @@ $(document).ready(function() {
         //Hide register and login buttons
         global_username = suc.username;
         global_email = suc.email;
-        console.log('global u', global_username, global_email);
-        // TOOD:
         $('#display_username').text(`Hello ${global_username}!`);
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
@@ -28,19 +26,15 @@ $(document).ready(function() {
   });
 
   function renderListsForHome() {
-    // console.log("get all lists for home page");
     $.ajax({
       url: '/lists',
       method: 'GET',
       dataType: 'json',
       success: function(data) {
-        // console.log(data.publics);
-        // console.log(data.favs);
         if (data.publics) {
           renderFavourites(data.publics, data.favs)
         }
-        //add class
-        //Hide register and login buttons
+
       },
       error: function(err) {
         console.log('err');
@@ -49,51 +43,52 @@ $(document).ready(function() {
   }
 
   function createFavourite(list, favs) {
-    // console.log("I am in createFavourite");
 
-    var $topFavContainer = $('<section>')
-    var $titleFav = $('<div>')
+    // this is to create an individual list.
+
+    var $topFavContainer = $('<section>');
+    var $titleFav = $('<div>');
     $titleFav.addClass('row');
-
+    //Create the title
     var $listTitle =$('<div>');
     $listTitle.addClass('col-md-2 col-md-offset-3');
-    $title = $(`<a href='lists/${list.l_id}'>`)
-    $title.append($('<b>').text(list.title))
+    $title = $(`<a href='lists/${list.l_id}'>`);
+    $title.append($('<b>').text(list.title));
     $listTitle.append($title);
     $titleFav.append($listTitle);
 
-
+    //Creation of the Fav Button
     var $listFav = $('<div>');
     var $listFavButton = $(`<a class='btn btn-default favoriteButton' data-l_id='${list.l_id}'>`)
     $listFavButton.text('  Favourite');
     $listFav.addClass('col-md-2 col-md-offset-2');
     if (list.count === null){
+      // then don't display null display zero instead.
       var $spanBadge = $('<span>');
       $spanBadge.addClass('badge');
-      $spanBadge.text("0")
-      $listFavButton.prepend($spanBadge)
-      $listFav.append($listFavButton)
+      $spanBadge.text("0");
+      $listFavButton.prepend($spanBadge);
+      $listFav.append($listFavButton);
 
     } else {
       var $spanBadge = $('<span>');
       $spanBadge.addClass('badge');
-      $spanBadge.text(list.count)
-      $listFavButton.prepend($spanBadge)
-      // console.log('Inside the createFavorite function will check the whole list', favs)
-      // console.log('and I am checking the list.l_id with ', list.l_lid);
+      $spanBadge.text(list.count);
+      $listFavButton.prepend($spanBadge);
+
       if (favs){
         if (list.l_id in favs){
-          console.log("it is in favs")
+          // If the button is favorted show that its liked.
           $listFavButton.removeClass('btn btn-default');
           $listFavButton.addClass('btn btn-success');
         }
       }
-      $listFav.append($listFavButton)
+      $listFav.append($listFavButton);
     }
     $titleFav.append($listFav);
 
     $topFavContainer.append($titleFav);
-
+    // Ths is to append image right below the titile and the fav button.
     $imageRow = $('<div>');
     $imageRow.addClass('row');
     $divImage = $("<div class ='frontImage'>");
@@ -101,17 +96,16 @@ $(document).ready(function() {
     if (list.img[0]) {
       $image.attr("src", list.img[0].image);
     }
-
-    // console.log("hhhhhhhherrreeeeee:", $image);
-
-    setInterval(function() { shuffle(list.img, $image); } , 2000);
-
+    // Shuffle Images every 2 seconds.
+    if (list.img.length > 1){
+      setInterval(function() { shuffle(list.img, $image); } , 2000);
+    }
     $divImage.addClass('col-md-12');
     $divImage.append($image);
-    $imageRow.append($divImage)
+    $imageRow.append($divImage);
 
     $topFavContainer.append($imageRow);
-
+    // ths is for the Discritpion.
     var $listRow =$('<div>');
     $listRow.addClass=('row');
     $listDesc = $('<div>')
@@ -119,10 +113,9 @@ $(document).ready(function() {
     $listDesc.append(`${list.description}`);
     $listRow.append($listDesc);
     $topFavContainer.append($listRow);
-    $topFavContainer.append('<br>')
-    $topFavContainer.append('<br>')
-
-    // $listItem.append($('<input>').text("View List"));
+    $topFavContainer.append('<br>');
+    $topFavContainer.append('<br>');
+    // And then Finally append to the main container.
     return $topFavContainer;
   }
 
@@ -130,43 +123,39 @@ $(document).ready(function() {
 
 
   function renderFavourites(lists, favs){
-    // console.log('I am in render favorites');
+    // this is for rendering ever favorite list.
     lists.forEach( function (list) {
-      $('#listfav').append(createFavourite(list, favs))
+      $('#listfav').append(createFavourite(list, favs));
     });
   }
 
   function shuffle (imgs, tag) {
-    console.log("shuffle");
     if (imgs.length !== 0 ){
+      // find random i between the 0 and length.
       var i = Math.floor(Math.random() * imgs.length);
       $(tag).attr("src", imgs[i].image);
     } else {
-      console.log("no image");
     }
   }
 
 
   $("#listfav").on('click', '.favoriteButton', function (e) {
     e.preventDefault();
+    // if the user is logged or in this case if global_username has a truthy value, allow the person to click.
     if (global_username) {
-      var lid = $(this).data('l_id')
-      console.log('the button is clicked and this is the lid', lid)
-      // $(this).children('.badge').text('1')
-      // $(this).addClass('active');
+      var lid = $(this).data('l_id');
+      // sending the lid that will be deleted. and will receive an object that has counts and a boolean to know whether or not if the use has favorited.
       $.ajax({
         url: '/lists/add-fav',
         method: 'POST',
         data: {lid: lid},
         success: function(suc) {
-          console.log('this is the success object', suc)
-          console.log(suc.toFav);
-          console.log(suc.counts);
           if (suc.toFav) {
-            console.log('it is true ->' + suc.ToFav)
+            // if its favorited then change the class to show that it is facvorited.
             $(e.target).removeClass('btn btn-default');
             $(e.target).addClass('btn btn-success');
           } else {
+            // This is for unfavoriting the list.
             $(e.target).removeClass('btn btn-success');
             $(e.target).addClass('btn btn-default');
           }
@@ -176,7 +165,7 @@ $(document).ready(function() {
           console.log(err);
           }
         });
-      }
+      };
     });
 
   // LOGIN
@@ -186,8 +175,6 @@ $(document).ready(function() {
     var password = $(this).siblings(".reg_password").val();
     var username = $(this).siblings(".reg_username").val();
 
-    console.log(email, password, username);
-
     $.ajax({
       url: '/register/',
       method: 'POST',
@@ -196,16 +183,14 @@ $(document).ready(function() {
          username: username},
       dataType: 'json',
       success: function(suc) {
-        //add class
         //Hide register and login buttons
         global_username = suc.username;
         global_email = suc.email;
-        console.log("I am here: ", suc);
         $('#display_username').text(`Hello ${global_username}!`);
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
         $('#regmodal').modal('hide');
-        $('.dropdown').removeClass('hide')
+        $('.dropdown').removeClass('hide');
        },
       error: function(err) {
         console.log(err);
@@ -219,12 +204,9 @@ $(document).ready(function() {
 
   $("#login").on('click', function (e) {
     e.preventDefault();
-    console.log("here!!!");
     var email = $(this).siblings(".login_email").val();
     var password = $(this).siblings(".login_password").val();
-
-    console.log(email, password);
-
+    // sending email and password and will receive the username and email.
     $.ajax({
       url: '/login/',
       method: 'POST',
@@ -240,7 +222,7 @@ $(document).ready(function() {
         $('#login_nav').addClass('hide');
         $('#reg_nav').addClass('hide');
         $('#loginmodal').modal('hide');
-        $('.dropdown').removeClass('hide')
+        $('.dropdown').removeClass('hide');
         location.reload();
       },
       error: function(err) {
@@ -255,15 +237,15 @@ $(document).ready(function() {
 
   $("#logout").on('click', function (e) {
     e.preventDefault();
+    // triggure the ajax event where the user loggs out and will automatically refresh its page.
     $.ajax({
       url: '/logout/',
       method: 'POST',
       success: function() {
-        //Hide register and login buttons
-        console.log("I am heree")
+        //Show register and login button.
         global_username = "";
         global_email = "";
-        $('#display_username').text(`Hello ${global_username}!`)
+        $('#display_username').text(`Hello ${global_username}!`);
         $('#login_nav').removeClass('hide');
         $('#reg_nav').removeClass('hide');
         $('.dropdown').addClass('hide');
@@ -283,15 +265,11 @@ $(document).ready(function() {
 
   $(".newList").on('click', function (e) {
     e.preventDefault();
-    var map_id = $(this).data('mid')
-    console.log("here is the map_id I am fetching", map_id);
+    var map_id = $(this).data('mid');
     var listTitle = $(this).closest('.newContributor').find('.listTitle').val();
-    console.log(listTitle);
     var listDesc = $(this).closest('.newContributor').find('.listDesc').val();
-    console.log(listDesc);
     var isPublic = ($(".public").is(":checked"));
-    console.log(isPublic);
-
+    // sending listTitle, listDesc and a boolean of isPublic and will receive a new lid for the browser to automatically go to.
     $.ajax({
       url: '/lists/new',
       method: 'POST',
@@ -300,55 +278,48 @@ $(document).ready(function() {
         public: isPublic
       },
       success: function(suc) {
-
+      // if its successful then go to the newly created list.
       window.location.href="../lists/" + suc.lid;
-
     },
       error: function(err) {
-        console.log('Create list console.error();')
+        console.log('Create list error');;
       }
-    })
+    });
   });
   $(".userContributions").on('click', '.delList', function (e) {
-    console.log("Button is clicked");
     var lid = $(this).data('lid');
-    console.log(lid)
-    var dList = $(this).closest('.delRow')
+    var dList = $(this).closest('.delRow');
 
     $.ajax({
       url: '/lists/' + lid,
       method: 'DELETE',
       success: function(suc) {
-
+        // then empty the list.
         $(dList).empty();
-
-    },
+      },
       error: function(err) {
-        console.log('Create list console.error();')
+        console.log('Create contributor error;')
       }
-    })
+    });
   });
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   $(".deleteMap").on('click', function (e) {
     e.preventDefault();
     var map_id = $(this).data('mid')
-    console.log("here is the map_id I am fetching", map_id);
     var divDelete = $(this).closest('.divMap');
-    console.log(divDelete);
-
 
     $.ajax({
       url: '/maps/' +  map_id, //delete mapid url
       method: 'DELETE',
       data: map_id,
       success: function(suc) {
-          $(divDelete).empty();
+        $(divDelete).empty();
       },
       error: function(err) {
         console.log('Delete Error')
       }
-    })
+    });
   });
 
   $(".addMap").on('click', function (e) {
@@ -356,7 +327,7 @@ $(document).ready(function() {
     var newTitle = $(this).siblings(".newMapTitle").val();
     var newDesc = $(this).siblings(".newMapDesc").val();
     var lid = $(this).data('lid');
-
+    // add a map by sending lid, title, and the description, and receive a new m_id.
     $.ajax({
       url: '/maps/new',
       method: 'POST',
@@ -367,9 +338,9 @@ $(document).ready(function() {
         window.location.href="../maps/"+suc.mid;
       },
       error: function(err) {
-        console.log('Add Map Error')
+        console.log('Add Map Error');
       }
-    })
+    });
   });
 
   $(".addCont").on('click', function (e) {
@@ -402,13 +373,12 @@ $(document).ready(function() {
 
     $("#lid_contributors").on('click', ".delCont", function (e) {
       e.preventDefault();
-      console.log("the del contributor button was clicked");
       var delContusername = $(this).data('cont')
       var delLid = $(this).data('clid');
-      console.log('Here is the lid that was clicked->', delLid);
-      console.log('here is the delContusername that was clciked->', delContusername)
 
       var divDeleteCont = $(this).closest('.divCont')
+
+      // send the username and then delete the container.
       $.ajax({
         url: '/lists/' + delLid + '/dropContributor',
         method: 'DELETE',

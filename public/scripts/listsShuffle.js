@@ -36,9 +36,13 @@ $(document).ready(function () {
           console.log("Array of images of " ,element.m_id, element.img);
           var arrayImages = element.img;
 
+          if (element.img[0]) {
+            $picMapTag.attr("src", element.img[0].image);
+          }
 
-          setInterval(function() {shuffle2(arrayImages, $picMapTag); }, 2000);
-
+          if (element.img.length > 1) {
+            setInterval(function() {shuffle2(arrayImages, $picMapTag); }, 2000);
+          }
         })
 
         // setInterval(function() {shuffle(data[0].),
@@ -57,7 +61,7 @@ $(document).ready(function () {
     console.log("shuffle2");
     console.log("imgs", imgs)
     console.log("tag", tag)
-    if (imgs.length !== 0 ){
+    if (imgs.length > 1 ){
       var i = Math.floor(Math.random() * imgs.length);
       console.log(imgs[i])
       console.log(imgs[i].image);
