@@ -53,6 +53,17 @@ module.exports = (dataHelper, utility) => {
     });
   });
 
+  router.get('/:mid/history', (req, res) => {
+    let mid = req.params.mid;
+    dataHelper.getHistoryByMapId(mid, (err, history) => {
+      if (err) {
+        res.status(500).send(err.message);
+        return;
+      }
+      res.status(200).json(history);
+    })
+  });
+
   // method: post
   // URL: /maps/new
   // client input: req.body = { lid: int, title: str, description: str }
@@ -65,11 +76,19 @@ module.exports = (dataHelper, utility) => {
       title: req.body.title,
       description: req.body.description
     };
+    let timestamp = new Date();
     dataHelper.addMap(obj, (err, mid) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
         res.status(200).json({ mid: mid });
+        let history = {
+          timestamp: new Date(),
+          username: req.session.username,
+          change: "created this map",
+          mid: mid
+        }
+        dataHelper.addHistory(history);
       }
     })
   });
@@ -108,6 +127,7 @@ module.exports = (dataHelper, utility) => {
         res.status(400).send(err.message);
       } else {
         res.status(200).send();
+        dataHelper.dropHistory(mid);
       }
     });
   });
