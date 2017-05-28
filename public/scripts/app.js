@@ -84,7 +84,8 @@ $(document).ready(function() {
       if (favs){
         if (list.l_id in favs){
           console.log("it is in favs")
-          $listFavButton.addClass('active');
+          $listFavButton.removeClass('btn btn-default');
+          $listFavButton.addClass('btn btn-success');
         }
       }
       $listFav.append($listFavButton)
@@ -95,8 +96,8 @@ $(document).ready(function() {
 
     $imageRow = $('<div>');
     $imageRow.addClass('row');
-    $divImage = $('<div>');
-    $image = $(`<img id="imgdata-${list.l_id}" height="50%" width="50%">`);
+    $divImage = $("<div class ='frontImage'>");
+    $image = $(`<img id="imgdata-${list.l_id}" height="100%" width="100%">`);
     if (list.img[0]) {
       $image.attr("src", list.img[0].image);
     }
