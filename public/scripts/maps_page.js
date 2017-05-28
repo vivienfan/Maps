@@ -10,7 +10,11 @@ $(document).ready(function () {
   var points = [];
   var popup = L.popup();
   var markerArray = [];
-  var circle;
+
+  var arrowIcon = L.icon({
+    iconUrl: 'https://cdn3.iconfinder.com/data/icons/musthave/256/Stock%20Index%20Down.png',
+    iconSize: [38, 50]
+  });
 
   /*---------------- Initialization ----------------*/
   myMap = L.map('leafletmap').setView([LAT, LNG], 13);
@@ -180,12 +184,8 @@ $(document).ready(function () {
         method: 'GET',
         dataType: 'json',
         success:function(res) {
-          circle = L.circle([res.lat, res.lng], {
-              color: 'red',
-              fillColor: '#f03',
-              fillOpacity: 0.5,
-              radius: 700
-          }).addTo(myMap);
+          $(e.target).val('');
+          L.marker([res.lat, res.lng], {icon: arrowIcon}).addTo(myMap);
           myMap.panTo(new L.LatLng(res.lat, res.lng));
         }
       });
