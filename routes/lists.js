@@ -9,7 +9,7 @@ module.exports = (dataHelper, utility) => {
   // URL: /lists
   // client input: none
   // server output: err / { publics:[], favs: [] }
-  //  publics = [{ l_id: int, title: str, description: str, imgArr: [ { src: str } ] }]
+  //  publics = [{ l_id: int, title: str, description: str, img: [ { src: str } ] }]
   //  favs = [ {l_id: int }]
   //
   // main page, get all public lists ordered by number of favourites
@@ -140,6 +140,41 @@ module.exports = (dataHelper, utility) => {
       });
     });
   });
+
+  // method: get
+  // URL: /lists/:lid/get-img
+  // client input: req.params
+  // server output: [ { m_id: int, img: [ { image: str } ] } ]
+  //
+  // lists page, get all the images of each map
+  router.get('/:lid/get-img', (req, res) => {
+    let lid = req.params.lid;
+    let promises = [];
+    dataHelper.getMapIdByListId(lid, (err, maps) => {
+      if (err) {
+        res.status(500).send(err.message);
+        return;
+      }
+      maps.forEach((element) => {
+        promises.push(dataHelper.getImagesForMap(element.m_id, (err, imgs) => {
+          if (err) {
+            res.status(500).send(err.message);
+            return;
+          }
+          element.img = imgs;
+        }));
+      });
+      Promise.all(promises)
+      .then(() => {
+        console.log(maps);
+        res.status(200).json(maps);
+      })
+      .catch((err) => {
+        res.status(500).send(err.message);
+      })
+    })
+  })
+
 
   // method: post
   // URL: /lists/add-fav
