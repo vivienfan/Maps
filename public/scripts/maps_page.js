@@ -12,7 +12,7 @@ $(document).ready(function () {
   var markerArray = [];
 
   /*---------------- Initialization ----------------*/
-  myMap = L.map('leafletmap').setView([LAT, LNG], 11);
+  myMap = L.map('leafletmap').setView([LAT, LNG], 13);
 
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -85,7 +85,7 @@ $(document).ready(function () {
             addPoint(point);
           });
           var group = L.featureGroup(markerArray);
-          myMap.fitBounds(group.getBounds());
+          myMap.fitBounds(group.getBounds(), {padding: [50, 50]});
         }
       }
     });
