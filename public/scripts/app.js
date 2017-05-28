@@ -11,7 +11,6 @@ $(document).ready(function() {
     method: 'GET',
     dataType: 'json',
     success: function(suc) {
-      console.log(suc)
       if (suc) {
         //Hide register and login buttons
         global_username = suc.username;
