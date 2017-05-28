@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   var points = [];
   var popup = L.popup();
+  var markerArray = [];
 
   /*---------------- Initialization ----------------*/
   myMap = L.map('leafletmap').setView([LAT, LNG], 11);
@@ -62,11 +63,11 @@ $(document).ready(function () {
     var popContent = createPointPopup(point);
     var infoContent = createPointInfo(point);
 
-    L.marker([point.latitude, point.longitude])
+    var marker = L.marker([point.latitude, point.longitude])
     .addTo(myMap)
     .bindPopup(popContent);
 
-    // infoContent.addClass("eachPoint"); //Milind Attempting to style
+    markerArray.push(marker);
 
     $('#points-list').append(infoContent);
   }
@@ -83,6 +84,8 @@ $(document).ready(function () {
           points.forEach(function(point) {
             addPoint(point);
           });
+          var group = L.featureGroup(markerArray);
+          myMap.fitBounds(group.getBounds());
         }
       }
     });
