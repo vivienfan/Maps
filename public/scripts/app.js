@@ -51,23 +51,23 @@ $(document).ready(function() {
 
   function createFavourite(list, favs) {
     console.log("I am in createFavourite");
-    var $listItem = $('<div>');
-    $listItem.addClass('row');
+
+    var $topFavContainer = $('<section>')
+    var $titleFav = $('<div>')
+    $titleFav.addClass('row');
 
     var $listTitle =$('<div>');
-    $listTitle.addClass('col-md-3');
-    $listTitle.append($('<b>').text(list.title));
-    $listItem.append($listTitle);
+    $listTitle.addClass('col-md-2 col-md-offset-3');
+    $title = $(`<a href='lists/${list.l_id}'>`)
+    $title.append($('<b>').text(list.title))
+    $listTitle.append($title);
+    $titleFav.append($listTitle);
 
-    var $listDesc =$('<div>');
-    $listDesc.addClass('col-md-3');
-    $listDesc.append(`${list.description}`);
-    $listItem.append($listDesc);
 
     var $listFav = $('<div>');
     var $listFavButton = $(`<a class='btn btn-primary favoriteButton' data-l_id='${list.l_id}'>`)
     $listFavButton.text('  Favourite');
-    $listFav.addClass('col-md-3');
+    $listFav.addClass('col-md-2 col-md-offset-2');
     if (list.count === null){
       var $spanBadge = $('<span>');
       $spanBadge.addClass('badge');
@@ -89,16 +89,33 @@ $(document).ready(function() {
         }
       }
       $listFav.append($listFavButton)
-
     }
-    $listItem.append($listFav);
-    var $buttonL = $(`<a name='View List' class='btn btn-primary' href='lists/${list.l_id}'>`);
-    $buttonL.text('View List')
-    $listItem.append($buttonL);
-    $listItem.append($('<b>'));
-    $listItem.append($('<b>'));
+    $titleFav.append($listFav);
+
+    $topFavContainer.append($titleFav);
+
+    $imageRow = $('<div>');
+    $imageRow.addClass('row');
+    $divImage = $('<div>');
+    $image = $('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScJo371kBfS70VvFL4Oy4dXFNeIpeyatkMo6GaMw0dt_cxZefYgA" height="50%" width="50%">')
+    $divImage.addClass('col-md-12');
+    $divImage.append($image);
+    $imageRow.append($divImage)
+
+    $topFavContainer.append($imageRow);
+
+    var $listRow =$('<div>');
+    $listRow.addClass=('row');
+    $listDesc = $('<div>')
+    $listDesc.addClass('col-md-12');
+    $listDesc.append(`${list.description}`);
+    $listRow.append($listDesc);
+    $topFavContainer.append($listRow);
+    $topFavContainer.append('<br>')
+    $topFavContainer.append('<br>')
+
     // $listItem.append($('<input>').text("View List"));
-    return $listItem;
+    return $topFavContainer;
   }
 
   function renderFavourites(lists, favs){
@@ -107,6 +124,12 @@ $(document).ready(function() {
       $('#listfav').append(createFavourite(list, favs))
     });
   }
+
+  // function shuffle (img) {
+  //   let index = random(0, img.length -1);
+  //   $().attr('src', img[index]);
+  // }
+  // setInterval(shuffle, 2000);
 
 
   $("#listfav").on('click', '.favoriteButton', function (e) {
