@@ -96,13 +96,14 @@ $(document).ready(function() {
     $imageRow = $('<div>');
     $imageRow.addClass('row');
     $divImage = $('<div>');
-    $image = $(`<img id="imgdata-${list.l_id}" height="50%" width="50%">`)
+    $image = $(`<img id="imgdata-${list.l_id}" height="50%" width="50%">`);
+    if (list.img[0]) {
+      $image.attr("src", list.img[0].image);
+    }
 
     console.log("hhhhhhhherrreeeeee:", $image);
 
-    shuffle(list.img, list.l_id, $image);
-
-
+    setInterval(function() { shuffle(list.img, $image); } , 2000);
 
     $divImage.addClass('col-md-12');
     $divImage.append($image);
@@ -135,38 +136,14 @@ $(document).ready(function() {
   }
 
   function shuffle (imgs, tag) {
-    console.log("test:------------------");
-
-    console.log(imgs);
+    console.log("shuffle");
     if (imgs.length !== 0 ){
       var i = Math.floor(Math.random() * imgs.length);
-      console.log(i);
       $(tag).attr("src", imgs[i].image);
-      console.log(tag);
-      console.log("test-end:-----------------");
     } else {
       console.log("no image");
     }
-
-
-    //
-    // console.log("shuffling");
-    // console.log(imgs)
-    // console.log('id', id)
-    // var i = Math.floor(Math.random() * imgs.length);
-    // console.log('the i index is ', i)
-    // if (imgs[i]){
-    //   console.log('and the imgs[i] is ', imgs[i])
-    //   console.log('and the imgs[i].image is ', imgs[i].image)
-    //   var idAttr = "imgdata-" + id;
-    //   console.log("Here is the image id attribute I am going to find", idAttr);
-    //
-    //   var findImg = $("#listfav").find(idAttr)
-    //   console.log("I am able to find ", findImg)
-    //
-    //   $(findImg).attr("src", imgs[i].image);
-    //}
-   }
+  }
 
 
   $("#listfav").on('click', '.favoriteButton', function (e) {
