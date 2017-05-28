@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 
     var $listFav = $('<div>');
-    var $listFavButton = $(`<a class='btn btn-primary favoriteButton' data-l_id='${list.l_id}'>`)
+    var $listFavButton = $(`<a class='btn btn-default favoriteButton' data-l_id='${list.l_id}'>`)
     $listFavButton.text('  Favourite');
     $listFav.addClass('col-md-2 col-md-offset-2');
     if (list.count === null){
@@ -163,9 +163,11 @@ $(document).ready(function() {
           console.log(suc.counts);
           if (suc.toFav) {
             console.log('it is true ->' + suc.ToFav)
-            $(e.target).addClass('active');
+            $(e.target).removeClass('btn btn-default');
+            $(e.target).addClass('btn btn-success');
           } else {
-            $(e.target).removeClass('active');
+            $(e.target).removeClass('btn btn-success');
+            $(e.target).addClass('btn btn-default');
           }
           $(e.target).children('.badge').text(suc.counts);
           },
