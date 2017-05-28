@@ -144,7 +144,7 @@ $(document).ready(function () {
     $('#edit-point-modal').modal('toggle');
   });
 
-  $('#edit-point-modal').on('click', function(e) {
+  $('#edit-point').on('click', function(e) {
     var pid = $('#edit-point-modal').data('pid');
     var m_data = {
       title: $('#edit-point-modal').find('.textbox-title').val(),
@@ -192,4 +192,25 @@ $(document).ready(function () {
     }
   });
 
+  $("#map-history").on("click", function(e) {
+    $.ajax({
+      url: mid + '/history',
+      method: 'GET',
+      dataType: 'json',
+      success: function(res) {
+        console.log(res);
+        $('#history-detail').empty();
+        res.forEach(function(element) {
+          let $row = $('<tr>');
+          let $timestamp = $('<td>').text(element.timestamp);
+          let $username = $('<td>').text(element.username);
+          let $action = $('<td>').text(element.change);
+          $row.append($timestamp, $username, $action);
+          console.log($row);
+          $('#history-detail').append($row);
+        });
+        $('#map-history-modal').modal('toggle');
+      }
+    });
+  });
 });
