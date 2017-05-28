@@ -10,6 +10,7 @@ $(document).ready(function () {
   var points = [];
   var popup = L.popup();
   var markerArray = [];
+  var circle;
 
   /*---------------- Initialization ----------------*/
   myMap = L.map('leafletmap').setView([LAT, LNG], 13);
@@ -172,8 +173,22 @@ $(document).ready(function () {
 
   $("#location-search").on("keypress", function(e) {
     if(e.which == 13) {
-        console.log($(this).val());
-//        $.ajax()
+      let location = $(this).val().replace(/\s/g, "+");
+      console.log(location);
+      $.ajax({
+        url: '../points/serach/' + location,
+        method: 'GET',
+        dataType: 'json',
+        success:function(res) {
+          circle = L.circle([res.lat, res.lng], {
+              color: 'red',
+              fillColor: '#f03',
+              fillOpacity: 0.5,
+              radius: 700
+          }).addTo(myMap);
+          myMap.panTo(new L.LatLng(res.lat, res.lng));
+        }
+      });
     }
   });
 

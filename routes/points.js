@@ -1,9 +1,39 @@
 'use strict';
 
+const request = require('request');
 const express = require('express');
 const router  = express.Router();
+const google_map_api_key = process.env.GOOGLE_MAP_API_KEY;
 
 module.exports = (dataHelper, utility) => {
+
+
+  router.get('/serach/:location', (req,res) => {
+    let buff = '';
+    let location = req.params.location;
+    let options = {
+      url: `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${google_map_api_key}`
+    }
+    request.get(options)
+      .on('error', (err) => {
+        console.error(err);
+        res.status(500).send(err.message);
+      })
+      .on('response', (response) => {
+        if (response.statusCode < 500 && response.statusCode >= 400) {
+          res.status(response.statusCode).send();
+          return;
+        }
+      })
+      .on('data', (chunk) => {
+        buff += chunk;
+      })
+      .on('end', () => {
+        let laglng = JSON.parse(buff).results[0].geometry.location;
+        res.status(200).json(laglng);
+        return;
+      })
+  })
 
   // method: get
   // URL: /points/all/:mid
