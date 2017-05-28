@@ -90,6 +90,13 @@ module.exports = (dataHelper, utility) => {
         res.status(400).send(err.message);
       } else {
         res.status(200).json({ pid: pid });
+        let history = {
+          timestamp: new Date(),
+          username: req.session.username,
+          change: `created a new point: ${obj.title}(${pid})`,
+          mid: obj.mid
+        };
+        dataHelper.addHistory(history);
       }
     })
   });
@@ -116,11 +123,18 @@ module.exports = (dataHelper, utility) => {
        longitude: req.body.longitude,
        latitude: req.body.latitude
      }
-    dataHelper.updatePointByPointId(obj, (err) => {
+    dataHelper.updatePointByPointId(obj, (err, mid) => {
       if(err) {
         res.status(400).send(err.message);
       } else {
         res.status(200).send();
+        let history = {
+          timestamp: new Date(),
+          username: req.session.username,
+          change: `modified point: ${obj.title}(${obj.pid})`,
+          mid: mid
+        };
+        dataHelper.addHistory(history);
       }
     });
   });
@@ -133,11 +147,18 @@ module.exports = (dataHelper, utility) => {
   // delete points from map_points table
   router.delete('/:pid', (req, res) => {
     let pid = req.params.pid;
-    dataHelper.dropPoint(pid, (err) => {
+    dataHelper.dropPoint(pid, (err, row) => {
       if (err) {
         res.status(400).send(err.message);
       } else {
         res.status(200).send();
+        let history = {
+          timestamp: new Date(),
+          username: req.session.username,
+          change: `deleted point: ${row.title}(${pid})`,
+          mid: row.m_id
+        };
+        dataHelper.addHistory(history);
       }
     });
   });
