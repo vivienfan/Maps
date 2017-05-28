@@ -9,28 +9,51 @@ module.exports = (dataHelper, utility) => {
   // URL: /lists
   // client input: none
   // server output: err / { publics:[], favs: [] }
-  //  publics = [{ l_id: int, title: str, description: str }]
+  //  publics = [{ l_id: int, title: str, description: str, imgArr: [ { src: str } ] }]
   //  favs = [ {l_id: int }]
   //
   // main page, get all public lists ordered by number of favourites
   router.get('/', (req, res) => {
-    let uid = req.session.user_id;;
+    let promises = [];
+    let uid = req.session.user_id;
+    let resObj = {
+      publics: null,
+      favs: null
+    };
+
     dataHelper.getAllPublicLists((err, publics) => {
       if (err) {
         res.status(500).send(err.message);
         return;
       }
-      if (uid) {
-        dataHelper.getAllFavListIdByUid(uid, (err, favs) => {
+      resObj.publics = publics;
+      publics.forEach((element) => {
+        promises.push(dataHelper.getImagesForList(element.l_id, (err, imgs) =>{
           if (err) {
             res.status(500).send(err.message);
             return;
           }
-          res.status(200).json({ publics: publics, favs: favs });
-        });
-      } else {
-        res.status(200).json({ publics: publics, favs: null });
+          element.img = imgs;
+        }));
+      });
+      if (uid) {
+        promises.push(dataHelper.getAllFavListIdByUid(uid, (err, favs) => {
+          if (err) {
+            res.status(500).send(err.message);
+            return;
+          }
+          resObj.favs = favs;
+        }))
       }
+      Promise.all(promises)
+      .then(() => {
+        console.log(resObj);
+        res.status(200).json(resObj);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send(err.message);
+      })
     });
   });
 
