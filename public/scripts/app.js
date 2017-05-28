@@ -3,7 +3,6 @@ $(document).ready(function() {
   var global_username = '';
   var global_email = '';
 
-
   $('.dropdown').addClass('hide');
   renderListsForHome();
 
@@ -131,7 +130,6 @@ $(document).ready(function() {
   // }
   // setInterval(shuffle, 2000);
 
-
   $("#listfav").on('click', '.favoriteButton', function (e) {
     e.preventDefault();
     if (global_username) {
@@ -161,10 +159,6 @@ $(document).ready(function() {
         });
       }
     });
-
-
-
-// // renderFavourites([{'title': '123', 'description': 'desc'},{'title': '234', 'description': '2nd'} ])
 
   // LOGIN
   $("#register").on('click', function (e) {
@@ -229,8 +223,6 @@ $(document).ready(function() {
         $('#loginmodal').modal('hide');
         $('.dropdown').removeClass('hide')
         location.reload();
-
-
       },
       error: function(err) {
         console.log('login error');
@@ -264,11 +256,7 @@ $(document).ready(function() {
     });
   });
 
-
-
 // Profile.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-
-
 
   $("#yourProf").on('click', function (e) {
     window.location=`/profiles/${global_username}`;
@@ -284,7 +272,6 @@ $(document).ready(function() {
     console.log(listDesc);
     var isPublic = ($(".public").is(":checked"));
     console.log(isPublic);
-
 
     $.ajax({
       url: '/lists/new',
@@ -322,12 +309,6 @@ $(document).ready(function() {
       }
     })
   });
-
-
-
-
-
-
 //Lists.ejs_||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   $(".deleteMap").on('click', function (e) {
@@ -409,10 +390,6 @@ $(document).ready(function() {
       console.log('here is the delContusername that was clciked->', delContusername)
 
       var divDeleteCont = $(this).closest('.divCont')
-
-
-
-
       $.ajax({
         url: '/lists/' + delLid + '/dropContributor',
         method: 'DELETE',
@@ -426,15 +403,4 @@ $(document).ready(function() {
           }
         })
       })
-
-
 });
-
-
-
-
-// var a = $('<section>').attr('data-map_id', m_id);
-//
-// find the value
-//
-// var map_id =  a.data('m_id')
