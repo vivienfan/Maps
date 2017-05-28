@@ -169,4 +169,12 @@ $(document).ready(function () {
       }
     });
   });
+
+  $("#location-search").on("keypress", function(e) {
+    if(e.which == 13) {
+        console.log($(this).val());
+//        $.ajax()
+    }
+  });
+
 });
