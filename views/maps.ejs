@@ -42,25 +42,43 @@
         transition: width 0.4s ease-in-out;
     }
 
-    input[type=text]:focus {
-        width: 100%;
+    input[type=text][id=location-search]:focus {
+      width: 100%;
     }
+
+    .textbox-title{
+      width: 100%;
+    }
+
+    .textbox-description{
+      width: 100%;
+    }
+
+    .textbox-image{
+      width: 100%;
+    }
+
+    #map-history{
+      text-decoration: underline;
+      float: right;
+      margin-top: 20px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
   </style>
 
 </head>
 
 <body data-mid="<%=mid%>" data-canedit="<%=canEdit%>">
-
+  <h4 id="map-history">History</h4>
   <h1><%=title%></h1>
   <h2><%=description%></h2>
   <div class="col-md-12 my_map">
-<!--       <input type="search" class="form-control" placeholder="Search"> -->
     <input id="location-search" type="text" name="search" placeholder="Search..">
-
     <div id="leafletmap" style="width:100%; height: 400px;"></div>
   </div>
   <div id="points-list" class="col-md-12"></div>
-
 
   <div class="modal fade" id="add-point-modal" role="dialog">
     <div class="modal-dialog">
@@ -112,6 +130,18 @@
         <div class="modal-footer">
           <button id="edit-point">Save</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="map-history-modal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">History</h4>
+        </div>
+        <div class="modal-body"></div>
       </div>
     </div>
   </div>
