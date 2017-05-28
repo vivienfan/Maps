@@ -29,9 +29,13 @@ module.exports = (dataHelper, utility) => {
         buff += chunk;
       })
       .on('end', () => {
-        let laglng = JSON.parse(buff).results[0].geometry.location;
-        res.status(200).json(laglng);
-        return;
+        let result = JSON.parse(buff).results[0]
+        if (result) {
+          let laglng = result.geometry.location;
+          res.status(200).json(laglng);
+          return;
+        }
+        res.status(400).send("Input location does not exists");
       })
   })
 
