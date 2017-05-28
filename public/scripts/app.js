@@ -28,14 +28,14 @@ $(document).ready(function() {
   });
 
   function renderListsForHome() {
-    console.log("get all lists for home page");
+    // console.log("get all lists for home page");
     $.ajax({
       url: '/lists',
       method: 'GET',
       dataType: 'json',
       success: function(data) {
-        console.log(data.publics);
-        console.log(data.favs);
+        // console.log(data.publics);
+        // console.log(data.favs);
         if (data.publics) {
           renderFavourites(data.publics, data.favs)
         }
@@ -49,7 +49,7 @@ $(document).ready(function() {
   }
 
   function createFavourite(list, favs) {
-    console.log("I am in createFavourite");
+    // console.log("I am in createFavourite");
 
     var $topFavContainer = $('<section>')
     var $titleFav = $('<div>')
@@ -79,8 +79,8 @@ $(document).ready(function() {
       $spanBadge.addClass('badge');
       $spanBadge.text(list.count)
       $listFavButton.prepend($spanBadge)
-      console.log('Inside the createFavorite function will check the whole list', favs)
-      console.log('and I am checking the list.l_id with ', list.l_lid);
+      // console.log('Inside the createFavorite function will check the whole list', favs)
+      // console.log('and I am checking the list.l_id with ', list.l_lid);
       if (favs){
         if (list.l_id in favs){
           console.log("it is in favs")
@@ -101,7 +101,7 @@ $(document).ready(function() {
       $image.attr("src", list.img[0].image);
     }
 
-    console.log("hhhhhhhherrreeeeee:", $image);
+    // console.log("hhhhhhhherrreeeeee:", $image);
 
     setInterval(function() { shuffle(list.img, $image); } , 2000);
 
@@ -129,7 +129,7 @@ $(document).ready(function() {
 
 
   function renderFavourites(lists, favs){
-    console.log('I am in render favorites');
+    // console.log('I am in render favorites');
     lists.forEach( function (list) {
       $('#listfav').append(createFavourite(list, favs))
     });
