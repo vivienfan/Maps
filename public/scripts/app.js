@@ -41,7 +41,7 @@ $(document).ready(function() {
         }
         //add class
         //Hide register and login buttons
-        },
+      },
       error: function(err) {
         console.log('err');
         }
@@ -96,7 +96,14 @@ $(document).ready(function() {
     $imageRow = $('<div>');
     $imageRow.addClass('row');
     $divImage = $('<div>');
-    $image = $('<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScJo371kBfS70VvFL4Oy4dXFNeIpeyatkMo6GaMw0dt_cxZefYgA" height="50%" width="50%">')
+    $image = $(`<img id="imgdata-${list.l_id}" height="50%" width="50%">`)
+
+    console.log("hhhhhhhherrreeeeee:", $image);
+
+    shuffle(list.img, list.l_id, $image);
+
+
+
     $divImage.addClass('col-md-12');
     $divImage.append($image);
     $imageRow.append($divImage)
@@ -117,6 +124,9 @@ $(document).ready(function() {
     return $topFavContainer;
   }
 
+
+
+
   function renderFavourites(lists, favs){
     console.log('I am in render favorites');
     lists.forEach( function (list) {
@@ -124,11 +134,40 @@ $(document).ready(function() {
     });
   }
 
-  // function shuffle (img) {
-  //   let index = random(0, img.length -1);
-  //   $().attr('src', img[index]);
-  // }
-  // setInterval(shuffle, 2000);
+  function shuffle (imgs, tag) {
+    console.log("test:------------------");
+
+    console.log(imgs);
+    if (imgs.length !== 0 ){
+      var i = Math.floor(Math.random() * imgs.length);
+      console.log(i);
+      $(tag).attr("src", imgs[i].image);
+      console.log(tag);
+      console.log("test-end:-----------------");
+    } else {
+      console.log("no image");
+    }
+
+
+    //
+    // console.log("shuffling");
+    // console.log(imgs)
+    // console.log('id', id)
+    // var i = Math.floor(Math.random() * imgs.length);
+    // console.log('the i index is ', i)
+    // if (imgs[i]){
+    //   console.log('and the imgs[i] is ', imgs[i])
+    //   console.log('and the imgs[i].image is ', imgs[i].image)
+    //   var idAttr = "imgdata-" + id;
+    //   console.log("Here is the image id attribute I am going to find", idAttr);
+    //
+    //   var findImg = $("#listfav").find(idAttr)
+    //   console.log("I am able to find ", findImg)
+    //
+    //   $(findImg).attr("src", imgs[i].image);
+    //}
+   }
+
 
   $("#listfav").on('click', '.favoriteButton', function (e) {
     e.preventDefault();
