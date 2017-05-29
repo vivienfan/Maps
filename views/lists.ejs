@@ -15,7 +15,7 @@
               </h3>
               <h4><%= listInfo.description %> </h4>
               <% if (canEdit) { %>
-                <label> Title: </label>
+                <label style="margin-top: 50px;"> Title: </label>
                 <input type="text" name="title" class="newMapTitle">
                 <label> Description: </label>
                 <input type="text" name="description" class="newMapDesc">
@@ -27,31 +27,31 @@
               <ul class="list-unstyled">
               <% maps.forEach(function (mlist) { %>
                 <div class="divMap" data-divmid = "<%= mlist.m_id %>">
-                  <li>
+                  <li><div style='margin-bottom: 100px; margin-top: 100px;'>
                     <div class = 'row'>
                       <div class = 'col-md-2 col-md-offset-3'>
                         <h3><a href="/maps/<%= mlist.m_id %>"><%= mlist.title  %></a></h3>
                       </div>
                       <div class = 'col-md-2 col-md-offset-2'>
                         <% if (canEdit) { %>
-                          <a class="btn btn-danger deleteMap" data-mid ="<%= mlist.m_id %>"> Delete Map </a>
+                          <a class="btn btn-danger deleteMap" data-mid ="<%= mlist.m_id %>" style="margin-top:15px;"> Delete Map </a>
                         <% } %>
                         <br>
+                      </div>
                     </div>
-                  </div>
-                  <div class = 'row'>
-                    <div class = 'col-md-12 frontImage' >
-                      <img class="mImg-<%= mlist.m_id %>" height="100%" width="100%">
+                    <div class = 'row'>
+                      <div class = 'col-md-12 frontImage' >
+                        <img class="mImg-<%= mlist.m_id %>" height="100%" width="100%">
+                      </div>
                     </div>
-                  </div>
-                  <div class ='row'>
-                    <div class = 'col-md-12'>
-                      <%= mlist.description %>
+                    <div class ='row'>
+                      <div class = 'col-md-12'>
+                        <%= mlist.description %>
+                      </div>
                     </div>
-                  </div>
-                  <br>
-                  <br>
-                  </li>
+                    <br>
+                    <br>
+                  </div></li>
                 </div>
               <% }); %>
               </ul>
@@ -65,7 +65,7 @@
             <section id="lid_contributors">
               <% contributors.forEach(function (contlist) { %>
                 <div class="divCont">
-                  <li>
+                  <li style="margin-bottom: 15px;">
                     <a href="/profiles/<%= contlist.username %>"><%= contlist.username %></a>
                     <%  if (canEdit) { %>
                     <a class="btn btn-danger delCont" data-Cont="<%= contlist.username %>" data-cLid="<%= listInfo.l_id %>">Delete</a>
@@ -75,7 +75,7 @@
               <% }); %>
             </section>
             <%  if (canEdit) { %>
-              <input type="text" name="username" class="username">
+              <input type="text" name="username" class="username" style="margin-bottom: 10px;">
               <button class="btn btn-primary addCont" data-lid="<%= listInfo.l_id %>"> Add Contributor</button>
             <% }  %>
           </ul>
