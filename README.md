@@ -12,6 +12,7 @@ MAPS is a website where user can store and share their list of maps and each map
 2. The Guest can also see other people's profiles such as bob. Try visiting "top stadium" you will find that you cannot access the top stadium list because it is private.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/visitingbobpage.png)
+  !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/accesstohostdenied.png)
 
 2. Register page
 
@@ -36,19 +37,19 @@ MAPS is a website where user can store and share their list of maps and each map
 
 7. You can search from the search bar to find the location where you want to add a point.
 
-!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatinganewlist.png)
+!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/viewingmap.png)
 
 8. Then you can use the cursor to click anywhere on the map where you want to put a point on.
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/newpointpopup.png)
 
-9. When the user clicks, the pop up appears and the user can insert the title, description, and a url link image and then click add to insert the point.
+9. When the user clicks, the modal appears and the user can insert the title, description, and a url link image and then click add to insert the point.
 
-!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatinganewlist.png)
+!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/newpointpopup.png)
 
 10. The user can either delete or edit the map point but clicking either the edit or delete button.
 
-!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatinganewlist.png)
+!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/mappointedit2.png)
 
 11. Clicking the edit button will give a popup.
 
