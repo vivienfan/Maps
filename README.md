@@ -43,14 +43,14 @@ MAPS is a website where user can store and share their list of maps and each map
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/newpointpopup.png)
 
+9. Below the map, it should show the title, description, and image that you have inputed before when you were creating the map.
 
-10. The user can either delete or edit the map point but clicking either the edit or delete button.
+!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/mappointcreation)
+
+
+10. Notice at the bottom of the map_point image, there are two buttons for editing and deleting the map. When the user clicks on the edit button, the modal should appear where the user can edit the map point information.
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/mappointedit2.png)
-
-11. Clicking the edit button will give a popup.
-
-!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/edit%20the%20mappoint.png)
 
 12. The User can also select the point to reveal more information about that point.
 
