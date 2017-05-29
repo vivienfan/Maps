@@ -93,6 +93,7 @@ MAPS is a website where user can store and share their list of maps and each map
   - Check the seeds file to see what gets seeded in the DB
 5. Run the server: `npm run local`
 6. Visit `http://localhost:8080/`
+7. In order to get the google search bar working. Please add the instruction in the .env file with your own googple api key. 
 
 ## Dependencies
 
