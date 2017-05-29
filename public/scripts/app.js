@@ -41,6 +41,16 @@ $(document).ready(function() {
     });
   }
 
+  function isFaved(lid, favs) {
+    let flag = false;
+    favs.forEach((element) => {
+      if (lid === element.l_id) {
+        flag = true;
+      }
+    });
+    return flag;
+  }
+
   function createFavourite(list, favs) {
 
     // this is to create an individual list.
@@ -75,8 +85,8 @@ $(document).ready(function() {
       $spanBadge.text(list.count);
       $listFavButton.prepend($spanBadge);
 
-      if (favs){
-        if (list.l_id in favs){
+      if (favs && favs.length !== 0){
+        if (isFaved(list.l_id, favs)){
           // If the button is favorted show that its liked.
           $listFavButton.removeClass('btn btn-default');
           $listFavButton.addClass('btn btn-success');
