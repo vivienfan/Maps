@@ -1,4 +1,11 @@
 $(document).ready(function () {
+
+/*-------------------- sketchy --------------------*/
+  $("#login_nav").css("display", "none");
+  $("#reg_nav").css("display", "none");
+  $(".dropdown").css("display", "none");
+/*-------------------------------------------------*/
+
   var myMap;
   var mid = $("body").data("mid");
   var canEdit = $("body").data("canedit");
