@@ -6,11 +6,19 @@ MAPS is a website where user can store and share their list of maps and each map
 
 1. When the user just visits the page, the user can just view images, lists, and maps but not able to delete or edit.
 
+  !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/menu)
+
 2. Register page
+
+  !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/register.png)
 
 3. User can favorite the page and the button turns to green and the number iterates to 1.
 
+  !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/menu)
+
 4. When you click menu, you can see the two options for logging out or seeing your profile.
+
+  !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/menu)
 
 5. In your profile, you can create a new list while you provide the title and description and you can select whether you want to publicly show it or not. If it is private then no one can see it other than the contributor.
 
