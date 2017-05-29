@@ -8,7 +8,12 @@
         <div class="col-md-9">
           <section class = "listandMaps">
             <section id="lid_info">
-              <h3> <b> <%= listInfo.title %> </b> <%= listInfo.description %> </h3>
+              <h3> <b> <%= listInfo.title %> </b>
+              <% if (!listInfo.public)  { %>
+              (private)
+              <% } %>
+              </h3>
+              <h4><%= listInfo.description %> </h4>
               <% if (canEdit) { %>
                 <label> Title: </label>
                 <input type="text" name="title" class="newMapTitle">
