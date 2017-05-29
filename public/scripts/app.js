@@ -102,15 +102,20 @@ $(document).ready(function() {
       var $imageRow = $('<div>');
       $imageRow.addClass('row');
       var $divImage = $("<div class ='frontImage'>");
-      var $image = $(`<img id="imgdata-${list.l_id}" height="100%" width="100%">`);
+      var $image = $(`<div id="imgdata-${list.l_id}" height="100%" width="100%">`);
       if (list.img[0]) {
-        $image.attr("src", list.img[0].image);
+        $image.css("background-image", "url("+list.img[0].image+")");
+        $image.css("background-size", "cover");
+        $image.css("background-position", "center 30%");
+        $image.css("background-repeat", "no-repeat");
+        $image.css("height", "100%");
+        $image.css("width", "auto");
       }
       // Shuffle Images every 2 seconds.
       if (list.img.length > 1){
         setInterval(function() { shuffle(list.img, $image); } , 2000);
       }
-      $divImage.addClass('col-md-12');
+      $divImage.addClass('col-md-8 col-md-offset-2 ');
       $divImage.append($image);
       $imageRow.append($divImage);
     }
@@ -141,12 +146,9 @@ $(document).ready(function() {
   }
 
   function shuffle (imgs, tag) {
-    if (imgs.length !== 0 ){
-      // find random i between the 0 and length.
-      var i = Math.floor(Math.random() * imgs.length);
-      $(tag).attr("src", imgs[i].image);
-    } else {
-    }
+    // find random i between the 0 and length.
+    var i = Math.floor(Math.random() * imgs.length);
+    $(tag).css("background-image", "url("+imgs[i].image+")");
   }
 
 

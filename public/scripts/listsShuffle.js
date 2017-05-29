@@ -19,7 +19,12 @@ $(document).ready(function () {
           var arrayImages = element.img;
           // on load, take the first image. This is to avoid waiting for 2000 to finish intervaling it.
           if (element.img[0]) {
-            $picMapTag.attr("src", element.img[0].image);
+            $picMapTag.css("background-image", "url("+element.img[0].image+")");
+            $picMapTag.css("background-size", "cover");
+            $picMapTag.css("background-position", "center 30%");
+            $picMapTag.css("background-repeat", "no-repeat");
+            $picMapTag.css("height", "100%");
+            $picMapTag.css("width", "auto");
           }
           // if there is a long array then call the shuffle. There is no point of calling the shuffle if the array's length is just one.
           if (element.img.length > 1) {
@@ -37,7 +42,7 @@ $(document).ready(function () {
   function shuffle2 (imgs, tag) {
     if (imgs.length > 1 ){
       var i = Math.floor(Math.random() * imgs.length);
-      $(tag).attr("src", imgs[i].image);
+      $(tag).css("background-image", "url("+imgs[i].image+")");
     } else {
       console.log("no image");
     }
