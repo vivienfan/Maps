@@ -4,29 +4,29 @@ MAPS is a website where user can store and share their list of maps and each map
 
 ## Final Product
 
-1. When the user just visits the page, the user can just view images, lists, and maps but not able to delete or edit.
+1. When the user just visits the page and log in, the user can browse the website and the guest user can only view images, lists, and maps but not able to delete or edit.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/main%20page.png)
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/notloggedinview.png)
 
-2. The Guest can also see other people's profiles such as bob. Try visiting "top stadium" you will find that you cannot access the top stadium list because it is private.
+2. The Guest can also see other people's profiles such as bob. You can visit this page either by visiting the URL link "http://localhost:8080/profiles/bob" where bob is the username. Try visiting "Top Stadiums" you will find that you cannot access the Top Stadiums list because it is private.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/visitingbobpage.png)
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/accesstohostdenied.png)
 
-2. Register page
+2. The user can register by clicking the register button which should be in the nav bar.  
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/register.png)
 
-3. User can favorite a list and the button toggles to green and the number iterates.
+3. In the home page user can favorite a list and the button toggles to green and the number iterates.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/favorite.png)
 
-4. When you click menu, you can see the two options for logging out or seeing your profile.
+4. When you click menu, you can see the two buttons for logging out and your profile.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/menu)
 
-5. In your profile, you can create a new list. You can provide the title and description and you can select whether you want to publicly show the list or make it private where only the user and its contributors can see it.
+5. If you clicked your profile button, it will direct you to your profile page where you are able to create a new list. You can provide the title and description and you can select whether you want to publicly show the list or make it private where only its owner and its contributors can see it.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatinganewlist.png)
 
@@ -35,17 +35,14 @@ MAPS is a website where user can store and share their list of maps and each map
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatingamap.png)
 
-7. You can search from the search bar to find the location where you want to add a point.
+7. You can use the search bar to find the location where you want to add a point.
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/viewingmap.png)
 
-8. Then you can use the cursor to click anywhere on the map where you want to put a point on.
+8. Then you can use the cursor to click anywhere on the map where you want to put a point on. On click the modal appears and the user can insert the title, description, and a url link image and then click add to insert the point.
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/newpointpopup.png)
 
-9. When the user clicks, the modal appears and the user can insert the title, description, and a url link image and then click add to insert the point.
-
-!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/newpointpopup.png)
 
 10. The user can either delete or edit the map point but clicking either the edit or delete button.
 
