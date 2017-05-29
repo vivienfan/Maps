@@ -51,15 +51,22 @@
             <% contributedLists.forEach(function (list) { %>
               <li>
                 <div class ="row delRow">
-                  <div class = "col-md-4">
-                    <b><a type="submit" value="Edit List" href="/lists/<%= list.l_id %> "><%= list.title %></a></b>
-                  </div>
-                  <div class = "col-md-4">
-                    <p><%= list.description %></p>
-                  </div><!--<%=list.l_id%>-->
                   <% if (canEdit) { %>
+                    <div class = "col-md-2">
+                      <b><a type="submit" value="Edit List" href="/lists/<%= list.l_id %> "><%= list.title %></a></b>
+                    </div>
+                    <div class = "col-md-6">
+                      <p><%= list.description %></p>
+                    </div>
                     <div class = "col-md-4">
                       <a class="btn btn-danger delList" data-lid="<%= list.l_id %>">Delete List </a>
+                    </div>
+                  <% } else { %>
+                    <div class = "col-md-4">
+                      <b><a type="submit" value="Edit List" href="/lists/<%= list.l_id %> "><%= list.title %></a></b>
+                    </div>
+                    <div class = "col-md-8">
+                      <p><%= list.description %></p>
                     </div>
                   <% } %>
               </div>
