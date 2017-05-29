@@ -55,7 +55,7 @@ $(document).ready(function() {
 
     // this is to create an individual list.
 
-    var $topFavContainer = $('<section>');
+    var $topFavContainer = $('<section style="margin-bottom: 50px;">');
     var $titleFav = $('<div>');
     $titleFav.addClass('row');
     //Create the title
@@ -98,20 +98,22 @@ $(document).ready(function() {
 
     $topFavContainer.append($titleFav);
     // Ths is to append image right below the titile and the fav button.
-    $imageRow = $('<div>');
-    $imageRow.addClass('row');
-    $divImage = $("<div class ='frontImage'>");
-    $image = $(`<img id="imgdata-${list.l_id}" height="100%" width="100%">`);
-    if (list.img[0]) {
-      $image.attr("src", list.img[0].image);
+    if (list.img.length !== 0) {
+      var $imageRow = $('<div>');
+      $imageRow.addClass('row');
+      var $divImage = $("<div class ='frontImage'>");
+      var $image = $(`<img id="imgdata-${list.l_id}" height="100%" width="100%">`);
+      if (list.img[0]) {
+        $image.attr("src", list.img[0].image);
+      }
+      // Shuffle Images every 2 seconds.
+      if (list.img.length > 1){
+        setInterval(function() { shuffle(list.img, $image); } , 2000);
+      }
+      $divImage.addClass('col-md-12');
+      $divImage.append($image);
+      $imageRow.append($divImage);
     }
-    // Shuffle Images every 2 seconds.
-    if (list.img.length > 1){
-      setInterval(function() { shuffle(list.img, $image); } , 2000);
-    }
-    $divImage.addClass('col-md-12');
-    $divImage.append($image);
-    $imageRow.append($divImage);
 
     $topFavContainer.append($imageRow);
     // ths is for the Discritpion.
