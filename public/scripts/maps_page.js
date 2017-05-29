@@ -37,7 +37,6 @@ $(document).ready(function () {
     var $description = $("<p>").text(point.description);
     var $img = $("<img>").attr("src", point.image).css("width", "100px");
     $div.append($title, $description, $img);
-
     var $container = $("<section>");
     $container.append($div);
     return $container.html();
@@ -51,7 +50,6 @@ $(document).ready(function () {
     var $title = $("<label>").text(point.title);
     var $description = $("<p>").text(point.description);
     var $img = $("<img>").attr("src", point.image)
-    // .css("width", "400px");
     $div.append($title, $description, $img);
     if(canEdit) {
       var $br = $("<br>");
@@ -67,13 +65,10 @@ $(document).ready(function () {
   function addPoint(point) {
     var popContent = createPointPopup(point);
     var infoContent = createPointInfo(point);
-
     var marker = L.marker([point.latitude, point.longitude])
     .addTo(myMap)
     .bindPopup(popContent);
-
     markerArray.push(marker);
-
     $('#points-list').append(infoContent);
   }
 
@@ -96,17 +91,15 @@ $(document).ready(function () {
     });
   }
 
-  function onMapClick(e) {
+  /*---------------- Event Handler ----------------*/
+
+  myMap.on('click', function(e) {
     if (canEdit) {
       latitude = e.latlng.lat;
       longitude = e.latlng.lng;
       $('#add-point-modal').modal('toggle');
     }
-  }
-
-  /*---------------- Event Handler ----------------*/
-
-  myMap.on('click', onMapClick);
+  });
 
   $('#add-new-point').on('click',function(e) {
     var m_data = {
@@ -202,7 +195,7 @@ $(document).ready(function () {
         $('#history-detail').empty();
         res.forEach(function(element) {
           let $row = $('<tr>');
-          let $timestamp = $('<td>').text(element.timestamp);
+          let $timestamp = $('<td>').text(Date(element.timestamp));
           let $username = $('<td>').text(element.username);
           let $action = $('<td>').text(element.change);
           $row.append($timestamp, $username, $action);
