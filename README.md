@@ -2,7 +2,7 @@
 
 MAPS is a website where user can store and share their list of maps and each map includes map_points. The website also includes a search bar where the user can search  a location and then insert a map point.
 
-##Final Product
+## Final Product
 
 1. When the user just visits the page, the user can just view images, lists, and maps but not able to delete or edit.
 
@@ -36,7 +36,7 @@ MAPS is a website where user can store and share their list of maps and each map
 
 16. Bob has a private list called top stadiums and wants to allow example to edit the map. He can do that by adding example as a contributor.
 
-17. When example logs in, he can go to their own profile page to see that he is now the contributor to the private list. 
+17. When example logs in, he can go to their own profile page to see that he is now the contributor to the private list.
 
 ## Getting Started
 
