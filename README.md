@@ -64,9 +64,16 @@ MAPS is a website where user can store and share their list of maps and each map
 
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/addContr.png)
 
-15. When bob logs in and goes to his profile page. Bob can see that his contribution table is updated. and when bob checks the history, you can see that the history is updated.
-
+15. When bob logs in and goes to his profile page. Bob can see that his "Bob's contributions" list is updated.
 !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/bobcontribution.png)
+
+16. Bob can also create a new map point in example1
+
+!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/bobcreatingthepoint.png)
+
+17. And when Bob clicks on the history, bob can see that the history is updated and view the activity for this map.
+
+ !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/historybob.png)
 
 16. Bob has a private list called top stadiums and wants to allow example to edit the map. He can do that by adding example as a contributor.
 
@@ -74,7 +81,7 @@ MAPS is a website where user can store and share their list of maps and each map
 
 17. When example logs in, he can go to their own profile page to see that he is now the contributor to the private list.
 
-!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatinganewlist.png)
+!["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/examplecanviewprivate.png)  
 
 ## Getting Started
 
