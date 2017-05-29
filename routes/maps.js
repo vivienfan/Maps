@@ -42,6 +42,7 @@ module.exports = (dataHelper, utility) => {
             return;
           }
           let tempVar = {
+            lid: mapInfo.l_id,
             mid: mid,
             title: mapInfo.title,
             description: mapInfo.description,
