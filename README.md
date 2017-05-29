@@ -9,11 +9,15 @@ MAPS is a website where user can store and share their list of maps and each map
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/main%20page.png)
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/notloggedinview.png)
 
+2. The Guest can also see other people's profiles such as bob. Try visiting "top stadium" you will find that you cannot access the top stadium list because it is private.
+
+  !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/visitingbobpage.png)
+
 2. Register page
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/register.png)
 
-3. User can favorite the page and the button turns to green and the number iterates.
+3. User can favorite a list and the button toggles to green and the number iterates.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/favorite.png)
 
@@ -21,7 +25,7 @@ MAPS is a website where user can store and share their list of maps and each map
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/menu)
 
-5. In your profile, you can create a new list while you provide the title and description and you can select whether you want to publicly show it or not. If it is private then no one can see it other than the contributor.
+5. In your profile, you can create a new list. You can provide the title and description and you can select whether you want to publicly show the list or make it private where only the user and its contributors can see it.
 
   !["try"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/creatinganewlist.png)
 
