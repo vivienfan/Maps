@@ -86,13 +86,21 @@ MAPS is a website where user can store and share their list of maps and each map
 ## Getting Started
 
 1. Install dependencies: `npm i`
-2. Fix to binaries for sass: `npm rebuild node-sass`
-3. Run migrations: `npm run knex migrate:latest`
+2. Create a .env file at the root directory of this project, and define the following variables:
+    DB_HOST
+    DB_USER
+    DB_PASS
+    DB_NAME
+    DB_SSL
+    DB_PORT
+    GOOGLE_MAP_API_KEY
+3. Fix to binaries for sass: `npm rebuild node-sass`
+4. Run migrations: `npm run knex migrate:latest`
   - Check the migrations folder to see what gets created in the DB
-4. Run the seed: `npm run knex seed:run`
+5. Run the seed: `npm run knex seed:run`
   - Check the seeds file to see what gets seeded in the DB
-5. Run the server: `npm run local`
-6. Visit `http://localhost:8080/`
+6. Run the server: `npm run local`
+7. Visit `http://localhost:8080/`
 7. In order to get the google search bar working. Please add the instruction in the .env file with your own googple api key. 
 
 ## Dependencies
