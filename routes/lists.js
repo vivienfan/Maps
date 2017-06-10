@@ -47,7 +47,6 @@ module.exports = (dataHelper, utility) => {
       }
       Promise.all(promises)
       .then(() => {
-        console.log(resObj);
         res.status(200).json(resObj);
       })
       .catch((err) => {
@@ -118,7 +117,6 @@ module.exports = (dataHelper, utility) => {
           return;
         }
         let isContributor = utility.isAContributor(uid, contributors);
-        console.log(isContributor);
         if (listInfo.public || isContributor) {
           dataHelper.getMapsByListId(lid, (err, maps) => {
             if (err) {
@@ -166,7 +164,6 @@ module.exports = (dataHelper, utility) => {
       });
       Promise.all(promises)
       .then(() => {
-        console.log(maps);
         res.status(200).json(maps);
       })
       .catch((err) => {
@@ -223,7 +220,6 @@ module.exports = (dataHelper, utility) => {
       username: req.body.username,
       lid: req.params.lid
     }
-    console.log(obj);
       dataHelper.dropContributor(obj, (err) => {
       if (err) {
         res.status(400).send(err.message);

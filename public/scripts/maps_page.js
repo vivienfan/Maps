@@ -178,7 +178,6 @@ $(document).ready(function () {
   $("#location-search").on("keypress", function(e) {
     if(e.which == 13) {
       let location = $(this).val().replace(/\s/g, "+");
-      console.log(location);
       $.ajax({
         url: '../points/serach/' + location,
         method: 'GET',
@@ -198,7 +197,6 @@ $(document).ready(function () {
       method: 'GET',
       dataType: 'json',
       success: function(res) {
-        console.log(res);
         $('#history-detail').empty();
         res.forEach(function(element) {
           let $row = $('<tr>');
@@ -206,7 +204,6 @@ $(document).ready(function () {
           let $username = $('<td>').text(element.username);
           let $action = $('<td>').text(element.change);
           $row.append($timestamp, $username, $action);
-          console.log($row);
           $('#history-detail').append($row);
         });
         $('#map-history-modal').modal('toggle');

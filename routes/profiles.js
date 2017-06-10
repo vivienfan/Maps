@@ -24,7 +24,6 @@ module.exports = (dataHelper, utility) => {
       favourite = favs;
     })
     .then(() => {
-      console.log('get all contribution');
       return dataHelper.getContributionsByUsername(username, (err, contrs) => {
         if(err) {
           res.status(400).send(err);
@@ -34,14 +33,12 @@ module.exports = (dataHelper, utility) => {
       })
     })
     .then(() => {
-      console.log('render page');
       let tempVar = {
         username: username,
         favouriteLists: favourite,
         contributedLists: contribution,
         canEdit: (username === req.session.username)
       };
-      console.log(tempVar);
       res.render('../views/profile', tempVar);
     })
     .catch((err) => {

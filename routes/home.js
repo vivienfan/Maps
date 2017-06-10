@@ -23,7 +23,6 @@ module.exports = (dataHelper, utility) => {
   // send back client with their username and email saved in cookie
   router.get('/me', (req, res) => {
     let obj = null;
-    console.log(req.session.username, req.session.email);
     if (req.session.username && req.session.email) {
       obj = {
         username: req.session.username,
@@ -93,7 +92,6 @@ module.exports = (dataHelper, utility) => {
         res.status(403).send(err.message);
         return;
       }
-      console.log(dbObj);
       if (dbObj) {
         req.session.user_id = dbObj.id;
         req.session.username = dbObj.username;
