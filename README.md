@@ -4,6 +4,8 @@ MAPS is a website where user can store and share their list of maps and each map
 
 ## Final Product
 
+### Try it out [here](https://map-lists.herokuapp.com/)!
+
 1. When the guest user just visits the page, the user can browse the website and the user can only view images, lists, and maps but not able to delete or edit.
 
   !["Main Page"](https://github.com/vivienfan/Miterm_Map/blob/master/docs/main%20page.png)
